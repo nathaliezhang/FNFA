@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "name": "Séance spéciale"
+  },
+  {
+    "id": 2,
+    "name": "Volet professionnel"
+  },
+  {
+    "id": 3,
+    "name": "Séance scolaire"
+  },
+  {
+    "id": 4,
+    "name": "Compétition et sélections"
+  },
+  {
+    "id": 5,
+    "name": "Long métrage et rencontres"
+  },
+  {
+    "id": 6,
+    "name": "Atelier secret Fab"
+  },
+  {
+    "id": 7,
+    "name": "Salon des nouvelles écritures"
+  },
+  {
+    "id": 8,
+    "name": "Unknown"
+  }
+]
