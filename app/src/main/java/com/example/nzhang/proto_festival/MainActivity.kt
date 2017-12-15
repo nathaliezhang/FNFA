@@ -30,8 +30,6 @@ class MainActivity : AppCompatActivity() {
 
         // Load and parse JSON
         val eventsJson = loadJsonFromAssets()
-        Log.d("content", eventsJson)
-
         val moshi = Moshi.Builder().build()
         val adapter = moshi.adapter(Events::class.java)
         val eventResponse = adapter.fromJson(eventsJson)
