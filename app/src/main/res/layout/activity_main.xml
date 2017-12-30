@@ -7,13 +7,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.nzhang.proto_festival.MainActivity">
 
-    <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:id="@+id/container_list"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--tools:listitem="@layout/item_event">-->
-    <!--</android.support.v7.widget.RecyclerView>-->
-
     <com.hendraanggrian.widget.ExpandableRecyclerView
         android:id="@+id/expandable_container_list"
         android:layout_width="match_parent"
