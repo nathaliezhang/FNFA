@@ -5,5 +5,8 @@ package com.example.nzhang.proto_festival.model
  */
 
 data class Events(val events: List<Event>) {
+    data class Event(val id: String, val name: String) {
 
+    }
 }
+
