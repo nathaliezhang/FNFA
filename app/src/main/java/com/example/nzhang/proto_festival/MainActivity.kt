@@ -69,6 +69,10 @@ class MainActivity : AppCompatActivity() {
         val adapter = moshi.adapter(Events::class.java)
         return adapter.fromJson(eventsJson)
     }
+
+    fun putInFav(view: View) {
+        println(view.parent.parent.parent)
+    }
 }
 
 class ExpandableEventAdapter(
@@ -99,5 +103,6 @@ class ExpandableEventAdapter(
         val titleView = view.findViewById<TextView>(R.id.text_list_item_title)
         val timeView = view.findViewById<TextView>(R.id.text_list_item_time)
         val durationView = view.findViewById<TextView>(R.id.text_list_item_duration)
+        val test = view.findViewById<TextView>(R.id.text_list_item_place)
     }
 }
