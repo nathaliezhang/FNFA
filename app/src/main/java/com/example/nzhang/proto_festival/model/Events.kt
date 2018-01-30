@@ -9,7 +9,6 @@ import java.util.*
  * Created by nathalie on 14/12/2017.
  */
 
-//@TargetApi(26)
 data class Events(val events: List<Event>) {
     data class Event(val id: String, val name: String, val startingDate: String, val endingDate: String) {
         fun getStartingDate(): Date {

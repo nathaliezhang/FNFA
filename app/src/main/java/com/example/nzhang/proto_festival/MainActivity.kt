@@ -103,6 +103,5 @@ class ExpandableEventAdapter(
         val titleView = view.findViewById<TextView>(R.id.text_list_item_title)
         val timeView = view.findViewById<TextView>(R.id.text_list_item_time)
         val durationView = view.findViewById<TextView>(R.id.text_list_item_duration)
-        val test = view.findViewById<TextView>(R.id.text_list_item_place)
     }
 }
