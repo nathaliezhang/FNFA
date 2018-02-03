@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import com.example.nzhang.proto_festival.model.Events
 import com.example.nzhang.proto_festival.model.Places
@@ -120,6 +121,9 @@ class EventAdapter(
         }
         holder.placeView.text = sb.toString()
 
+        holder.imageButton.setOnClickListener({
+            println(event.name)
+        })
     }
 
     class EventViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -127,5 +131,6 @@ class EventAdapter(
         val timeView = view.findViewById<TextView>(R.id.text_list_item_time)
         val durationView = view.findViewById<TextView>(R.id.text_list_item_duration)
         val placeView = view.findViewById<TextView>(R.id.text_list_item_place)
+        val imageButton = view.findViewById<ImageButton>(R.id.img_list_item_heart)
     }
 }
