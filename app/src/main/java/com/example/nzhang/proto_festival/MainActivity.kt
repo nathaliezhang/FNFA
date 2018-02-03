@@ -2,6 +2,7 @@ package com.example.nzhang.proto_festival
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -23,11 +24,15 @@ class MainActivity : AppCompatActivity() {
 
     lateinit private var recycleView: RecyclerView
     lateinit private var divideItemDecoration: DividerItemDecoration
+    lateinit private var tabBar: TabLayout
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val time = System.currentTimeMillis()
+
+        tabBar = findViewById<TabLayout>(R.id.tab_bar)
 
         val mLayoutManager = LinearLayoutManager(this)
 
@@ -38,13 +43,35 @@ class MainActivity : AppCompatActivity() {
         // Order by date and by name
         val orderedEvents = eventResponse!!.events.sortedWith(compareBy({it.getStartingDate().time}, {it.name}))
         val places = placeResponse!!.places
+        val days = arrayListOf("Mercredi","Jeudi","Vendredi","Samedi", "Dimanche")
+        val positionalDays = mutableMapOf<Int, String>()
 
         this.recycleView = findViewById(R.id.container_list)
+        for (day in days) {
+            positionalDays.put(orderedEvents.indexOfFirst({it.getDay() == day}), day)
+            positionalDays.put(orderedEvents.indexOfLast({it.getDay() == day}), day)
+        }
+
+        this.recycleView = findViewById(R.id.expandable_container_list)
         this.recycleView.layoutManager = mLayoutManager
         this.recycleView.adapter = EventAdapter(orderedEvents, places)
 
         this.divideItemDecoration = DividerItemDecoration(this.recycleView.context, mLayoutManager.orientation)
         this.recycleView.addItemDecoration(divideItemDecoration)
+
+        this.recycleView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                // Get the first visible item
+                val firstVisibleItem: Int = mLayoutManager.findFirstVisibleItemPosition()
+                if (positionalDays.containsKey(firstVisibleItem)) {
+                    if (tabBar.getTabAt(tabBar.selectedTabPosition)!!.text != positionalDays[firstVisibleItem]) {
+                        val index = days.indexOf(positionalDays[firstVisibleItem])
+                        val tab = tabBar.getTabAt(index)
+                        tab!!.select()
+                    }
+                }
+            }
+        })
 
     }
 
