@@ -26,16 +26,18 @@ class MainActivity : AppCompatActivity() {
     lateinit private var recycleView: RecyclerView
     lateinit private var divideItemDecoration: DividerItemDecoration
     lateinit private var tabBar: TabLayout
+    private var noSelectedTab: Boolean = true
+    private var previousTabPosition : Int = 0 //will change if not the first day...
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val time = System.currentTimeMillis()
+        // val time = System.currentTimeMillis()
 
         tabBar = findViewById<TabLayout>(R.id.tab_bar)
 
-        val mLayoutManager = LinearLayoutManager(this)
+        val mLayoutManager = ScrollingLinearLayoutManager(this, LinearLayoutManager.VERTICAL, false, 100)
 
         // Load and parse JSON
         val eventResponse = parseEventLoadJson()
@@ -46,9 +48,11 @@ class MainActivity : AppCompatActivity() {
         val places = placeResponse!!.places
         val days = arrayListOf("Mercredi","Jeudi","Vendredi","Samedi", "Dimanche")
         val positionalDays = mutableMapOf<Int, String>()
+        val invertPosDays = mutableMapOf<String, Int>()
 
         for (day in days) {
             positionalDays.put(orderedEvents.indexOfFirst({it.getDay() == day}), day)
+            invertPosDays.put(day, orderedEvents.indexOfFirst({it.getDay() == day}))
             positionalDays.put(orderedEvents.indexOfLast({it.getDay() == day}), day)
         }
 
@@ -62,15 +66,36 @@ class MainActivity : AppCompatActivity() {
         this.recycleView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 // Get the first visible item
-                val firstVisibleItem: Int = mLayoutManager.findFirstVisibleItemPosition()
-                if (positionalDays.containsKey(firstVisibleItem)) {
-                    if (tabBar.getTabAt(tabBar.selectedTabPosition)!!.text != positionalDays[firstVisibleItem]) {
-                        val index = days.indexOf(positionalDays[firstVisibleItem])
-                        val tab = tabBar.getTabAt(index)
-                        tab!!.select()
+                if (noSelectedTab) {
+                    val firstVisibleItem: Int = mLayoutManager.findFirstVisibleItemPosition()
+                    if (positionalDays.containsKey(firstVisibleItem)) {
+                        if (tabBar.getTabAt(tabBar.selectedTabPosition)!!.text != positionalDays[firstVisibleItem]) {
+                            val index = days.indexOf(positionalDays[firstVisibleItem])
+                            val tab = tabBar.getTabAt(index)
+                            tab!!.select()
+                        }
                     }
                 }
             }
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) { noSelectedTab = true }
+            }
+        })
+
+        this.tabBar.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                //do stuff here
+                noSelectedTab = false
+                if (previousTabPosition < tab.position) {
+                    this@MainActivity.recycleView.smoothScrollToPosition(invertPosDays[tab.text]!!+5)
+                } else {
+                    this@MainActivity.recycleView.smoothScrollToPosition(invertPosDays[tab.text]!!)
+                }
+                previousTabPosition = tab.position
+            }
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
+            override fun onTabReselected(tab: TabLayout.Tab) {}
         })
 
     }
