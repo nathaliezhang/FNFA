@@ -24,6 +24,19 @@ data class Events(val events: List<Event>) {
         fun getTimeDuration(): Long {
             return this.getEndingDate().time - this.getStartingDate().time
         }
+
+        fun getDay(): String {
+            val startTrunc = startingDate.indexOf("-", 5)
+            val endTrunc = startingDate.indexOf(" ")
+            val day = startingDate.substring(startTrunc+1, endTrunc)
+            when (day) {
+                "04" -> return "Mercredi"
+                "05" -> return "Jeudi"
+                "06" -> return "Vendredi"
+                "07" -> return "Samedi"
+                else -> return "Dimanche"
+            }
+        }
     }
 }
 
