@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.example.nzhang.proto_festival.model.Events
 import com.example.nzhang.proto_festival.model.Places
-import com.hendraanggrian.widget.ExpandableRecyclerView
 import com.squareup.moshi.Moshi
 import java.io.InputStream
 import java.text.SimpleDateFormat
@@ -39,10 +38,9 @@ class MainActivity : AppCompatActivity() {
         val orderedEvents = eventResponse!!.events.sortedWith(compareBy({it.getStartingDate().time}, {it.name}))
         val places = placeResponse!!.places
 
-        // this.recycleView = findViewById(R.id.container_list)
-        this.recycleView = findViewById(R.id.expandable_container_list)
+        this.recycleView = findViewById(R.id.container_list)
         this.recycleView.layoutManager = mLayoutManager
-        this.recycleView.adapter = ExpandableEventAdapter(mLayoutManager, orderedEvents, places)
+        this.recycleView.adapter = EventAdapter(orderedEvents, places)
 
         this.divideItemDecoration = DividerItemDecoration(this.recycleView.context, mLayoutManager.orientation)
         this.recycleView.addItemDecoration(divideItemDecoration)
@@ -84,11 +82,10 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-class ExpandableEventAdapter(
-        layout : LinearLayoutManager,
+class EventAdapter(
         private val events: List<Events.Event>,
         private val places: List<Places.Place>
-) : ExpandableRecyclerView.Adapter<ExpandableEventAdapter.EventViewHolder>(layout){
+) : RecyclerView.Adapter<EventAdapter.EventViewHolder>(){
 
     override fun getItemCount(): Int = events.size
 
@@ -96,14 +93,13 @@ class ExpandableEventAdapter(
         val context = parent.context
         val layoutInflater = LayoutInflater.from(context)
         val view = layoutInflater.inflate(R.layout.item_event, parent, false)
-        return ExpandableEventAdapter.EventViewHolder(view)
+        return EventAdapter.EventViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
-        super.onBindViewHolder(holder, position)
         val event = events[position]
-        val typeFormatShort = SimpleDateFormat("HH'H'mm", Locale.FRANCE)
-        val typeFormatLong = SimpleDateFormat("HH'H'mm'min'", Locale.FRANCE)
+        val typeFormatShort = SimpleDateFormat("HH'h'mm", Locale.FRANCE)
+        val typeFormatLong = SimpleDateFormat("HH'h'mm'min'", Locale.FRANCE)
         val sb = StringBuilder()
 
         holder.titleView.text = event.name
@@ -117,7 +113,7 @@ class ExpandableEventAdapter(
                     if (i == event.placeIds.size - 1) {
                         sb.append(placeId.name)
                     } else {
-                        sb.append(placeId.name + " & ")
+                        sb.append(placeId.name + " / ")
                     }
                 }
             }
