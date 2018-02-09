@@ -65,7 +65,6 @@ class MainActivity : AppCompatActivity() {
             positionalDays.put(orderedEvents.indexOfLast({it.getDay() == day}), day)
         }
 
-        this.recycleView = findViewById(R.id.expandable_container_list)
         this.recycleView.layoutManager = mLayoutManager
         this.recycleView.adapter = EventAdapter(orderedEvents, places)
 
@@ -98,14 +97,15 @@ class MainActivity : AppCompatActivity() {
         this.tabBar.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 //do stuff here
+                initTabsText()
                 if (notUpdatingTab) {
                     noSelectedTab = false
                     if (previousTabPosition < tab.position) {
                         if (tab.text == getDay()) {
                             val index = orderedEvents.indexOfFirst({it.getEndingDate().time >= System.currentTimeMillis() && it.getDay() == tab.text})
-                            this@MainActivity.recycleView.smoothScrollToPosition(index+5)
+                            this@MainActivity.recycleView.smoothScrollToPosition(index+4)
                         } else {
-                            this@MainActivity.recycleView.smoothScrollToPosition(invertPosDays[tab.text]!!+5)
+                            this@MainActivity.recycleView.smoothScrollToPosition(invertPosDays[tab.text]!!+4)
                         }
                     } else {
                         if (tab.text == getDay()) {
@@ -125,6 +125,7 @@ class MainActivity : AppCompatActivity() {
             }
             override fun onTabUnselected(tab: TabLayout.Tab) {}
             override fun onTabReselected(tab: TabLayout.Tab) {
+                initTabsText()
                 if (notUpdatingTab) {
                     noSelectedTab = false
                     if (tab.text == getDay()) {
@@ -132,14 +133,14 @@ class MainActivity : AppCompatActivity() {
                         if (index < mLayoutManager.findFirstVisibleItemPosition()) {
                             this@MainActivity.recycleView.smoothScrollToPosition(index)
                         } else {
-                            this@MainActivity.recycleView.smoothScrollToPosition(index+5)
+                            this@MainActivity.recycleView.smoothScrollToPosition(index+4)
                         }
                     } else {
                         val index = invertPosDays[tab.text]
                         if (index!! < mLayoutManager.findFirstVisibleItemPosition()) {
                             this@MainActivity.recycleView.smoothScrollToPosition(index)
                         } else {
-                            this@MainActivity.recycleView.smoothScrollToPosition(index+5)
+                            this@MainActivity.recycleView.smoothScrollToPosition(index+4)
                         }
                     }
                     previousTabPosition = tab.position
@@ -178,12 +179,15 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun updateTabsText(tab: TabLayout.Tab) {
+    private fun initTabsText() {
         tabBar.getTabAt(0)!!.text = "Mercredi"
         tabBar.getTabAt(1)!!.text = "Jeudi"
         tabBar.getTabAt(2)!!.text = "Vendredi"
         tabBar.getTabAt(3)!!.text = "Samedi"
         tabBar.getTabAt(4)!!.text = "Dimanche"
+    }
+
+    private fun updateTabsText(tab: TabLayout.Tab) {
         val sb = StringBuilder()
         sb.append(tabBar.getTabAt(tab.position)!!.text)
         sb.append(daysNumber[tabBar.getTabAt(tab.position)!!.text])
@@ -295,6 +299,6 @@ class EventAdapter(
         val timeView = view.findViewById<TextView>(R.id.text_list_item_time)
         val durationView = view.findViewById<TextView>(R.id.text_list_item_duration)
         val placeView = view.findViewById<TextView>(R.id.text_list_item_place)
-        val imageButton = view.findViewById<ImageButton>(R.id.img_list_item_heart)
+        val imageButton = view.findViewById<ImageButton>(R.id.imageButton)
     }
 }
