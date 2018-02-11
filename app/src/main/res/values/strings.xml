@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">Proto_festival</string>
+
+    <string name="info_price_item_title">Tarifs</string>
+    <string name="info_price_item_block">
+        Projection : 3€ par élève - 1 accompagnateur gratuit pour un groupe de 10 élèves.
+        Atelier : 4€ par élève - accompagnateur gratuit
+        Matinée des métiers : 3€ par élève - 1 accompagnateur gratuit pour un groupe de 10 élèves.
+        Secret de fabrication : 3€ par élève - 1 accompagnateur gratuit pour un groupe de 10 élèves.
+        Le Salon des nouvelles écritures : visite libre, gratuit, sur réservation
+    </string>
+    <string name="info_about_item_title">A propos</string>
+    <string name="info_about_item_block">
+       Vitrine de l’animation française, le Festival national du film d’animation a été créé en
+        1983; il est devenu au fil des ans le rendez-vous incontournable des professionnels et des
+        amateurs de tous âges. Compétitif, il a pour vocation de mettre en valeur le meilleur de la
+        création contemporaine française.
+    </string>
+    <string name="info_about_item_link">En savoir plus</string>
+    <string name="info_partners_item_title">Partenaires</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
