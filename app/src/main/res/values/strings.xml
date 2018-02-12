@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Proto_festival</string>
 
+    <string name="wednesday">Mercredi</string>
+    <string name="thursday">Jeudi</string>
+    <string name="friday">Vendredi</string>
+    <string name="saturday">Samedi</string>
+    <string name="sunday">Dimanche</string>
+
     <string name="info_price_item_title">Tarifs</string>
     <string name="info_price_item_block">
         Projection : 3€ par élève - 1 accompagnateur gratuit pour un groupe de 10 élèves.
