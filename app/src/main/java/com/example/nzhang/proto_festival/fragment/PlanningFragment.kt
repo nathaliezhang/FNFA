@@ -40,7 +40,8 @@ class PlanningFragment : Fragment() {
     lateinit private var orderedEvents: List<Events.Event>
     lateinit private var places: List<Places.Place>
     lateinit private var daysLimitIndex: Map<Int, String>
-    lateinit private var firstIndexOfDay: Map<String, Int>
+    lateinit private var headerPosition: Map<String, Int>
+    lateinit private var eventsAndHeaders: List<Any>
 
     private var days = arrayListOf("Mercredi","Jeudi","Vendredi","Samedi","Dimanche")
     private var AutomaticScrollInProgress: Boolean = false
@@ -61,6 +62,7 @@ class PlanningFragment : Fragment() {
         // Order by date and by name
         orderedEvents = eventResponse!!.events.sortedWith(compareBy({it.getStartingDate().time}, {it.name}))
         places = placeResponse!!.places
+
         val computedDaysLimitIndex = mutableMapOf<Int, String>()
         val computedFirstIndexOfDay = mutableMapOf<String, Int>()
 
@@ -71,7 +73,37 @@ class PlanningFragment : Fragment() {
         }
 
         daysLimitIndex = computedDaysLimitIndex
-        firstIndexOfDay = computedFirstIndexOfDay
+
+
+        val computedEventAndHeaders = mutableListOf<Any>()
+
+        for (event in orderedEvents) {
+            val position = orderedEvents.indexOf(event)
+            for (day in days) {
+                if (position == computedFirstIndexOfDay[day]) {
+                    computedEventAndHeaders.add(day)
+                }
+            }
+            computedEventAndHeaders.add(event)
+        }
+        eventsAndHeaders = computedEventAndHeaders
+        println(eventsAndHeaders)
+
+        val headerMapPosition = mutableMapOf<String, Int>()
+        for (event in eventsAndHeaders) {
+            var index = eventsAndHeaders.indexOf(event)
+            when (event) {
+                "Mercredi" -> headerMapPosition.put("Mercredi", index)
+                "Jeudi" -> headerMapPosition.put("Jeudi", index)
+                "Vendredi" -> headerMapPosition.put("Vendredi", index)
+                "Samedi" -> headerMapPosition.put("Samedi", index)
+                "Dimanche" -> headerMapPosition.put("Dimanche", index)
+                else -> print("None")
+            }
+        }
+        headerPosition = headerMapPosition
+        ///println(headerPosition)
+
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
@@ -80,9 +112,13 @@ class PlanningFragment : Fragment() {
         val view = inflater!!.inflate(R.layout.fragment_planning, container, false)
         tabBar = view.findViewById(R.id.tab_bar)
         val mLayoutManager = ScrollingLinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false, 100)
+
+
         recycleView = view.findViewById(R.id.container_list)
         recycleView.layoutManager = mLayoutManager
-        recycleView.adapter = EventAdapter(orderedEvents, places)
+        recycleView.adapter = EventAdapter(eventsAndHeaders, places, headerPosition)
+
+
         val divideItemDecoration = DividerItemDecoration(recycleView.context, mLayoutManager.orientation)
         recycleView.addItemDecoration(divideItemDecoration)
 
@@ -139,9 +175,9 @@ class PlanningFragment : Fragment() {
                         }
                     } else {
                         if (previousTabPosition < tab.position) {
-                            recycleView.smoothScrollToPosition(firstIndexOfDay[tab.text]!!+4)
+                            recycleView.smoothScrollToPosition(headerPosition[tab.text]!!+4)
                         } else {
-                            recycleView.smoothScrollToPosition(firstIndexOfDay[tab.text]!!)
+                            recycleView.smoothScrollToPosition(headerPosition[tab.text]!!)
                         }
                     }
                 } else {
@@ -163,7 +199,7 @@ class PlanningFragment : Fragment() {
                             recycleView.smoothScrollToPosition(index+4)
                         }
                     } else {
-                        val index = firstIndexOfDay[tab.text]
+                        val index = headerPosition[tab.text]
                         if (index!! < mLayoutManager.findFirstVisibleItemPosition()) {
                             recycleView.smoothScrollToPosition(index)
                         } else {
@@ -243,13 +279,13 @@ class PlanningFragment : Fragment() {
     private fun convertDay(date: String): String {
         val endTrunc = date.indexOf(" ")
         val day = date.substring(0, endTrunc)
-        when (day) {
-            "2018-04-04" -> return "Mercredi"
-            "2018-04-05" -> return "Jeudi"
-            "2018-04-06" -> return "Vendredi"
-            "2018-04-07" -> return "Samedi"
-            "2018-04-08" -> return "Dimanche"
-            else -> return "None"
+        return when (day) {
+            "2018-04-04" -> "Mercredi"
+            "2018-04-05" -> "Jeudi"
+            "2018-04-06" -> "Vendredi"
+            "2018-04-07" -> "Samedi"
+            "2018-04-08" -> "Dimanche"
+            else -> "None"
         }
     }
 }

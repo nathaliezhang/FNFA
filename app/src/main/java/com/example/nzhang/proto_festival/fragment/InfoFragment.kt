@@ -15,7 +15,6 @@ import com.example.nzhang.proto_festival.R
 
 class InfoFragment : Fragment(), View.OnClickListener {
 
-    private var selectedItem = R.id.info_price_content
     private val contentMapping = hashMapOf<Int, Int>(
             R.id.info_price_button to R.id.info_price_content,
             R.id.info_about_button to R.id.info_about_content,
