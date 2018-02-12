@@ -15,15 +15,15 @@
             android:id="@+id/info_price_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:drawableRight="@android:drawable/arrow_down_float"
-            android:drawableEnd="@android:drawable/arrow_down_float"
+            style="@style/InfoButton"
             android:text="@string/info_price_item_title" />
 
         <com.github.aakira.expandablelayout.ExpandableRelativeLayout
             android:id="@+id/info_price_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_below="@+id/info_price_button"
+            android:background="@drawable/borderlines"
             android:padding="16dp"
             app:ael_duration="400"
             app:ael_expanded="false"
@@ -39,17 +39,19 @@
         <Button
             android:id="@+id/info_about_button"
             android:layout_below="@+id/info_price_content"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableRight="@android:drawable/arrow_down_float"
-            android:drawableEnd="@android:drawable/arrow_down_float"
+            style="@style/InfoButton"
             android:text="@string/info_about_item_title" />
 
         <com.github.aakira.expandablelayout.ExpandableRelativeLayout
             android:id="@+id/info_about_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="fill_parent"
             android:layout_below="@+id/info_about_button"
+            android:textAlignment="textStart"
+            android:layout_gravity="start"
+            android:background="@drawable/borderlines"
             android:padding="16dp"
             app:ael_duration="400"
             app:ael_expanded="false"
@@ -73,10 +75,9 @@
         <Button
             android:id="@+id/info_partners_button"
             android:layout_below="@+id/info_about_content"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableRight="@android:drawable/arrow_down_float"
-            android:drawableEnd="@android:drawable/arrow_down_float"
+            style="@style/InfoButton"
             android:text="@string/info_partners_item_title" />
 
         <com.github.aakira.expandablelayout.ExpandableRelativeLayout
@@ -84,6 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/info_partners_button"
+            android:background="@drawable/borderlines"
             android:padding="16dp"
             app:ael_duration="400"
             app:ael_expanded="false"
