@@ -47,7 +47,7 @@ class PlanningFragment : Fragment() {
     private var AutomaticScrollInProgress: Boolean = false
     private var ManualScrollInProgress: Boolean = false
     private var notUpdatingTab: Boolean = true
-    private var previousTabPosition : Int = 0 //will change if not the first day...
+    private var previousTabPosition : Int = -1 //will change if not the first day...
     private var tickReceiver: BroadcastReceiver? = null
     private var isInit: Boolean = true
     private val daysNumber = hashMapOf("Mercredi" to " 4 Avril", "Jeudi" to " 5 Avril", "Vendredi" to " 6 Avril", "Samedi" to " 7 Avril", "Dimanche" to " 8 Avril")
@@ -167,10 +167,10 @@ class PlanningFragment : Fragment() {
                     AutomaticScrollInProgress = true
                     if (tab.text == getCurrentDay()) {
                         if (previousTabPosition < tab.position) {
-                            val index = orderedEvents.indexOfFirst({it.getEndingDate().time >= System.currentTimeMillis() && it.getDay() == tab.text})
+                            val index = orderedEvents.indexOfFirst({it.getStartingDate().time >= System.currentTimeMillis() && it.getDay() == tab.text})
                             recycleView.smoothScrollToPosition(index+4)
                         } else {
-                            val index = orderedEvents.indexOfFirst({it.getEndingDate().time >= System.currentTimeMillis() && it.getDay() == tab.text})
+                            val index = orderedEvents.indexOfFirst({it.getStartingDate().time >= System.currentTimeMillis() && it.getDay() == tab.text})
                             recycleView.smoothScrollToPosition(index)
                         }
                     } else {
@@ -192,7 +192,7 @@ class PlanningFragment : Fragment() {
                 if (!ManualScrollInProgress) {
                     AutomaticScrollInProgress = true
                     if (tab.text == getCurrentDay()) {
-                        val index = orderedEvents.indexOfFirst({it.getEndingDate().time >= System.currentTimeMillis() && it.getDay() == tab.text})
+                        val index = orderedEvents.indexOfFirst({it.getStartingDate().time >= System.currentTimeMillis() && it.getDay() == tab.text})
                         if (index < mLayoutManager.findFirstVisibleItemPosition()) {
                             recycleView.smoothScrollToPosition(index)
                         } else {
@@ -288,6 +288,6 @@ class PlanningFragment : Fragment() {
             else -> "None"
         }
     }
-}
+} //Une demi heure
 
 
