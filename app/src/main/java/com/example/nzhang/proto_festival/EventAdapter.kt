@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import com.example.nzhang.proto_festival.model.Categories
 import com.example.nzhang.proto_festival.model.Events
 import com.example.nzhang.proto_festival.model.Places
 import java.text.SimpleDateFormat
@@ -15,9 +16,10 @@ import java.util.*
  * Created by mel on 11/02/2018.
  */
 class EventAdapter(
+        private val headerPosition: Map<String, Int>,
         private val events: List<Any>,
         private val places: List<Places.Place>,
-        private val headerPosition: Map<String, Int>
+        private val categories: List<Categories.Category>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private val TYPE_HEADER: Int = 0
@@ -48,32 +50,51 @@ class EventAdapter(
             val event = events[position] as Events.Event
             val typeFormatShort = SimpleDateFormat("HH'h'mm", Locale.FRANCE)
             val typeFormatLong = SimpleDateFormat("HH'h'mm'min'", Locale.FRANCE)
-            val sb = StringBuilder()
+            val placeSb = StringBuilder()
+            val categorySb = StringBuilder()
+
             holder.titleView.text = event.name
             holder.timeView.text = typeFormatShort.format(event.getStartingDate())
             holder.durationView.text = typeFormatLong.format(event.getTimeDuration())
+
 
             for (i in event.placeIds.indices ) { // Event id in Events
                 for (placeId: Places.Place in places) { // Places id
                     val convertPlaceId = placeId.id.toInt()
                     if (event.placeIds[i] == convertPlaceId) {
                         if (i == event.placeIds.size - 1) {
-                            sb.append(placeId.name)
+                            placeSb.append(placeId.name)
                         } else {
-                            sb.append(placeId.name + " / ")
+                            placeSb.append(placeId.name + " / ")
                         }
                     }
                 }
+                holder.placeView.text = placeSb.toString()
             }
+
+            for (i in event.categoryIds.indices ) { // Category id in Categories
+                for (categoryId: Categories.Category in categories) { // Category id
+                    val convertCategoryId = categoryId.id.toInt()
+                    if (event.categoryIds[i] == convertCategoryId) {
+                        if (i == event.categoryIds.size - 1) {
+                            categorySb.append(categoryId.name)
+                        } else {
+                            categorySb.append(categoryId.name + " / ")
+                        }
+                    }
+                }
+                holder.categoryView.text = categorySb.toString()
+            }
+
+            holder.imageButton.setOnClickListener({
+                println(event.name)
+            })
+
             if (event.getEndingDate().time >= System.currentTimeMillis()) {
                 holder.itemView.alpha = 1.0f
             } else {
                 holder.itemView.alpha = 0.5f
             }
-            holder.placeView.text = sb.toString()
-            holder.imageButton.setOnClickListener({
-                println(event.name)
-            })
         }
 
     }
@@ -95,10 +116,10 @@ class EventAdapter(
             headerPosition["Dimanche"] -> true
             else -> false
         }
-        // return position == 0 // match only for 0 -> get the first position of each day
     }
 
     class EventViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val categoryView = view.findViewById<TextView>(R.id.text_list_item_category)
         val titleView = view.findViewById<TextView>(R.id.text_list_item_title)
         val timeView = view.findViewById<TextView>(R.id.text_list_item_time)
         val durationView = view.findViewById<TextView>(R.id.text_list_item_duration)
