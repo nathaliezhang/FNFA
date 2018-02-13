@@ -18,6 +18,7 @@ import android.view.ViewTreeObserver
 import com.example.nzhang.proto_festival.EventAdapter
 import com.example.nzhang.proto_festival.R
 import com.example.nzhang.proto_festival.ScrollingLinearLayoutManager
+import com.example.nzhang.proto_festival.model.Categories
 import com.example.nzhang.proto_festival.model.Events
 import com.example.nzhang.proto_festival.model.Places
 import com.squareup.moshi.Moshi
@@ -39,6 +40,7 @@ class PlanningFragment : Fragment() {
     lateinit private var tabBar: TabLayout
     lateinit private var orderedEvents: List<Events.Event>
     lateinit private var places: List<Places.Place>
+    lateinit private var categories: List<Categories.Category>
     lateinit private var daysLimitIndex: Map<Int, String>
     lateinit private var headerPosition: Map<String, Int>
     lateinit private var eventsAndHeaders: List<Any>
@@ -58,10 +60,12 @@ class PlanningFragment : Fragment() {
         // Load and parse JSON
         val eventResponse = parseEventLoadJson()
         val placeResponse = parsePlaceLoadJson()
+        val categoryResponse = parseCategoryLoadJson()
 
         // Order by date and by name
         orderedEvents = eventResponse!!.events.sortedWith(compareBy({it.getStartingDate().time}, {it.name}))
         places = placeResponse!!.places
+        categories = categoryResponse!!.categories
 
         val computedDaysLimitIndex = mutableMapOf<Int, String>()
         val computedFirstIndexOfDay = mutableMapOf<String, Int>()
@@ -87,22 +91,20 @@ class PlanningFragment : Fragment() {
             computedEventAndHeaders.add(event)
         }
         eventsAndHeaders = computedEventAndHeaders
-        println(eventsAndHeaders)
 
         val headerMapPosition = mutableMapOf<String, Int>()
         for (event in eventsAndHeaders) {
-            var index = eventsAndHeaders.indexOf(event)
+            val index = eventsAndHeaders.indexOf(event)
             when (event) {
                 "Mercredi" -> headerMapPosition.put("Mercredi", index)
                 "Jeudi" -> headerMapPosition.put("Jeudi", index)
                 "Vendredi" -> headerMapPosition.put("Vendredi", index)
                 "Samedi" -> headerMapPosition.put("Samedi", index)
                 "Dimanche" -> headerMapPosition.put("Dimanche", index)
-                else -> print("None")
+                else -> "None"
             }
         }
         headerPosition = headerMapPosition
-        ///println(headerPosition)
 
     }
 
@@ -116,7 +118,7 @@ class PlanningFragment : Fragment() {
 
         recycleView = view.findViewById(R.id.container_list)
         recycleView.layoutManager = mLayoutManager
-        recycleView.adapter = EventAdapter(eventsAndHeaders, places, headerPosition)
+        recycleView.adapter = EventAdapter(headerPosition, eventsAndHeaders, places, categories)
 
 
         val divideItemDecoration = DividerItemDecoration(recycleView.context, mLayoutManager.orientation)
@@ -240,10 +242,10 @@ class PlanningFragment : Fragment() {
         this.recycleView.adapter.notifyDataSetChanged()
     }
 
-    private fun loadJsonFromAssets(filename: String) : String {
+    private fun loadJsonFromAssets(fileName: String) : String {
         val bytesStream: InputStream
         try {
-            bytesStream = activity.baseContext.assets.open(filename)
+            bytesStream = activity.baseContext.assets.open(fileName)
             if (bytesStream != null) {
                 val streamSize: Int = bytesStream.available() // Returns an estimate of the number of bytes that can be read
                 val buffer: ByteArray = kotlin.ByteArray(streamSize)
@@ -257,6 +259,13 @@ class PlanningFragment : Fragment() {
         return ""
     }
 
+/*    private fun parseEventLoadJson(fileName: String, fileClass: Class<Any>) : Any? {
+        val json = loadJsonFromAssets(fileName)
+        val moshi = Moshi.Builder().build()
+        val adapter = moshi.adapter(fileClass)
+        return adapter.fromJson(json)
+    }*/
+
     private fun parseEventLoadJson() : Events? {
         val eventsJson = loadJsonFromAssets("events.json")
         val moshi = Moshi.Builder().build()
@@ -268,6 +277,13 @@ class PlanningFragment : Fragment() {
         val moshi = Moshi.Builder().build()
         val adapter = moshi.adapter(Places::class.java)
         return adapter.fromJson(placesJson)
+    }
+
+    private fun parseCategoryLoadJson() : Categories? {
+        val categoriesJson = loadJsonFromAssets("categories.json")
+        val moshi = Moshi.Builder().build()
+        val adapter = moshi.adapter(Categories::class.java)
+        return adapter.fromJson(categoriesJson)
     }
 
     private fun getCurrentDay(): String {

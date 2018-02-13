@@ -3,6 +3,7 @@
     {
       "id": 0,
       "name": "Compétition 1",
+      "description": "",
       "startingDate": "2018-04-04 14:00:00",
       "endingDate": "2018-04-04 15:00:00",
       "placeIds": [1],
@@ -12,6 +13,7 @@
     {
       "id": 1,
       "name": "Sahara",
+      "description": "",
       "startingDate": "2018-04-04 15:30:00",
       "endingDate": "2018-04-04 17:00:00",
       "placeIds": [1],
@@ -21,6 +23,7 @@
     {
       "id": 2,
       "name": "Compétition 5",
+      "description": "",
       "startingDate": "2018-04-04 18:30:00",
       "endingDate": "2018-04-04 19:30:00",
       "placeIds": [1],
@@ -30,6 +33,7 @@
     {
       "id": 3,
       "name": "Film d'ouverture",
+      "description": "",
       "startingDate": "2018-04-04 21:30:00",
       "endingDate": "2018-04-04 23:00:00",
       "placeIds": [1],
@@ -39,6 +43,7 @@
     {
       "id": 4,
       "name": "Inauguration",
+      "description": "",
       "startingDate": "2018-04-04 19:00:00",
       "endingDate": "2018-04-04 20:00:00",
       "placeIds": [0],
@@ -48,6 +53,7 @@
     {
       "id": 5,
       "name": "Cocktail de réouverture",
+      "description": "",
       "startingDate": "2018-04-04 20:00:00",
       "endingDate": "2018-04-04 21:30:00",
       "placeIds": [0],
@@ -56,7 +62,8 @@
     },
     {
       "id": 6,
-      "name": "Regards croisés sur la programmation 2018",
+      "name": "Regards croisés",
+      "description": "Programmation 2018",
       "startingDate": "2018-04-04 10:00:00",
       "endingDate": "2018-04-04 13:30:00",
       "placeIds": [3],
@@ -66,6 +73,7 @@
     {
       "id": 7,
       "name": "Atelier Kool Cloud",
+      "description": "",
       "startingDate": "2018-04-04 14:00:00",
       "endingDate": "2018-04-04 17:00:00",
       "placeIds": [3],
@@ -74,7 +82,8 @@
     },
     {
       "id": 8,
-      "name": "Dans les coulisses de 'Sahara' - en présence de Pierre Corré et Christian Ronget",
+      "name": "Dans les coulisses de 'Sahara'",
+      "description": "En présence de Pierre Corré et Christian Ronget",
       "startingDate": "2018-04-04 17:15:00",
       "endingDate": "2018-04-04 18:30:00",
       "placeIds": [3],
@@ -84,6 +93,7 @@
     {
       "id": 9,
       "name": "Atelier tout public LISAA",
+      "description": "",
       "startingDate": "2018-04-04 14:30:00",
       "endingDate": "2018-04-04 18:00:00",
       "placeIds": [4],
@@ -93,6 +103,7 @@
     {
       "id": 10,
       "name": "Soirée",
+      "description": "",
       "startingDate": "2018-04-04 23:30:00",
       "endingDate": "2018-04-05 01:00:00",
       "placeIds": [4],
@@ -101,7 +112,8 @@
     },
     {
       "id": 11,
-      "name": "Salon des nouvelles écritures  (ouvert aux professionnels et scolaires sur réservation)",
+      "name": "Salon des nouvelles écritures",
+      "description": "Ouvert aux professionnels et scolaires sur réservation",
       "startingDate": "2018-04-04 10:00:00",
       "endingDate": "2018-04-04 13:30:00",
       "placeIds": [5],
@@ -111,6 +123,7 @@
     {
       "id": 12,
       "name": "Salon des nouvelles écritures",
+      "description": "",
       "startingDate": "2018-04-04 13:30:00",
       "endingDate": "2018-04-04 19:30:00",
       "placeIds": [5],
@@ -120,6 +133,7 @@
     {
       "id": 13,
       "name": "Le Cube animé",
+      "description": "",
       "startingDate": "2018-04-04 10:00:00",
       "endingDate": "2018-04-04 19:30:00",
       "placeIds": [6],
@@ -128,7 +142,8 @@
     },
     {
       "id": 14,
-      "name": "Croc Blanc en présence de l'auteur Sophie Bordet-Petillon",
+      "name": "Croc Blanc",
+      "description": "Avec l'auteur Sophie Bordet-Petillon",
       "startingDate": "2018-04-04 14:00:00",
       "endingDate": "2018-04-04 15:30:00",
       "placeIds": [7],
@@ -138,6 +153,7 @@
     {
       "id": 15,
       "name": "Compétition 1",
+      "description": "",
       "startingDate": "2018-04-04 14:30:00",
       "endingDate": "2018-04-04 15:30:00",
       "placeIds": [8],
@@ -147,6 +163,7 @@
     {
       "id": 16,
       "name": "Pour les tout petits",
+      "description": "",
       "startingDate": "2018-04-04 16:30:00",
       "endingDate": "2018-04-04 17:30:00",
       "placeIds": [8],
@@ -156,6 +173,7 @@
     {
       "id": 17,
       "name": "Séries",
+      "description": "",
       "startingDate": "2018-04-04 18:30:00",
       "endingDate": "2018-04-04 20:00:00",
       "placeIds": [8],
@@ -165,6 +183,7 @@
     {
       "id": 18,
       "name": "Compétition 2",
+      "description": "",
       "startingDate": "2018-04-05 14:00:00",
       "endingDate": "2018-04-05 15:00:00",
       "placeIds": [1],
@@ -173,7 +192,8 @@
     },
     {
       "id": 19,
-      "name": "Matinée du volume : Table ronde sur les métiers du volume",
+      "name": "Matinée du volume",
+      "description": "Table ronde sur les métiers du volume",
       "startingDate": "2018-04-05 10:00:00",
       "endingDate": "2018-04-05 11:30:00",
       "placeIds": [2],
@@ -182,7 +202,8 @@
     },
     {
       "id": 20,
-      "name": "Le film 'Interdits aux chiens et aux Italiens' en chantier - en présence d'Alain Ughetto",
+      "name": "'Interdits aux chiens et aux Italiens'",
+      "description": "Film en chantier en présence d'Alain Ughetto",
       "startingDate": "2018-04-05 11:30:00",
       "endingDate": "2018-04-05 12:00:00",
       "placeIds": [2],
@@ -191,7 +212,8 @@
     },
     {
       "id": 21,
-      "name": "Le film 'La Tour' en chantier",
+      "name": "'La Tour'",
+      "description": "Film en chantier",
       "startingDate": "2018-04-05 12:15:00",
       "endingDate": "2018-04-05 13:00:00",
       "placeIds": [2],
@@ -201,6 +223,7 @@
     {
       "id": 22,
       "name": "Pitchs des Séries et Webséries",
+      "description": "",
       "startingDate": "2018-04-05 14:00:00",
       "endingDate": "2018-04-05 16:00:00",
       "placeIds": [2],
@@ -210,6 +233,7 @@
     {
       "id": 23,
       "name": "Séries",
+      "description": "",
       "startingDate": "2018-04-05 16:30:00",
       "endingDate": "2018-04-05 17:30:00",
       "placeIds": [2],
@@ -218,7 +242,8 @@
     },
     {
       "id": 24,
-      "name": "Dans les coulisses d''Athleticus' - en présence de Nicolas Deveaux",
+      "name": "Dans les coulisses d''Athleticus'",
+      "description": "En présence de Nicolas Deveaux",
       "startingDate": "2018-04-05 18:00:00",
       "endingDate": "2018-04-05 19:00:00",
       "placeIds": [2],
@@ -228,6 +253,7 @@
     {
       "id": 25,
       "name": "Discussion croisée sur la série d'animation",
+      "description": "",
       "startingDate": "2018-04-05 16:30:00",
       "endingDate": "2018-04-05 17:30:00",
       "placeIds": [3],
@@ -237,6 +263,7 @@
     {
       "id": 26,
       "name": "Speed dating des auteurs - AGRAF",
+      "description": "",
       "startingDate": "2018-04-05 18:00:00",
       "endingDate": "2018-04-05 20:00:00",
       "placeIds": [3],
@@ -246,6 +273,7 @@
     {
       "id": 27,
       "name": "Cantine professionnelle",
+      "description": "",
       "startingDate": "2018-04-05 12:30:00",
       "endingDate": "2018-04-05 14:00:00",
       "placeIds": [4],
@@ -255,6 +283,7 @@
     {
       "id": 28,
       "name": "Stand démo Wacom/TV Paint",
+      "description": "",
       "startingDate": "2018-04-05 10:00:00",
       "endingDate": "2018-04-05 18:30:00",
       "placeIds": [9],
@@ -263,7 +292,8 @@
     },
     {
       "id": 29,
-      "name": "Salon des nouvelles écritures  (ouvert aux professionnels et scolaires sur réservation)",
+      "name": "Salon des nouvelles écritures",
+      "description": "Ouvert aux professionnels et scolaires sur réservation",
       "startingDate": "2018-04-05 10:00:00",
       "endingDate": "2018-04-05 13:30:00",
       "placeIds": [5],
@@ -273,6 +303,7 @@
     {
       "id": 30,
       "name": "Salon des nouvelles écritures",
+      "description": "",
       "startingDate": "2018-04-05 13:30:00",
       "endingDate": "2018-04-05 19:30:00",
       "placeIds": [5],
@@ -282,6 +313,7 @@
     {
       "id": 31,
       "name": "Le Cube animé",
+      "description": "",
       "startingDate": "2018-04-05 10:00:00",
       "endingDate": "2018-04-05 19:30:00",
       "placeIds": [10],
@@ -291,6 +323,7 @@
     {
       "id": 32,
       "name": "Compétition 4",
+      "description": "",
       "startingDate": "2018-04-05 14:00:00",
       "endingDate": "2018-04-05 15:30:00",
       "placeIds": [7],
@@ -300,6 +333,7 @@
     {
       "id": 33,
       "name": "Compétition 8",
+      "description": "",
       "startingDate": "2018-04-05 16:00:00",
       "endingDate": "2018-04-05 17:30:00",
       "placeIds": [7],
@@ -309,6 +343,7 @@
     {
       "id": 34,
       "name": "Compétition 6",
+      "description": "",
       "startingDate": "2018-04-05 18:30:00",
       "endingDate": "2018-04-05 20:00:00",
       "placeIds": [7],
@@ -318,6 +353,7 @@
     {
       "id": 35,
       "name": "Compétition 5",
+      "description": "",
       "startingDate": "2018-04-05 22:30:00",
       "endingDate": "2018-04-06 00:00:00",
       "placeIds": [7],
@@ -326,7 +362,8 @@
     },
     {
       "id": 36,
-      "name": "'Mutafukaz' en présence de RUN et Féodor Atkine",
+      "name": "'Mutafukaz'",
+      "description": "En présence de RUN et Féodor Atkine",
       "startingDate": "2018-04-05 20:30:00",
       "endingDate": "2018-04-05 22:00:00",
       "placeIds": [7],
@@ -336,6 +373,7 @@
     {
       "id": 37,
       "name": "Compétition 1",
+      "description": "",
       "startingDate": "2018-04-05 14:00:00",
       "endingDate": "2018-04-06 15:30:00",
       "placeIds": [8],
@@ -344,7 +382,8 @@
     },
     {
       "id": 38,
-      "name": "'Les As de la jungle' en présence de David Alaux",
+      "name": "'Les As de la jungle'",
+      "description": "En présence de David Alaux",
       "startingDate": "2018-04-06 14:00:00",
       "endingDate": "2018-04-06 15:30:00",
       "placeIds": [1],
@@ -354,6 +393,7 @@
     {
       "id": 39,
       "name": "DRUM animation + Soirée Clips",
+      "description": "",
       "startingDate": "2018-04-06 21:00:00",
       "endingDate": "2018-04-06 22:30:00",
       "placeIds": [1],
@@ -363,6 +403,7 @@
     {
       "id": 40,
       "name": "Animer avec Wacom",
+      "description": "",
       "startingDate": "2018-04-06 10:00:00",
       "endingDate": "2018-04-06 11:00:00",
       "placeIds": [2],
@@ -371,7 +412,8 @@
     },
     {
       "id": 41,
-      "name": "Regards croisés du collectif des Résidences",
+      "name": "Regards croisés",
+      "description": "Collectif des Résidences",
       "startingDate": "2018-04-06 11:00:00",
       "endingDate": "2018-04-06 12:00:00",
       "placeIds": [2],
@@ -380,7 +422,8 @@
     },
     {
       "id": 42,
-      "name": "L'Actu des résidences : l'Appel de Folimage + le renouveau de la Fabrique",
+      "name": "L'Actu des résidences",
+      "description": "L'Appel de Folimage + le renouveau de la Fabrique",
       "startingDate": "2018-04-06 12:00:00",
       "endingDate": "2018-04-06 12:30:00",
       "placeIds": [2],
@@ -390,6 +433,7 @@
     {
       "id": 43,
       "name": "Pitchs des Courts métrages",
+      "description": "",
       "startingDate": "2018-04-06 14:00:00",
       "endingDate": "2018-04-06 16:00:00",
       "placeIds": [2],
@@ -399,6 +443,7 @@
     {
       "id": 44,
       "name": "Line-up des diffuseurs",
+      "description": "",
       "startingDate": "2018-04-06 16:30:00",
       "endingDate": "2018-04-06 17:00:00",
       "placeIds": [2],
@@ -407,7 +452,8 @@
     },
     {
       "id": 45,
-      "name": "Le film 'Funan, le nouveau peuple' en chantier - en présence de Denis Do et Sébastien Onomo",
+      "name": "'Funan, le nouveau peuple'",
+      "description": "Film en chantier en présence de Denis Do et Sébastien Onomo",
       "startingDate": "2018-04-06 17:00:00",
       "endingDate": "2018-04-06 18:00:00",
       "placeIds": [2],
@@ -417,6 +463,7 @@
     {
       "id": 46,
       "name": "Compétition 7",
+      "description": "",
       "startingDate": "2018-04-06 18:00:00",
       "endingDate": "2018-04-06 19:30:00",
       "placeIds": [2],
@@ -426,6 +473,7 @@
     {
       "id": 47,
       "name": "Initiation TV Paint",
+      "description": "",
       "startingDate": "2018-04-06 16:00:00",
       "endingDate": "2018-04-06 17:30:00",
       "placeIds": [3],
@@ -435,6 +483,7 @@
     {
       "id": 48,
       "name": "A la rencontre des réalisateurs",
+      "description": "",
       "startingDate": "2018-04-06 17:30:00",
       "endingDate": "2018-04-06 20:00:00",
       "placeIds": [3],
@@ -444,6 +493,7 @@
     {
       "id": 49,
       "name": "Petit déjeuner des producteurs",
+      "description": "",
       "startingDate": "2018-04-06 09:30:00",
       "endingDate": "2018-04-06 10:30:00",
       "placeIds": [4],
@@ -453,6 +503,7 @@
     {
       "id": 50,
       "name": "Cantine professionnelle",
+      "description": "",
       "startingDate": "2018-04-06 12:30:00",
       "endingDate": "2018-04-06 14:00:00",
       "placeIds": [4],
@@ -461,7 +512,8 @@
     },
     {
       "id": 51,
-      "name": "Salon des nouvelles écritures  (ouvert aux professionnels et scolaires sur réservation)",
+      "name": "Salon des nouvelles écritures",
+      "description": "Ouvert aux professionnels et scolaires sur réservation",
       "startingDate": "2018-04-06 10:00:00",
       "endingDate": "2018-04-06 13:30:00",
       "placeIds": [5],
@@ -471,6 +523,7 @@
     {
       "id": 52,
       "name": "Salon des nouvelles écritures",
+      "description": "",
       "startingDate": "2018-04-06 13:30:00",
       "endingDate": "2018-04-06 19:30:00",
       "placeIds": [5],
@@ -489,6 +542,7 @@
     {
       "id": 54,
       "name": "Compétition 1",
+      "description": "",
       "startingDate": "2018-04-06 14:00:00",
       "endingDate": "2018-04-06 15:00:00",
       "placeIds": [7],
@@ -498,6 +552,7 @@
     {
       "id": 55,
       "name": "Compétition 2",
+      "description": "",
       "startingDate": "2018-04-06 14:00:00",
       "endingDate": "2018-04-06 15:00:00",
       "placeIds": [8],
@@ -507,6 +562,7 @@
     {
       "id": 56,
       "name": "Compétition 1",
+      "description": "",
       "startingDate": "2018-04-05 14:00:00",
       "endingDate": "2018-04-05 15:30:00",
       "placeIds": [8],
@@ -515,7 +571,8 @@
     },
     {
       "id": 57,
-      "name": "Secret de fabrication - Les As de la jungle",
+      "name": "Secret de fabrication",
+      "description": "Les As de la jungle",
       "startingDate": "2018-04-06 10:30:00",
       "endingDate": "2018-04-06 12:00:00",
       "placeIds": [12],
@@ -524,7 +581,8 @@
     },
     {
       "id": 58,
-      "name": "'Zombillenium' en présence d'Alexis Ducord",
+      "name": "'Zombillenium'",
+      "description": "En présence d'Alexis Ducord",
       "startingDate": "2018-04-07 14:00:00",
       "endingDate": "2018-04-07 15:30:00",
       "placeIds": [1],
@@ -533,7 +591,8 @@
     },
     {
       "id": 59,
-      "name": "Le Quatuor à cornes en présence de Benjamin Botella, Yves Cotten et Emmanuelle Gorgiard",
+      "name": "Le Quatuor à cornes",
+      "description": "En présence de Benjamin Botella, Yves Cotten et Emmanuelle Gorgiard",
       "startingDate": "2018-04-07 16:00:00",
       "endingDate": "2018-04-07 17:00:00",
       "placeIds": [1],
@@ -543,6 +602,7 @@
     {
       "id": 60,
       "name": "Remise des prix",
+      "description": "",
       "startingDate": "2018-04-07 19:00:00",
       "endingDate": "2018-04-07 20:00:00",
       "placeIds": [1],
@@ -552,6 +612,7 @@
     {
       "id": 61,
       "name": "Projection du palmarès",
+      "description": "",
       "startingDate": "2018-04-07 21:00:00",
       "endingDate": "2018-04-07 22:30:00",
       "placeIds": [1],
@@ -560,7 +621,8 @@
     },
     {
       "id": 62,
-      "name": "Dans les coulisses de 'Croc blanc' en présence de Bruno Coulais",
+      "name": "Dans les coulisses de 'Croc blanc'",
+      "description": "En présence de Bruno Coulais",
       "startingDate": "2018-04-07 14:30:00",
       "endingDate": "2018-04-07 16:00:00",
       "placeIds": [2],
@@ -569,7 +631,8 @@
     },
     {
       "id": 63,
-      "name": "Atelier musique à l'image avec Christine Ott",
+      "name": "Atelier musique à l'image",
+      "description": "Avec Christine Ott",
       "startingDate": "2018-04-07 14:30:00",
       "endingDate": "2018-04-07 16:30:00",
       "placeIds": [3],
@@ -579,6 +642,7 @@
     {
       "id": 64,
       "name": "A la rencontre des réalisateurs",
+      "description": "",
       "startingDate": "2018-04-07 17:00:00",
       "endingDate": "2018-04-07 19:00:00",
       "placeIds": [3],
@@ -588,6 +652,7 @@
     {
       "id": 65,
       "name": "Cocktail de clôture",
+      "description": "",
       "startingDate": "2018-04-07 20:00:00",
       "endingDate": "2018-04-07 21:30:00",
       "placeIds": [4],
@@ -597,6 +662,7 @@
     {
       "id": 66,
       "name": "Soirée",
+      "description": "",
       "startingDate": "2018-04-07 22:30:00",
       "endingDate": "2018-04-07 01:00:00",
       "placeIds": [4],
@@ -605,7 +671,8 @@
     },
     {
       "id": 67,
-      "name": "Salon des nouvelles écritures + Life is Strange",
+      "name": "Salon des nouvelles écritures",
+      "description": "Et Life is Strange",
       "startingDate": "2018-04-07 13:30:00",
       "endingDate": "2018-04-07 19:30:00",
       "placeIds": [5],
@@ -615,6 +682,7 @@
     {
       "id": 68,
       "name": "Le Cube animé",
+      "description": "",
       "startingDate": "2018-04-07 13:30:00",
       "endingDate": "2018-04-07 18:30:00",
       "placeIds": [10],
@@ -624,6 +692,7 @@
     {
       "id": 69,
       "name": "Pour les tout petits",
+      "description": "",
       "startingDate": "2018-04-07 10:30:00",
       "endingDate": "2018-04-07 11:30:00",
       "placeIds": [7],
@@ -632,7 +701,8 @@
     },
     {
       "id": 70,
-      "name": "Le film 'Pachamama' en chantier - en présence de Juan Antin et  Céline Hermann",
+      "name": "'Pachamama'",
+      "description": "Film en chantier en présence de Juan Antin et  Céline Hermann",
       "startingDate": "2018-04-07 11:30:00",
       "endingDate": "2018-04-07 13:00:00",
       "placeIds": [7],
@@ -641,7 +711,8 @@
     },
     {
       "id": 71,
-      "name": "Croc Blanc - en présence de Bruno Coulais",
+      "name": "Croc Blanc",
+      "description": "En présence de Bruno Coulais",
       "startingDate": "2018-04-07 16:30:00",
       "endingDate": "2018-04-07 18:00:00",
       "placeIds": [7],
@@ -651,6 +722,7 @@
     {
       "id": 72,
       "name": "Montgolfière Dimitri",
+      "description": "",
       "startingDate": "2018-04-07 14:00:00",
       "endingDate": "2018-04-07 20:00:00",
       "placeIds": [13],
@@ -660,6 +732,7 @@
     {
       "id": 73,
       "name": "Séries jeunesse",
+      "description": "",
       "startingDate": "2018-04-07 14:30:00",
       "endingDate": "2018-04-07 15:30:00",
       "placeIds": [8],
@@ -669,6 +742,7 @@
     {
       "id": 74,
       "name": "Compétition 2",
+      "description": "",
       "startingDate": "2018-04-07 16:30:00",
       "endingDate": "2018-04-07 17:30:00",
       "placeIds": [8],
@@ -678,6 +752,7 @@
     {
       "id": 75,
       "name": "Carte blanche Arte",
+      "description": "",
       "startingDate": "2018-04-07 18:00:00",
       "endingDate": "2018-04-07 19:30:00",
       "placeIds": [8],
@@ -686,7 +761,8 @@
     },
     {
       "id": 76,
-      "name": "'Drôles de petites bêtes' en présence d'Antoon Krings",
+      "name": "'Drôles de petites bêtes'",
+      "description": "En présence d'Antoon Krings",
       "startingDate": "2018-04-08 14:00:00",
       "endingDate": "2018-04-08 15:30:00",
       "placeIds": [1],
@@ -696,6 +772,7 @@
     {
       "id": 77,
       "name": "Ciné concert 'Lotte, mon amour'",
+      "description": "",
       "startingDate": "2018-04-08 16:30:00",
       "endingDate": "2018-04-08 17:30:00",
       "placeIds": [1],
@@ -705,6 +782,7 @@
     {
       "id": 78,
       "name": "Carte blanche Arte",
+      "description": "",
       "startingDate": "2018-04-08 16:30:00",
       "endingDate": "2018-04-08 17:30:00",
       "placeIds": [2],
@@ -714,6 +792,7 @@
     {
       "id": 79,
       "name": "Rencontre avec Antoon Krings",
+      "description": "",
       "startingDate": "2018-04-08 15:30:00",
       "endingDate": "2018-04-08 16:30:00",
       "placeIds": [3],
@@ -723,6 +802,7 @@
     {
       "id": 80,
       "name": "Ateliers tout public LISAA",
+      "description": "",
       "startingDate": "2018-04-08 14:00:00",
       "endingDate": "2018-04-08 16:30:00",
       "placeIds": [4],
@@ -732,6 +812,7 @@
     {
       "id": 81,
       "name": "Salon des nouvelles écritures",
+      "description": "",
       "startingDate": "2018-04-08 13:30:00",
       "endingDate": "2018-04-08 18:00:00",
       "placeIds": [5],
@@ -741,6 +822,7 @@
     {
       "id": 82,
       "name": "Le Cube animé",
+      "description": "",
       "startingDate": "2018-04-08 13:30:00",
       "endingDate": "2018-04-08 18:30:00",
       "placeIds": [10],
@@ -750,6 +832,7 @@
     {
       "id": 83,
       "name": "Séries jeunesse",
+      "description": "",
       "startingDate": "2018-04-08 11:00:00",
       "endingDate": "2018-04-08 12:30:00",
       "placeIds": [14],
@@ -758,7 +841,8 @@
     },
     {
       "id": 84,
-      "name": "Projection du palmarès + rencontre avec les réalisateurs",
+      "name": "Projection du palmarès",
+      "description": "Et rencontre avec les réalisateurs",
       "startingDate": "2018-04-08 11:15:00",
       "endingDate": "2018-04-08 13:00:00",
       "placeIds": [7],
@@ -768,6 +852,7 @@
     {
       "id": 85,
       "name": "Docs en stock - Gauguin, je suis un sauvage",
+      "description": "",
       "startingDate": "2018-04-08 16:00:00",
       "endingDate": "2018-04-08 17:30:00",
       "placeIds": [15],
