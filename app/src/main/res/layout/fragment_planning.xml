@@ -2,58 +2,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.nzhang.proto_festival.fragment.PlanningFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <RelativeLayout android:id="@+id/planning_list_container"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/planning_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/white" />
 
         <android.support.design.widget.TabLayout
-            android:id="@+id/tab_bar"
-            app:tabMode="scrollable"
+            android:id="@+id/planning_tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabTextAppearance="@style/AppTabBar"
-            app:tabIndicatorColor="@color/black">
-
-            <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/wednesday" />
-
-            <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/thursday" />
-
-            <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/friday" />
-
-            <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/saturday" />
-
-            <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sunday" />
-
-        </android.support.design.widget.TabLayout>
-
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/container_list"
-            android:layout_below="@id/tab_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:listitem="@layout/item_event_row">
-        </android.support.v7.widget.RecyclerView>
-
-    </RelativeLayout>
+            app:tabMode="fixed" />
+    </LinearLayout>
 
 </FrameLayout>
