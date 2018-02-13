@@ -1,13 +1,12 @@
 package com.example.nzhang.proto_festival
 
 import android.app.Activity
-import android.support.design.widget.TabLayout
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import com.example.nzhang.proto_festival.model.Events
 import com.example.nzhang.proto_festival.model.Places
 import com.squareup.moshi.Moshi
 import java.io.InputStream
+
 
 /**
  * Created by mel on 13/02/2018.
@@ -17,14 +16,14 @@ class DataController(activity: Activity) {
 
     private var days = arrayListOf("Mercredi","Jeudi","Vendredi","Samedi","Dimanche")
     // Load and parse JSON
-    private val eventResponse = parseEventLoadJson(activity)
-    private val placeResponse = parsePlaceLoadJson(activity)
+    private val eventResponse = parseLoadJson(activity, Events::class.java, "events.json") as Events
+    private val placeResponse = parseLoadJson(activity, Places::class.java, "places.json") as Places
 
     // Order by date and by name
-    private val orderedEvents = eventResponse!!.events.sortedWith(compareBy({it.getStartingDate().time}, {it.name}))
+    private val orderedEvents = eventResponse.events.sortedWith(compareBy({it.getStartingDate().time}, {it.name}))
     val publicEvents: List<Events.Event> = orderedEvents.filter({it.pro == 0})
     val proEvents: List<Events.Event> = orderedEvents.filter({it.pro == 1})
-    val places: List<Places.Place> = placeResponse!!.places
+    val places: List<Places.Place> = placeResponse.places
 
     fun getDaysLimitIndex(listEvents: List<Events.Event>): Map<Int, String> {
         val computedDaysLimitIndex = mutableMapOf<Int, String>()
@@ -88,16 +87,10 @@ class DataController(activity: Activity) {
         return ""
     }
 
-    private fun parseEventLoadJson(activity: Activity) : Events? {
-        val eventsJson = loadJsonFromAssets("events.json", activity)
+    fun <T> parseLoadJson(activity: Activity, dataClass: Class<T>, filename: String): T? {
+        val eventsJson = loadJsonFromAssets(filename, activity)
         val moshi = Moshi.Builder().build()
-        val adapter = moshi.adapter(Events::class.java)
+        val adapter = moshi.adapter(dataClass)
         return adapter.fromJson(eventsJson)
-    }
-    private fun parsePlaceLoadJson(activity: Activity) : Places? {
-        val placesJson = loadJsonFromAssets("places.json", activity)
-        val moshi = Moshi.Builder().build()
-        val adapter = moshi.adapter(Places::class.java)
-        return adapter.fromJson(placesJson)
     }
 }
