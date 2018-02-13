@@ -16,7 +16,7 @@ class DataController(activity: Activity) {
     // Load and parse JSON
     private val eventResponse = parseLoadJson(activity, Events::class.java, "events.json") as Events
     private val placeResponse = parseLoadJson(activity, Places::class.java, "places.json") as Places
-    private val categorieResponse = parseLoadJson(activity, Categories::class.java, "places.json") as Categories
+    private val categorieResponse = parseLoadJson(activity, Categories::class.java, "categories.json") as Categories
 
     // Order by date and by name
     private val orderedEvents = eventResponse.events.sortedWith(compareBy({it.getStartingDate().time}, {it.name}))

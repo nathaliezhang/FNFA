@@ -59,6 +59,7 @@ class ListFragment : Fragment() {
             val type = arguments.getString(typeList)
             val dataClass = DataController(activity)
             places = dataClass.places
+            categories = dataClass.categories
             val eventsList = dataClass.get(type)
             orderedEvents = eventsList
             daysLimitIndex = dataClass.getDaysLimitIndex(eventsList)
