@@ -1,5 +1,6 @@
 package com.example.nzhang.proto_festival
 
+import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -12,9 +13,7 @@ import com.example.nzhang.proto_festival.model.Places
 import java.text.SimpleDateFormat
 import java.util.*
 
-/**
- * Created by mel on 11/02/2018.
- */
+
 class EventAdapter(
         private val headerPosition: Map<String, Int>,
         private val events: List<Any>,
@@ -24,6 +23,8 @@ class EventAdapter(
 
     private val TYPE_HEADER: Int = 0
     private val TYPE_ITEM: Int = 1
+    private var mExpandedPosition: Int = -1
+    private var previousExpandedPosition: Int = -1
 
     override fun getItemCount(): Int = events.size
 
@@ -56,7 +57,20 @@ class EventAdapter(
             holder.titleView.text = event.name
             holder.timeView.text = typeFormatShort.format(event.getStartingDate())
             holder.durationView.text = typeFormatLong.format(event.getTimeDuration())
+            holder.descriptionView.text = event.description
 
+            val isExpanded = position == mExpandedPosition
+            holder.details.visibility = (if (isExpanded) View.VISIBLE else View.GONE)
+            holder.itemView.isActivated = isExpanded
+
+            if (isExpanded)
+                previousExpandedPosition = position
+
+            holder.itemView.setOnClickListener {
+                mExpandedPosition = if (isExpanded) -1 else position
+                notifyItemChanged(previousExpandedPosition)
+                notifyItemChanged(position)
+            }
 
             for (i in event.placeIds.indices ) { // Event id in Events
                 for (placeId: Places.Place in places) { // Places id
@@ -125,6 +139,8 @@ class EventAdapter(
         val durationView = view.findViewById<TextView>(R.id.text_list_item_duration)
         val placeView = view.findViewById<TextView>(R.id.text_list_item_place)
         val imageButton = view.findViewById<ImageButton>(R.id.imageButton)
+        val details = view.findViewById<ConstraintLayout>(R.id.item_details)
+        val descriptionView = view.findViewById<TextView>(R.id.text_list_item_description)
     }
 
     class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
