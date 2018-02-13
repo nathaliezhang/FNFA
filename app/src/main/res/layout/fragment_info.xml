@@ -16,6 +16,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             style="@style/InfoButton"
+            android:drawableRight="@drawable/next"
+            android:stateListAnimator="@null"
             android:text="@string/info_price_item_title" />
 
         <com.github.aakira.expandablelayout.ExpandableRelativeLayout
@@ -23,17 +25,18 @@
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:layout_below="@+id/info_price_button"
-            android:background="@drawable/borderlines"
             android:padding="16dp"
             app:ael_duration="400"
             app:ael_expanded="false"
             app:ael_interpolator="linear"
-            app:ael_orientation="vertical">
+            app:ael_orientation="vertical"
+            android:background="@drawable/borderlines">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/info_price_item_block"/>
+                android:text="@string/info_price_item_block"
+                android:textColor="@color/black"/>
         </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
         <Button
@@ -42,6 +45,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/InfoButton"
+            android:drawableRight="@drawable/next"
+            android:stateListAnimator="@null"
             android:text="@string/info_about_item_title" />
 
         <com.github.aakira.expandablelayout.ExpandableRelativeLayout
@@ -51,18 +56,19 @@
             android:layout_below="@+id/info_about_button"
             android:textAlignment="textStart"
             android:layout_gravity="start"
-            android:background="@drawable/borderlines"
             android:padding="16dp"
             app:ael_duration="400"
             app:ael_expanded="false"
             app:ael_interpolator="linear"
-            app:ael_orientation="vertical">
+            app:ael_orientation="vertical"
+            android:background="@drawable/borderlines">
 
             <TextView
                 android:id="@+id/info_about_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/info_about_item_block"/>
+                android:text="@string/info_about_item_block"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/info_about_link"
@@ -78,6 +84,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/InfoButton"
+            android:drawableRight="@drawable/next"
+            android:stateListAnimator="@null"
             android:text="@string/info_partners_item_title" />
 
         <com.github.aakira.expandablelayout.ExpandableRelativeLayout
@@ -85,7 +93,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/info_partners_button"
-            android:background="@drawable/borderlines"
             android:padding="16dp"
             app:ael_duration="400"
             app:ael_expanded="false"

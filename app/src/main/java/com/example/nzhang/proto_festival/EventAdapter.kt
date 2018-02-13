@@ -49,7 +49,7 @@ class EventAdapter(
         } else if (holder is EventViewHolder) {
             val event = events[position] as Events.Event
             val typeFormatShort = SimpleDateFormat("HH'h'mm", Locale.FRANCE)
-            val typeFormatLong = SimpleDateFormat("HH'h'mm'min'", Locale.FRANCE)
+            val typeFormatLong = SimpleDateFormat("HH'h'mm", Locale.FRANCE)
             val placeSb = StringBuilder()
             val categorySb = StringBuilder()
 
@@ -86,6 +86,7 @@ class EventAdapter(
                 holder.categoryView.text = categorySb.toString()
             }
 
+            holder.descriptionView.text = event.description
             holder.imageButton.setOnClickListener({
                 println(event.name)
             })
@@ -124,6 +125,7 @@ class EventAdapter(
         val timeView = view.findViewById<TextView>(R.id.text_list_item_time)
         val durationView = view.findViewById<TextView>(R.id.text_list_item_duration)
         val placeView = view.findViewById<TextView>(R.id.text_list_item_place)
+        val descriptionView = view.findViewById<TextView>(R.id.text_list_item_description)
         val imageButton = view.findViewById<ImageButton>(R.id.imageButton)
     }
 
