@@ -22,6 +22,7 @@
             android:id="@+id/planning_tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:tabTextAppearance="@style/AppTabBar"
             app:tabMode="fixed" />
     </LinearLayout>
 
