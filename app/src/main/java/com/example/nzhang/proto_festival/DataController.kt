@@ -1,39 +1,31 @@
 package com.example.nzhang.proto_festival
 
 import android.app.Activity
-import android.support.design.widget.TabLayout
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import com.example.nzhang.proto_festival.model.Events
 import com.example.nzhang.proto_festival.model.Places
 import com.squareup.moshi.Moshi
 import java.io.InputStream
 
+
 /**
  * Created by mel on 13/02/2018.
  */
 
-class DataController {
-
-    lateinit private var publicEvents: List<Events.Event>
-    lateinit private var proEvents: List<Events.Event>
-    lateinit private var places: List<Places.Place>
+class DataController(activity: Activity) {
 
     private var days = arrayListOf("Mercredi","Jeudi","Vendredi","Samedi","Dimanche")
+    // Load and parse JSON
+    private val eventResponse = parseLoadJson(activity, Events::class.java, "events.json") as Events
+    private val placeResponse = parseLoadJson(activity, Places::class.java, "places.json") as Places
 
-    private fun onCreate(activity: Activity) {
-        // Load and parse JSON
-        val eventResponse = parseEventLoadJson(activity)
-        val placeResponse = parsePlaceLoadJson(activity)
+    // Order by date and by name
+    private val orderedEvents = eventResponse.events.sortedWith(compareBy({it.getStartingDate().time}, {it.name}))
+    val publicEvents: List<Events.Event> = orderedEvents.filter({it.pro == 0})
+    val proEvents: List<Events.Event> = orderedEvents.filter({it.pro == 1})
+    val places: List<Places.Place> = placeResponse.places
 
-        // Order by date and by name
-        val orderedEvents = eventResponse!!.events.sortedWith(compareBy({it.getStartingDate().time}, {it.name}))
-        publicEvents = orderedEvents.filter({it.pro == 0})
-        proEvents = orderedEvents.filter({it.pro == 1})
-        places = placeResponse!!.places
-    }
-
-    private fun getDaysLimitIndex(listEvents: List<Events.Event>): Map<Int, String> {
+    fun getDaysLimitIndex(listEvents: List<Events.Event>): Map<Int, String> {
         val computedDaysLimitIndex = mutableMapOf<Int, String>()
         for (day in days) {
             computedDaysLimitIndex.put(listEvents.indexOfFirst({it.getDay() == day}), day)
@@ -42,7 +34,7 @@ class DataController {
         return computedDaysLimitIndex
     } // publicdayslimitindex = DataController.getDaysLimitIndex(DataController.publicEvents)
 
-    private fun getAllEvents(listEvents: List<Events.Event>): List<Any> {
+    fun getAllEvents(listEvents: List<Events.Event>): List<Any> {
         val computedFirstIndexOfDay = mutableMapOf<String, Int>()
         for (day in days) {
             computedFirstIndexOfDay.put(day, listEvents.indexOfFirst({it.getDay() == day}))
@@ -62,7 +54,7 @@ class DataController {
        return computedEventAndHeaders
     } // = allproEvents
 
-    private fun getHeadersPosition(list: List<Any>): Map<String, Int> {
+    fun getHeadersPosition(list: List<Any>): Map<String, Int> {
         val headerMapPosition = mutableMapOf<String, Int>()
         for (event in list) {
             val index = list.indexOf(event)
@@ -95,16 +87,10 @@ class DataController {
         return ""
     }
 
-    private fun parseEventLoadJson(activity: Activity) : Events? {
-        val eventsJson = loadJsonFromAssets("events.json", activity)
+    fun <T> parseLoadJson(activity: Activity, dataClass: Class<T>, filename: String): T? {
+        val eventsJson = loadJsonFromAssets(filename, activity)
         val moshi = Moshi.Builder().build()
-        val adapter = moshi.adapter(Events::class.java)
+        val adapter = moshi.adapter(dataClass)
         return adapter.fromJson(eventsJson)
-    }
-    private fun parsePlaceLoadJson(activity: Activity) : Places? {
-        val placesJson = loadJsonFromAssets("places.json", activity)
-        val moshi = Moshi.Builder().build()
-        val adapter = moshi.adapter(Places::class.java)
-        return adapter.fromJson(placesJson)
     }
 }
