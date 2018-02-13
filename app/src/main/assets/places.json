@@ -1,6 +1,11 @@
 {
   "places" : [
     {
+      "id": 0,
+      "name": "Hôtel de ville",
+      "seats": -1
+    },
+    {
       "id": 1,
       "name": "Ciné TNB Jouvet",
       "seats": 400
@@ -8,7 +13,7 @@
     {
       "id": 2,
       "name": "Ciné TNB Piccoli",
-      "seats": 100
+      "seats": 96
     },
     {
       "id": 3,
@@ -27,22 +32,52 @@
     },
     {
       "id": 6,
-      "name": "Cube - RDC TNB",
+      "name": "Cube - RDC TNB",
       "seats": -1
     },
     {
       "id": 7,
-      "name": "Arvor salle 2",
-      "seats": 152
+      "name": "Arvor - Salle 2",
+      "seats": 158
     },
     {
       "id": 8,
-      "name": "Hall haut TNB",
-      "seats": -1
+      "name": "BRUZ Le Grand Logis (GS)",
+      "seats": 350
     },
     {
       "id": 9,
-      "name": "Rennes Les champs Libres",
+      "name": "Hall haut",
+      "seats": -1
+    },
+    {
+      "id": 10,
+      "name": "Cube",
+      "seats": -1
+    },
+    {
+      "id": 11,
+      "name": "Arvor espace rencontre",
+      "seats": -1
+    },
+    {
+      "id": 12,
+      "name": "ESRA",
+      "seats": -1
+    },
+    {
+      "id": 13,
+      "name": "Esplanade Charles de Gaulle",
+      "seats": -1
+    },
+    {
+      "id": 14,
+      "name": "Arvor - Salle 1",
+      "seats": 215
+    },
+    {
+      "id": 15,
+      "name": "Les champs Libres - Musée de Bretagne",
       "seats": -1
     }
   ]
