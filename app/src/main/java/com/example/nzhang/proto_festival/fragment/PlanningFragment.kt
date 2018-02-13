@@ -259,13 +259,6 @@ class PlanningFragment : Fragment() {
         return ""
     }
 
-/*    private fun parseEventLoadJson(fileName: String, fileClass: Class<Any>) : Any? {
-        val json = loadJsonFromAssets(fileName)
-        val moshi = Moshi.Builder().build()
-        val adapter = moshi.adapter(fileClass)
-        return adapter.fromJson(json)
-    }*/
-
     private fun parseEventLoadJson() : Events? {
         val eventsJson = loadJsonFromAssets("events.json")
         val moshi = Moshi.Builder().build()
