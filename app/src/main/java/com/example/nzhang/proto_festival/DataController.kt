@@ -2,28 +2,36 @@ package com.example.nzhang.proto_festival
 
 import android.app.Activity
 import android.util.Log
+import com.example.nzhang.proto_festival.model.Categories
 import com.example.nzhang.proto_festival.model.Events
 import com.example.nzhang.proto_festival.model.Places
 import com.squareup.moshi.Moshi
 import java.io.InputStream
+import kotlin.reflect.jvm.internal.impl.javax.inject.Singleton
 
-
-/**
- * Created by mel on 13/02/2018.
- */
-
+@Singleton
 class DataController(activity: Activity) {
 
     private var days = arrayListOf("Mercredi","Jeudi","Vendredi","Samedi","Dimanche")
     // Load and parse JSON
     private val eventResponse = parseLoadJson(activity, Events::class.java, "events.json") as Events
     private val placeResponse = parseLoadJson(activity, Places::class.java, "places.json") as Places
+    private val categorieResponse = parseLoadJson(activity, Categories::class.java, "places.json") as Categories
 
     // Order by date and by name
     private val orderedEvents = eventResponse.events.sortedWith(compareBy({it.getStartingDate().time}, {it.name}))
-    val publicEvents: List<Events.Event> = orderedEvents.filter({it.pro == 0})
-    val proEvents: List<Events.Event> = orderedEvents.filter({it.pro == 1})
+    private val publicEvents: List<Events.Event> = orderedEvents.filter({it.pro == 0})
+    private val proEvents: List<Events.Event> = orderedEvents.filter({it.pro == 1})
     val places: List<Places.Place> = placeResponse.places
+    val categories: List<Categories.Category> = categorieResponse.categories
+
+    fun get(param: String): List<Events.Event> {
+        if (param == "pro") {
+            return proEvents
+        } else {
+            return publicEvents
+        }
+    }
 
     fun getDaysLimitIndex(listEvents: List<Events.Event>): Map<Int, String> {
         val computedDaysLimitIndex = mutableMapOf<Int, String>()
@@ -87,7 +95,7 @@ class DataController(activity: Activity) {
         return ""
     }
 
-    fun <T> parseLoadJson(activity: Activity, dataClass: Class<T>, filename: String): T? {
+    private fun <T> parseLoadJson(activity: Activity, dataClass: Class<T>, filename: String): T? {
         val eventsJson = loadJsonFromAssets(filename, activity)
         val moshi = Moshi.Builder().build()
         val adapter = moshi.adapter(dataClass)
