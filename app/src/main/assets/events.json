@@ -208,7 +208,7 @@
       "endingDate": "2018-04-05 12:00:00",
       "placeIds": [2],
       "categoryIds": [2],
-      "pro": 0
+      "pro": 1
     },
     {
       "id": 21,
@@ -218,7 +218,7 @@
       "endingDate": "2018-04-05 13:00:00",
       "placeIds": [2],
       "categoryIds": [2],
-      "pro": 0
+      "pro": 1
     },
     {
       "id": 22,
@@ -228,7 +228,7 @@
       "endingDate": "2018-04-05 16:00:00",
       "placeIds": [2],
       "categoryIds": [2],
-      "pro": 0
+      "pro": 1
     },
     {
       "id": 23,
@@ -438,7 +438,7 @@
       "endingDate": "2018-04-06 16:00:00",
       "placeIds": [2],
       "categoryIds": [2],
-      "pro": 0
+      "pro": 1
     },
     {
       "id": 44,
@@ -458,7 +458,7 @@
       "endingDate": "2018-04-06 18:00:00",
       "placeIds": [2],
       "categoryIds": [2],
-      "pro": 0
+      "pro": 1
     },
     {
       "id": 46,
@@ -508,7 +508,7 @@
       "endingDate": "2018-04-06 14:00:00",
       "placeIds": [4],
       "categoryIds": [2],
-      "pro": 0
+      "pro": 1
     },
     {
       "id": 51,
