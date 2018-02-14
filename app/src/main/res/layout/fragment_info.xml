@@ -16,6 +16,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             style="@style/InfoButton"
+            android:drawableRight="@drawable/next_off"
             android:text="@string/info_price_item_title" />
 
         <com.github.aakira.expandablelayout.ExpandableRelativeLayout
@@ -33,7 +34,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/info_price_item_block"/>
+                android:text="@string/info_price_item_block"
+                android:textColor="@color/black"/>
         </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
         <Button
@@ -41,6 +43,7 @@
             android:layout_below="@+id/info_price_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableRight="@drawable/next_off"
             style="@style/InfoButton"
             android:text="@string/info_about_item_title" />
 
@@ -62,7 +65,8 @@
                 android:id="@+id/info_about_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/info_about_item_block"/>
+                android:text="@string/info_about_item_block"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/info_about_link"
@@ -77,6 +81,7 @@
             android:layout_below="@+id/info_about_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableRight="@drawable/next_off"
             style="@style/InfoButton"
             android:text="@string/info_partners_item_title" />
 
@@ -100,7 +105,7 @@
                 android:layout_centerHorizontal="true"
                 android:adjustViewBounds="true"
                 android:cropToPadding="true"
-                android:src="@drawable/partners" />
+                android:src="@drawable/partners"/>
         </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
     </RelativeLayout>

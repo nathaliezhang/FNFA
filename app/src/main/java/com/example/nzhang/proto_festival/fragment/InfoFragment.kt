@@ -13,6 +13,8 @@ import android.widget.TextView
 import com.example.nzhang.proto_festival.R
 
 
+
+
 class InfoFragment : Fragment(), View.OnClickListener {
 
     private val contentMapping = hashMapOf<Int, Int>(
@@ -20,11 +22,6 @@ class InfoFragment : Fragment(), View.OnClickListener {
             R.id.info_about_button to R.id.info_about_content,
             R.id.info_partners_button to R.id.info_partners_content
     )
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -49,7 +46,10 @@ class InfoFragment : Fragment(), View.OnClickListener {
             val id = view.id
             val parentView = view.parent as View
             val expandableLayout: ExpandableRelativeLayout = parentView.findViewById(contentMapping[id]!!)
+            view.setCompoundDrawablesWithIntrinsicBounds(0,0, R.drawable.next_on, 0)
+
             expandableLayout.toggle()
+
             collapseAll(view.parent as View, id)
         } else if (view is TextView) {
             if (view.id == R.id.info_about_link) {
