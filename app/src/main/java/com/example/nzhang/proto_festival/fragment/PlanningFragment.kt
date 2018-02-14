@@ -21,7 +21,7 @@ class PlanningFragment : Fragment() {
         val viewPager: ViewPager = view.findViewById(R.id.planning_viewpager)
 
         // Create an adapter that knows which fragment should be shown on each page
-        val adapter = ListPagerAdapter(context, fragmentManager)
+        val adapter = ListPagerAdapter(context, childFragmentManager)
 
         // Set the adapter onto the view pager
         viewPager.adapter = adapter
