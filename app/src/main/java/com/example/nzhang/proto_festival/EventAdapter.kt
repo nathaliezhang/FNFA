@@ -70,16 +70,7 @@ class EventAdapter(
             holder.itemView.setOnClickListener {
                 mExpandedPosition = if (isExpanded) -1 else position
                 notifyItemChanged(previousExpandedPosition)
-                notifyItemChanged(position)
-                holder.itemView.alpha = 1f
-                holder.itemView.animate()
-                        .alpha(0f)
-                        .setDuration(100)
-                        .setListener(object : AnimatorListenerAdapter() {
-                            override fun onAnimationEnd(animation: Animator) {
-                                holder.itemView.animate().alpha(1f).setDuration(100).setListener(null)
-                            }
-                        })
+                notifyItemChanged(position) 
             }
 
             for (i in event.placeIds.indices ) { // Event id in Events
