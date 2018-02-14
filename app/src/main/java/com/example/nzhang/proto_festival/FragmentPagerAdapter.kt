@@ -17,13 +17,14 @@ class FragmentPagerAdapter(private val mContext: Context, fm: FragmentManager) :
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> PlanningFragment()
-            else -> InfoFragment()
+            1 -> InfoFragment()
+            else -> FavoritesFragment()
         }
     }
 
     // This determines the number of tabs
     override fun getCount(): Int {
-        return 2
+        return 3
     }
 
     // This determines the title for each tab
@@ -31,7 +32,8 @@ class FragmentPagerAdapter(private val mContext: Context, fm: FragmentManager) :
         // Generate title based on item position
         return when (position) {
             0 -> "Planning"
-            else -> "Infos"
+            1 -> "Infos"
+            else -> "Favorites"
         }
     }
 
