@@ -7,7 +7,6 @@ import android.content.IntentFilter
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
-import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -77,13 +76,9 @@ class ListFragment : Fragment() {
         tabBar = view.findViewById(R.id.tab_bar)
         val mLayoutManager = ScrollingLinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false, 100)
 
-
         recycleView = view.findViewById(R.id.container_list)
         recycleView.layoutManager = mLayoutManager
         recycleView.adapter = EventAdapter(headerPosition, eventsAndHeaders, places, categories)
-
-        val divideItemDecoration = DividerItemDecoration(recycleView.context, mLayoutManager.orientation)
-        recycleView.addItemDecoration(divideItemDecoration)
 
         recycleView.viewTreeObserver.addOnGlobalLayoutListener(object: ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {

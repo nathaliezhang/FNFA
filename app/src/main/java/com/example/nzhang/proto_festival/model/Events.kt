@@ -10,7 +10,7 @@ import java.util.*
  */
 
 data class Events(val events: List<Event>) {
-    data class Event(val id: String, val name: String, val placeIds: List<Int>, val categoryIds: List<Int>, val startingDate: String, val endingDate: String, val pro: Int) {
+    data class Event(val id: String, val name: String, val placeIds: List<Int>, val categoryIds: List<Int>, val startingDate: String, val endingDate: String, val pro: Int, val description: String) {
         fun getStartingDate(): Date {
             val typeFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.FRANCE)
             return typeFormat.parse(startingDate)
