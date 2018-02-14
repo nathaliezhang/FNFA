@@ -12,7 +12,8 @@ import com.example.nzhang.proto_festival.model.Events
 import com.example.nzhang.proto_festival.model.Places
 import java.text.SimpleDateFormat
 import java.util.*
-
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 
 class EventAdapter(
         private val headerPosition: Map<String, Int>,
@@ -70,6 +71,15 @@ class EventAdapter(
                 mExpandedPosition = if (isExpanded) -1 else position
                 notifyItemChanged(previousExpandedPosition)
                 notifyItemChanged(position)
+                holder.itemView.alpha = 1f
+                holder.itemView.animate()
+                        .alpha(0f)
+                        .setDuration(100)
+                        .setListener(object : AnimatorListenerAdapter() {
+                            override fun onAnimationEnd(animation: Animator) {
+                                holder.itemView.animate().alpha(1f).setDuration(100).setListener(null)
+                            }
+                        })
             }
 
             for (i in event.placeIds.indices ) { // Event id in Events
@@ -121,6 +131,11 @@ class EventAdapter(
         }
     }
 
+    fun closeExpandedItem() {
+        mExpandedPosition = -1
+        previousExpandedPosition = -1
+    }
+
     private fun isHeader(position: Int): Boolean {
         return when(position) {
             headerPosition["Mercredi"] -> true
@@ -140,6 +155,7 @@ class EventAdapter(
         val placeView = view.findViewById<TextView>(R.id.text_list_item_place)
         val imageButton = view.findViewById<ImageButton>(R.id.imageButton)
         val details = view.findViewById<ConstraintLayout>(R.id.item_details)
+        val group = view.findViewById<ConstraintLayout>(R.id.item_group)
         val descriptionView = view.findViewById<TextView>(R.id.text_list_item_description)
     }
 

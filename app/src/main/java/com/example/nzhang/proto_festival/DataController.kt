@@ -72,7 +72,7 @@ class DataController(activity: Activity) {
                 "Vendredi" -> headerMapPosition.put("Vendredi", index)
                 "Samedi" -> headerMapPosition.put("Samedi", index)
                 "Dimanche" -> headerMapPosition.put("Dimanche", index)
-                else -> print("None")
+                else -> "None"
             }
         }
         return headerMapPosition
