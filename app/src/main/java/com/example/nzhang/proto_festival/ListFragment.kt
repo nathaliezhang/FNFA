@@ -20,9 +20,6 @@ import java.sql.Date
 import java.text.SimpleDateFormat
 import java.util.*
 
-
-
-
 class ListFragment : Fragment() {
 
     private var AutomaticScrollInProgress = false
@@ -97,7 +94,10 @@ class ListFragment : Fragment() {
                 if(!ManualScrollInProgress) {
                     val position =
                             if(days[tab!!.position] != getCurrentDay()) finalItemsList.indexOfFirst({it is String && it == getDayName(days[tab.position])})
-                            else finalItemsList.indexOfFirst({it is Events.Event && it.getFullStartingDate() == getCurrentDay() && it.getStartingDate().time > System.currentTimeMillis()})
+                            else {
+                                val pos = finalItemsList.indexOfFirst({it is Events.Event && it.getFullStartingDate() == getCurrentDay() && it.getStartingDate().time > System.currentTimeMillis()})
+                                if (pos != -1) pos else finalItemsList.indexOfFirst({it is String && it == getDayName(days[tab.position])})
+                            }
                     smoothScroller.targetPosition = position
                     recycleView.layoutManager.startSmoothScroll(smoothScroller)
                     AutomaticScrollInProgress = true
@@ -113,7 +113,10 @@ class ListFragment : Fragment() {
                 initTabsText()
                 val position =
                         if(days[tab!!.position] != getCurrentDay()) finalItemsList.indexOfFirst({it is String && it == getDayName(days[tab.position])})
-                        else finalItemsList.indexOfFirst({it is Events.Event && it.getFullStartingDate() == getCurrentDay() && it.getStartingDate().time > System.currentTimeMillis()})
+                        else {
+                            val pos = finalItemsList.indexOfFirst({it is Events.Event && it.getFullStartingDate() == getCurrentDay() && it.getStartingDate().time > System.currentTimeMillis()})
+                            if (pos != -1) pos else finalItemsList.indexOfFirst({it is String && it == getDayName(days[tab.position])})
+                        }
                 smoothScroller.targetPosition = position
                 recycleView.layoutManager.startSmoothScroll(smoothScroller)
                 updateTabsText(tab)
