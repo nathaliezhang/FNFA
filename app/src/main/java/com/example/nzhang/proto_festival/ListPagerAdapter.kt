@@ -25,7 +25,7 @@ class ListPagerAdapter(private val mContext: Context, fm: FragmentManager) : Fra
     override fun getPageTitle(position: Int): CharSequence? {
         return when (position) {
             0 -> "Public"
-            1 -> "Professional"
+            1 -> "Professionnel"
             else -> "Public"
         }
     }

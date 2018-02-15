@@ -153,4 +153,5 @@ class EventAdapter(
     class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val dayTitleView = view.findViewById<TextView>(R.id.text_list_header_title)
     }
+
 }
