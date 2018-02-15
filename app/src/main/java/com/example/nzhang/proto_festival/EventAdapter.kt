@@ -16,7 +16,7 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 
 class EventAdapter(
-        private val headerPosition: Map<String, Int>,
+        private val headerPosition: List<Int>,
         private val events: List<Any>,
         private val places: List<Places.Place>,
         private val categories: List<Categories.Category>
@@ -50,15 +50,14 @@ class EventAdapter(
 
         } else if (holder is EventViewHolder) {
             val event = events[position] as Events.Event
-            val typeFormatShort = SimpleDateFormat("HH'h'mm", Locale.FRANCE)
-            val typeFormatLong = SimpleDateFormat("HH'h'mm'min'", Locale.FRANCE)
             val placeSb = StringBuilder()
             val categorySb = StringBuilder()
 
             holder.titleView.text = event.name
-            holder.timeView.text = typeFormatShort.format(event.getStartingDate())
-            holder.durationView.text = typeFormatLong.format(event.getTimeDuration())
+            holder.timeView.text = event.getStartingHour()
+            holder.durationView.text = event.getTimeDurationHour()
             holder.descriptionView.text = event.description
+            holder.itemView.alpha = if (event.getEndingDate().time >= System.currentTimeMillis()) 1.0f else 0.5f
 
             val isExpanded = position == mExpandedPosition
             holder.details.visibility = (if (isExpanded) View.VISIBLE else View.GONE)
@@ -73,69 +72,34 @@ class EventAdapter(
                 notifyItemChanged(position) 
             }
 
-            for (i in event.placeIds.indices ) { // Event id in Events
-                for (placeId: Places.Place in places) { // Places id
-                    val convertPlaceId = placeId.id.toInt()
-                    if (event.placeIds[i] == convertPlaceId) {
-                        if (i == event.placeIds.size - 1) {
-                            placeSb.append(placeId.name)
-                        } else {
-                            placeSb.append(placeId.name + " / ")
-                        }
-                    }
+            event.placeIds.forEach({
+                id -> val name = places[places.indexOfFirst({it.id == id.toString()})].name
+                if (event.placeIds.indexOf(id) == event.placeIds.size - 1 ){
+                    placeSb.append(name)
+                } else {
+                    placeSb.append(name + " / ")
                 }
-                holder.placeView.text = placeSb.toString()
-            }
+            })
+            holder.placeView.text = placeSb.toString()
 
-            for (i in event.categoryIds.indices ) { // Category id in Categories
-                for (categoryId: Categories.Category in categories) { // Category id
-                    val convertCategoryId = categoryId.id.toInt()
-                    if (event.categoryIds[i] == convertCategoryId) {
-                        if (i == event.categoryIds.size - 1) {
-                            categorySb.append(categoryId.name)
-                        } else {
-                            categorySb.append(categoryId.name + " / ")
-                        }
-                    }
+            event.categoryIds.forEach({
+                id -> val name = categories[categories.indexOfFirst({it.id == id.toString()})].name
+                if (event.categoryIds.indexOf(id) == event.categoryIds.size - 1 ){
+                    placeSb.append(name)
+                } else {
+                    placeSb.append(name + " / ")
                 }
-                holder.categoryView.text = categorySb.toString()
-            }
+            })
+            holder.categoryView.text = categorySb.toString()
 
             holder.imageButton.setOnClickListener({
                 println(event.name)
             })
-
-            if (event.getEndingDate().time >= System.currentTimeMillis()) {
-                holder.itemView.alpha = 1.0f
-            } else {
-                holder.itemView.alpha = 0.5f
-            }
         }
-
     }
 
     override fun getItemViewType(position: Int): Int {
-        if (isHeader(position)) {
-           return TYPE_HEADER
-        } else {
-            return TYPE_ITEM
-        }
-    }
-
-    fun closeExpandedItem() {
-        mExpandedPosition = -1
-        previousExpandedPosition = -1
-    }
-
-    private fun isHeader(position: Int): Boolean {
-        return when(position) {
-            headerPosition["Mercredi"] -> true
-            headerPosition["Jeudi"] -> true
-            headerPosition["Vendredi"] -> true
-            headerPosition["Samedi"] -> true
-            headerPosition["Dimanche"] -> true
-            else -> false
-        }
+        return if (position in headerPosition) TYPE_HEADER else TYPE_ITEM
     }
 
     class EventViewHolder(view: View) : RecyclerView.ViewHolder(view) {
