@@ -21,7 +21,6 @@
     </string>
     <string name="info_about_item_link">En savoir plus</string>
 
-    <string name="info_partners_item_title">Partenaires</string
-        >
+    <string name="info_partners_item_title">Partenaires</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
