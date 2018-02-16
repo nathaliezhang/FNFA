@@ -10,10 +10,6 @@ import android.widget.TextView
 import com.example.nzhang.proto_festival.model.Categories
 import com.example.nzhang.proto_festival.model.Events
 import com.example.nzhang.proto_festival.model.Places
-import java.text.SimpleDateFormat
-import java.util.*
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 
 class EventAdapter(
         private val headerPosition: List<Int>,
@@ -26,6 +22,7 @@ class EventAdapter(
     private val TYPE_ITEM: Int = 1
     private var mExpandedPosition: Int = -1
     private var previousExpandedPosition: Int = -1
+    private val favoriteController = FavoriteController()
 
     override fun getItemCount(): Int = events.size
 
@@ -92,9 +89,15 @@ class EventAdapter(
             })
             holder.categoryView.text = categorySb.toString()
 
-            holder.imageButton.setOnClickListener({
-                println(event.id)
+            if (event.id.toInt() in favoriteController.getFavorites()) {
                 holder.imageButton.setImageResource(R.drawable.favorite_on)
+            } else {
+                holder.imageButton.setImageResource(R.drawable.favorite_off)
+            }
+
+            holder.imageButton.setOnClickListener({
+                favoriteController.setFavorite(event.id.toInt())
+                notifyItemChanged(position)
             })
         }
     }

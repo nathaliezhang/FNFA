@@ -1,23 +1,22 @@
-package com.example.nzhang.proto_festival
+package com.example.nzhang.proto_festival.fragment
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.nzhang.proto_festival.R
 
 
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [FavoritesFragment.OnFragmentInteractionListener] interface
+ * [FavoriteFragment.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [FavoritesFragment.newInstance] factory method to
+ * Use the [FavoriteFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class FavoritesFragment : Fragment() {
+class FavoriteFragment : Fragment() {
 
     /*private var mParam1: String? = null
     private var mParam2: String? = null
@@ -85,11 +84,11 @@ class FavoritesFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment FavoritesFragment.
+         * @return A new instance of fragment FavoriteFragment.
          *//*
 
-        fun newInstance(param1: String, param2: String): FavoritesFragment {
-            val fragment = FavoritesFragment()
+        fun newInstance(param1: String, param2: String): FavoriteFragment {
+            val fragment = FavoriteFragment()
             val args = Bundle()
             args.putString(ARG_PARAM1, param1)
             args.putString(ARG_PARAM2, param2)
