@@ -14,7 +14,6 @@ import android.widget.ImageButton
 import android.widget.TextView
 import com.example.nzhang.proto_festival.InfoAdapter
 import com.example.nzhang.proto_festival.R
-import com.example.nzhang.proto_festival.ScrollingLinearLayoutManager
 
 
 class InfoFragment : Fragment(), View.OnClickListener {
@@ -26,7 +25,7 @@ class InfoFragment : Fragment(), View.OnClickListener {
                               savedInstanceState: Bundle?): View? {
 
         val view = inflater!!.inflate(R.layout.fragment_info, container, false)
-        val mLayoutManager = ScrollingLinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false, 100)
+        val mLayoutManager = LinearLayoutManager(context)
 
         recycleView = view.findViewById(R.id.container_info)
         recycleView.layoutManager = mLayoutManager
