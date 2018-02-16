@@ -93,7 +93,8 @@ class EventAdapter(
             holder.categoryView.text = categorySb.toString()
 
             holder.imageButton.setOnClickListener({
-                println(event.name)
+                println(event.id)
+                holder.imageButton.setImageResource(R.drawable.favorite_on)
             })
         }
     }
