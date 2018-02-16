@@ -12,30 +12,23 @@ import java.util.*
 data class Events(val events: List<Event>) {
     data class Event(val id: String, val name: String, val placeIds: List<Int>, val categoryIds: List<Int>, val startingDate: String, val endingDate: String, val pro: Int, val description: String) {
         fun getStartingDate(): Date {
-            val typeFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.FRANCE)
-            return typeFormat.parse(startingDate)
+            return SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.FRANCE).parse(startingDate)
         }
 
         fun getEndingDate(): Date {
-            val typeFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss" , Locale.FRANCE)
-            return typeFormat.parse(endingDate)
+            return SimpleDateFormat("yyyy-MM-dd HH:mm:ss" , Locale.FRANCE).parse(endingDate)
         }
 
-        fun getTimeDuration(): Long {
-            return this.getEndingDate().time - this.getStartingDate().time
+        fun getTimeDurationHour(): String {
+            return SimpleDateFormat("HH'h'mm'min'", Locale.FRANCE).format(this.getEndingDate().time - this.getStartingDate().time)
         }
 
-        fun getDay(): String {
-            val startTrunc = startingDate.indexOf("-", 5)
-            val endTrunc = startingDate.indexOf(" ")
-            val day = startingDate.substring(startTrunc+1, endTrunc)
-            when (day) {
-                "04" -> return "Mercredi"
-                "05" -> return "Jeudi"
-                "06" -> return "Vendredi"
-                "07" -> return "Samedi"
-                else -> return "Dimanche"
-            }
+        fun getFullStartingDate(): String { //ie : mercredi 4 avril
+            return SimpleDateFormat("EEEE d MMMM", Locale.FRANCE).format(getStartingDate()).toString()
+        }
+
+        fun getStartingHour(): String {
+            return SimpleDateFormat("HH'h'mm", Locale.FRANCE).format(getStartingDate()).toString()
         }
     }
 }
