@@ -20,7 +20,7 @@ data class Events(val events: List<Event>) {
         }
 
         fun getTimeDurationHour(): String {
-            return SimpleDateFormat("HH'h'mm'min'", Locale.FRANCE).format(this.getEndingDate().time - this.getStartingDate().time)
+            return SimpleDateFormat("HH'h'mm", Locale.FRANCE).format(this.getEndingDate().time - this.getStartingDate().time)
         }
 
         fun getFullStartingDate(): String { //ie : mercredi 4 avril
