@@ -27,7 +27,7 @@ class DataClass(private val listEvent: List<Events.Event>) {
 
     fun getDaysLimits(): Map<Int, String> {
         val dayLimits = mutableMapOf<Int, String>()
-        dayLimits.putAll(allDays.map({ day -> finalItemsList.indexOfFirst({it is String && it == day }) to day}))
+        dayLimits.putAll(allDays.map({ day -> finalItemsList.indexOfFirst({it is String && it == getDayName(day) }) to day}))
         dayLimits.putAll(allDays.map({ day -> finalItemsList.indexOfLast({it is Events.Event && it.getFullStartingDate() == day}) to day }))
         return dayLimits
     }
