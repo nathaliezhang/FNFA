@@ -10,6 +10,7 @@ class DataClass(private val listEvent: List<Events.Event>) {
     val allDays = LinkedHashSet(listEvent.map({it.getFullStartingDate()})).toList()
     private val finalItemsList = getFinalItemsList()
 
+    // complete list of headers and events
     fun getFinalItemsList(): List<Any> {
         val finalItemsList = mutableListOf<Any>()
         for (event in listEvent) {
