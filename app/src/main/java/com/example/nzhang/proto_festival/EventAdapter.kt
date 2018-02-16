@@ -85,9 +85,9 @@ class EventAdapter(
             event.categoryIds.forEach({
                 id -> val name = categories[categories.indexOfFirst({it.id == id.toString()})].name
                 if (event.categoryIds.indexOf(id) == event.categoryIds.size - 1 ){
-                    placeSb.append(name)
+                    categorySb.append(name)
                 } else {
-                    placeSb.append(name + " / ")
+                    categorySb.append(name + " / ")
                 }
             })
             holder.categoryView.text = categorySb.toString()
