@@ -39,11 +39,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <ImageButton
-            android:id="@+id/info_price_button_arrow"
+        <ImageView
+            android:id="@+id/info_partners_button_arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/rotate_arrow"
+            android:src="@drawable/next_off"
             style="@style/InfoArrow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

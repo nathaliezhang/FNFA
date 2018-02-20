@@ -10,6 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.view.animation.Animation
+import android.view.animation.RotateAnimation
+import android.view.animation.DecelerateInterpolator
+
 
 class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -18,6 +22,7 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
     private val TYPE_PARTNER: Int = 2
     private var mExpandedPosition: Int = -1
     private var previousExpandedPosition: Int = -1
+    val animation = RotateAnimation(0f, 90.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
 
     override fun getItemCount(): Int = 3
 
@@ -47,6 +52,11 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
 
             if (isExpanded) {
                 holder.icon.setImageResource(R.drawable.picto_tarifs_cliquey)
+                animation.interpolator = DecelerateInterpolator()
+                animation.repeatCount = 0
+                animation.fillAfter = true
+                animation.duration = 300
+                holder.arrow.startAnimation(animation)
                 previousExpandedPosition = position
             } else {
                 holder.icon.setImageResource(R.drawable.picto_tarifs)
@@ -64,6 +74,11 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
 
             if (isExpanded) {
                 holder.icon.setImageResource(R.drawable.picto_festival_cliquey)
+                animation.interpolator = DecelerateInterpolator()
+                animation.repeatCount = 0
+                animation.fillAfter = true
+                animation.duration = 300
+                holder.arrow.startAnimation(animation)
                 previousExpandedPosition = position
             } else {
                 holder.icon.setImageResource(R.drawable.picto_festival)
@@ -85,6 +100,11 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
 
             if (isExpanded) {
                 holder.icon.setImageResource(R.drawable.picto_partenaires_cliquey)
+                animation.interpolator = DecelerateInterpolator()
+                animation.repeatCount = 0
+                animation.fillAfter = true
+                animation.duration = 300
+                holder.arrow.startAnimation(animation)
                 previousExpandedPosition = position
             } else {
                 holder.icon.setImageResource(R.drawable.picto_partenaires)
@@ -111,6 +131,7 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
         val group = view.findViewById<ConstraintLayout>(R.id.item_group_price)
         val details = view.findViewById<ConstraintLayout>(R.id.item_details_price)
         val icon = view.findViewById<ImageView>(R.id.info_price_image)
+        val arrow = view.findViewById<ImageView>(R.id.info_price_button_arrow)
     }
 
     class AboutViewHolder(view: View) : RecyclerView.ViewHolder(view){
@@ -118,12 +139,14 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
         val details = view.findViewById<ConstraintLayout>(R.id.item_details_about)
         val link = view.findViewById<TextView>(R.id.info_about_link)
         val icon = view.findViewById<ImageView>(R.id.info_about_image)
+        val arrow = view.findViewById<ImageView>(R.id.info_about_button_arrow)
     }
 
     class PartnerViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val group = view.findViewById<ConstraintLayout>(R.id.item_group_partner)
         val details = view.findViewById<ConstraintLayout>(R.id.item_details_partner)
         val icon = view.findViewById<ImageView>(R.id.info_partners_image)
+        val arrow = view.findViewById<ImageView>(R.id.info_partners_button_arrow)
     }
 
     private fun browserAboutPage() {
