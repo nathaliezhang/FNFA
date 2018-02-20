@@ -5,8 +5,6 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.content.Intent
-import android.net.Uri
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.ImageButton
@@ -27,13 +25,8 @@ class InfoFragment : Fragment() {
 
         recycleView = view.findViewById(R.id.container_info)
         recycleView.layoutManager = mLayoutManager
-        recycleView.adapter = InfoAdapter()
+        recycleView.adapter = InfoAdapter(activity)
 
         return view
-    }
-
-    private fun browserAboutPage() {
-        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://festival-film-animation.fr/qui-sommes-nous.html"))
-        startActivity(browserIntent)
     }
 }

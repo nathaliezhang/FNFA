@@ -1,18 +1,20 @@
 package com.example.nzhang.proto_festival
 
-import android.graphics.drawable.TransitionDrawable
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
+import android.widget.TextView
 
 /**
  * Created by nathalie on 14/02/2018.
  */
 
-class InfoAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val TYPE_PRICE: Int = 0
     private val TYPE_ABOUT: Int = 1
@@ -65,6 +67,10 @@ class InfoAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             if (isExpanded)
                 previousExpandedPosition = position
 
+            holder.link.setOnClickListener {
+                browserAboutPage()
+            }
+
             holder.itemView.setOnClickListener {
                 mExpandedPosition = if (isExpanded) -1 else position
                 notifyItemChanged(previousExpandedPosition)
@@ -104,10 +110,16 @@ class InfoAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     class AboutViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val group = view.findViewById<ConstraintLayout>(R.id.item_group_about)
         val details = view.findViewById<ConstraintLayout>(R.id.item_details_about)
+        val link = view.findViewById<TextView>(R.id.info_about_link)
     }
 
     class PartnerViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val group = view.findViewById<ConstraintLayout>(R.id.item_group_partner)
         val details = view.findViewById<ConstraintLayout>(R.id.item_details_partner)
+    }
+
+    private fun browserAboutPage() {
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://festival-film-animation.fr/qui-sommes-nous.html"))
+        activity.startActivity(browserIntent)
     }
 }
