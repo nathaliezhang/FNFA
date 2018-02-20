@@ -25,7 +25,7 @@ class DataController(activity: Activity) {
     val categories: List<Categories.Category> = categorieResponse.categories
 
     // Order by date and by name
-    private val orderedEvents = eventResponse.events.sortedWith(compareBy({it.getStartingDate().time}, {it.name}))
+    val orderedEvents = eventResponse.events.sortedWith(compareBy({it.getStartingDate().time}, {it.name}))
 
     private val publicEvents: List<Events.Event> = orderedEvents.filter({it.pro == 0})
     private val proEvents: List<Events.Event> = orderedEvents.filter({it.pro == 1})

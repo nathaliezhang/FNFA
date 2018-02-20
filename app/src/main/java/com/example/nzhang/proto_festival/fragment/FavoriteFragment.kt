@@ -2,9 +2,13 @@ package com.example.nzhang.proto_festival.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.nzhang.proto_festival.EventAdapter
+import com.example.nzhang.proto_festival.FavoriteAdapter
 import com.example.nzhang.proto_festival.R
 
 
@@ -17,6 +21,8 @@ import com.example.nzhang.proto_festival.R
  * create an instance of this fragment.
  */
 class FavoriteFragment : Fragment() {
+
+    lateinit private var recycleView: RecyclerView
 
     /*private var mParam1: String? = null
     private var mParam2: String? = null
@@ -33,8 +39,16 @@ class FavoriteFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
         // Inflate the layout for this fragment
-        return inflater!!.inflate(R.layout.fragment_favorites, container, false)
+        val view = inflater!!.inflate(R.layout.fragment_favorite, container, false)
+        val mLayoutManager = LinearLayoutManager(context)
+
+        recycleView = view.findViewById(R.id.container_favorite)
+        recycleView.layoutManager = mLayoutManager
+        recycleView.adapter = FavoriteAdapter(activity)
+
+        return view
     }
 
     /*

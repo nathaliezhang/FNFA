@@ -1,5 +1,6 @@
 package com.example.nzhang.proto_festival
 
+import android.app.Activity
 import kotlin.reflect.jvm.internal.impl.javax.inject.Singleton
 
 /**
@@ -8,11 +9,12 @@ import kotlin.reflect.jvm.internal.impl.javax.inject.Singleton
 
 
 @Singleton
-class FavoriteController() {
+class FavoriteController(activity: Activity) {
 
-    private val favorites: MutableList<Int> = mutableListOf()
+    private val preferences = activity.getPreferences(0).getStringSet("Events", mutableSetOf<String>())
+    private val favorites = preferences
 
-    fun setFavorite(id: Int) {
+    fun setFavorite(id: String) {
 
         if (favorites.contains(id)) {
             favorites.remove(id)
@@ -21,8 +23,7 @@ class FavoriteController() {
         }
     }
 
-    fun getFavorites(): MutableList<Int> {
+    fun getFavorites(): MutableSet<String> {
         return favorites
     }
-
 }

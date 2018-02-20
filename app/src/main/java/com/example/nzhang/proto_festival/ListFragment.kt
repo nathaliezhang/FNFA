@@ -80,7 +80,7 @@ class ListFragment : Fragment() {
 
         recycleView = view.findViewById(R.id.container_list)
         recycleView.layoutManager = mLayoutManager
-        recycleView.adapter = EventAdapter(headerPosition, finalItemsList, places, categories)
+        recycleView.adapter = EventAdapter(activity, headerPosition, finalItemsList, places, categories)
 
         val smoothScroller = object : LinearSmoothScroller(context) {
             override fun getVerticalSnapPreference(): Int {
