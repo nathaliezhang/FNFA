@@ -13,13 +13,16 @@
     </string>
 
     <string name="info_about_item_title">Le festival</string>
+    <string name="info_about_item_subtitle1">A propos</string>
     <string name="info_about_item_block">
        Vitrine de l’animation française, le Festival national du film d’animation a été créé en
         1983; il est devenu au fil des ans le rendez-vous incontournable des professionnels et des
         amateurs de tous âges. Compétitif, il a pour vocation de mettre en valeur le meilleur de la
         création contemporaine française.
     </string>
-    <string name="info_about_item_link">En savoir plus</string>
+    <string name="info_about_item_link_FNFA">site web du FNFA</string>
+    <string name="info_about_item_link_AFCA">site web du AFCA</string>
+    <string name="info_about_item_subtitle2">Lieux</string>
 
     <string name="info_partners_item_title">Partenaires</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>

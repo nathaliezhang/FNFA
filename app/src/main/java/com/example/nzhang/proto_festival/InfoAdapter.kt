@@ -1,24 +1,30 @@
 package com.example.nzhang.proto_festival
 
-import android.graphics.drawable.TransitionDrawable
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
+import android.view.animation.Animation
+import android.view.animation.RotateAnimation
+import android.view.animation.DecelerateInterpolator
 
-/**
- * Created by nathalie on 14/02/2018.
- */
 
-class InfoAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val TYPE_PRICE: Int = 0
     private val TYPE_ABOUT: Int = 1
     private val TYPE_PARTNER: Int = 2
     private var mExpandedPosition: Int = -1
     private var previousExpandedPosition: Int = -1
+    private val placesText = DataController(activity).placesText
+    val animation = RotateAnimation(0f, 90.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+
 
     override fun getItemCount(): Int = 3
 
@@ -46,13 +52,19 @@ class InfoAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             holder.details.visibility = (if (isExpanded) View.VISIBLE else View.GONE)
             holder.itemView.isActivated = isExpanded
 
-            if (isExpanded)
+            if (isExpanded) {
+                holder.icon.setImageResource(R.drawable.picto_tarifs_cliquey)
+                animation.interpolator = DecelerateInterpolator()
+                animation.repeatCount = 0
+                animation.fillAfter = true
+                animation.duration = 300
+                holder.arrow.startAnimation(animation)
                 previousExpandedPosition = position
+            } else {
+                holder.icon.setImageResource(R.drawable.picto_tarifs)
+            }
 
             holder.itemView.setOnClickListener {
-                //val drawable: TransitionDrawable = holder.imageButton.drawable as TransitionDrawable
-                //drawable.startTransition(200)
-
                 mExpandedPosition = if (isExpanded) -1 else position
                 notifyItemChanged(previousExpandedPosition)
                 notifyItemChanged(position)
@@ -62,8 +74,27 @@ class InfoAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             holder.details.visibility = (if (isExpanded) View.VISIBLE else View.GONE)
             holder.itemView.isActivated = isExpanded
 
-            if (isExpanded)
+            if (isExpanded) {
+                holder.icon.setImageResource(R.drawable.picto_festival_cliquey)
+                animation.interpolator = DecelerateInterpolator()
+                animation.repeatCount = 0
+                animation.fillAfter = true
+                animation.duration = 300
+                holder.arrow.startAnimation(animation)
                 previousExpandedPosition = position
+            } else {
+                holder.icon.setImageResource(R.drawable.picto_festival)
+            }
+
+            holder.places.text = placesText
+
+            holder.linkFNFA.setOnClickListener {
+                browserAboutPage("FNFA")
+            }
+
+            holder.linkAFCA.setOnClickListener {
+                browserAboutPage("AFCA")
+            }
 
             holder.itemView.setOnClickListener {
                 mExpandedPosition = if (isExpanded) -1 else position
@@ -75,8 +106,17 @@ class InfoAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             holder.details.visibility = (if (isExpanded) View.VISIBLE else View.GONE)
             holder.itemView.isActivated = isExpanded
 
-            if (isExpanded)
+            if (isExpanded) {
+                holder.icon.setImageResource(R.drawable.picto_partenaires_cliquey)
+                animation.interpolator = DecelerateInterpolator()
+                animation.repeatCount = 0
+                animation.fillAfter = true
+                animation.duration = 300
+                holder.arrow.startAnimation(animation)
                 previousExpandedPosition = position
+            } else {
+                holder.icon.setImageResource(R.drawable.picto_partenaires)
+            }
 
             holder.itemView.setOnClickListener {
                 mExpandedPosition = if (isExpanded) -1 else position
@@ -98,16 +138,35 @@ class InfoAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     class PriceViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val group = view.findViewById<ConstraintLayout>(R.id.item_group_price)
         val details = view.findViewById<ConstraintLayout>(R.id.item_details_price)
-        //val imageButton = view.findViewById<ImageButton>(R.id.info_price_button_arrow)
+        val icon = view.findViewById<ImageView>(R.id.info_price_image)
+        val arrow = view.findViewById<ImageView>(R.id.info_price_button_arrow)
     }
 
     class AboutViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val group = view.findViewById<ConstraintLayout>(R.id.item_group_about)
         val details = view.findViewById<ConstraintLayout>(R.id.item_details_about)
+        val linkFNFA = view.findViewById<TextView>(R.id.info_about_link_FNFA)
+        val linkAFCA = view.findViewById<TextView>(R.id.info_about_link_AFCA)
+        val icon = view.findViewById<ImageView>(R.id.info_about_image)
+        val arrow = view.findViewById<ImageView>(R.id.info_about_button_arrow)
+        val places = view.findViewById<TextView>(R.id.info_about_places)
     }
 
     class PartnerViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val group = view.findViewById<ConstraintLayout>(R.id.item_group_partner)
         val details = view.findViewById<ConstraintLayout>(R.id.item_details_partner)
+        val icon = view.findViewById<ImageView>(R.id.info_partners_image)
+        val arrow = view.findViewById<ImageView>(R.id.info_partners_button_arrow)
+    }
+
+    private fun browserAboutPage(type: String) {
+        if (type == "FNFA") {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://festival-film-animation.fr/qui-sommes-nous.html"))
+            activity.startActivity(browserIntent)
+        } else {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.afca.asso.fr/"))
+            activity.startActivity(browserIntent)
+        }
+
     }
 }
