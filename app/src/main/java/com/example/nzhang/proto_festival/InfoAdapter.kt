@@ -87,8 +87,12 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
                 holder.icon.setImageResource(R.drawable.picto_festival)
             }
 
-            holder.link.setOnClickListener {
-                browserAboutPage()
+            holder.linkFNFA.setOnClickListener {
+                browserAboutPage("FNFA")
+            }
+
+            holder.linkAFCA.setOnClickListener {
+                browserAboutPage("AFCA")
             }
 
             holder.itemView.setOnClickListener {
@@ -141,7 +145,8 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
     class AboutViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val group = view.findViewById<ConstraintLayout>(R.id.item_group_about)
         val details = view.findViewById<ConstraintLayout>(R.id.item_details_about)
-        val link = view.findViewById<TextView>(R.id.info_about_link)
+        val linkFNFA = view.findViewById<TextView>(R.id.info_about_link_FNFA)
+        val linkAFCA = view.findViewById<TextView>(R.id.info_about_link_AFCA)
         val icon = view.findViewById<ImageView>(R.id.info_about_image)
         val arrow = view.findViewById<ImageView>(R.id.info_about_button_arrow)
     }
@@ -153,8 +158,14 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
         val arrow = view.findViewById<ImageView>(R.id.info_partners_button_arrow)
     }
 
-    private fun browserAboutPage() {
-        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://festival-film-animation.fr/qui-sommes-nous.html"))
-        activity.startActivity(browserIntent)
+    private fun browserAboutPage(type: String) {
+        if (type == "FNFA") {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://festival-film-animation.fr/qui-sommes-nous.html"))
+            activity.startActivity(browserIntent)
+        } else {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.afca.asso.fr/"))
+            activity.startActivity(browserIntent)
+        }
+
     }
 }
