@@ -63,7 +63,6 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
             } else {
                 holder.icon.setImageResource(R.drawable.picto_tarifs)
             }
-            holder.places.text = placesText
 
             holder.itemView.setOnClickListener {
                 mExpandedPosition = if (isExpanded) -1 else position
@@ -86,6 +85,8 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
             } else {
                 holder.icon.setImageResource(R.drawable.picto_festival)
             }
+
+            holder.places.text = placesText
 
             holder.linkFNFA.setOnClickListener {
                 browserAboutPage("FNFA")
@@ -139,7 +140,6 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
         val details = view.findViewById<ConstraintLayout>(R.id.item_details_price)
         val icon = view.findViewById<ImageView>(R.id.info_price_image)
         val arrow = view.findViewById<ImageView>(R.id.info_price_button_arrow)
-        val places = view.findViewById<TextView>(R.id.info_price_places)
     }
 
     class AboutViewHolder(view: View) : RecyclerView.ViewHolder(view){
@@ -149,6 +149,7 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
         val linkAFCA = view.findViewById<TextView>(R.id.info_about_link_AFCA)
         val icon = view.findViewById<ImageView>(R.id.info_about_image)
         val arrow = view.findViewById<ImageView>(R.id.info_about_button_arrow)
+        val places = view.findViewById<TextView>(R.id.info_about_places)
     }
 
     class PartnerViewHolder(view: View) : RecyclerView.ViewHolder(view){

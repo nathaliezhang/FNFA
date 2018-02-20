@@ -58,17 +58,27 @@
         android:padding="24dp">
 
         <TextView
+            android:id="@+id/info_price_subtitle1"
+            style="@style/InfoSubTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/info_about_item_subtitle1"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/info_about_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/info_about_item_block"
             android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/info_price_subtitle1" />
 
         <TextView
             android:id="@+id/info_about_link_FNFA"
@@ -76,6 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/info_about_text"
             android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/info_about_item_link_FNFA"
             android:textColor="@color/black"
@@ -88,11 +99,36 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/info_about_text"
             android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="4dp"
             android:text="@string/info_about_item_link_AFCA"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/info_about_link_FNFA" />
+
+        <TextView
+            android:id="@+id/info_about_subtitle2"
+            style="@style/InfoSubTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/info_about_item_subtitle2"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/info_about_link_AFCA" />
+
+        <TextView
+            android:id="@+id/info_about_places"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/info_about_subtitle2" />
 
     </android.support.constraint.ConstraintLayout>
 

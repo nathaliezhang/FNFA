@@ -59,19 +59,6 @@
         android:padding="24dp">
 
         <TextView
-            android:id="@+id/info_price_subtitle1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/info_price_item_subtitle1"
-            android:textColor="@color/black"
-            style="@style/InfoSubTitle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
             android:id="@+id/info_price_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -82,28 +69,5 @@
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/info_price_subtitle1" />
-
-        <TextView
-            android:id="@+id/info_price_subtitle2"
-            style="@style/InfoSubTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/info_price_item_subtitle2"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/info_price_content" />
-
-        <TextView
-            android:id="@+id/info_price_places"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/info_price_subtitle2" />
     </android.support.constraint.ConstraintLayout>
 </LinearLayout>
