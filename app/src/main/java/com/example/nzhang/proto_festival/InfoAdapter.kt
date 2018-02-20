@@ -8,11 +8,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
-
-/**
- * Created by nathalie on 14/02/2018.
- */
 
 class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -48,13 +45,14 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
             holder.details.visibility = (if (isExpanded) View.VISIBLE else View.GONE)
             holder.itemView.isActivated = isExpanded
 
-            if (isExpanded)
+            if (isExpanded) {
+                holder.icon.setImageResource(R.drawable.picto_tarifs_cliquey)
                 previousExpandedPosition = position
+            } else {
+                holder.icon.setImageResource(R.drawable.picto_tarifs)
+            }
 
             holder.itemView.setOnClickListener {
-                //val drawable: TransitionDrawable = holder.imageButton.drawable as TransitionDrawable
-                //drawable.startTransition(200)
-
                 mExpandedPosition = if (isExpanded) -1 else position
                 notifyItemChanged(previousExpandedPosition)
                 notifyItemChanged(position)
@@ -64,8 +62,12 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
             holder.details.visibility = (if (isExpanded) View.VISIBLE else View.GONE)
             holder.itemView.isActivated = isExpanded
 
-            if (isExpanded)
+            if (isExpanded) {
+                holder.icon.setImageResource(R.drawable.picto_festival_cliquey)
                 previousExpandedPosition = position
+            } else {
+                holder.icon.setImageResource(R.drawable.picto_festival)
+            }
 
             holder.link.setOnClickListener {
                 browserAboutPage()
@@ -81,8 +83,12 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
             holder.details.visibility = (if (isExpanded) View.VISIBLE else View.GONE)
             holder.itemView.isActivated = isExpanded
 
-            if (isExpanded)
+            if (isExpanded) {
+                holder.icon.setImageResource(R.drawable.picto_partenaires_cliquey)
                 previousExpandedPosition = position
+            } else {
+                holder.icon.setImageResource(R.drawable.picto_partenaires)
+            }
 
             holder.itemView.setOnClickListener {
                 mExpandedPosition = if (isExpanded) -1 else position
@@ -104,18 +110,20 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
     class PriceViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val group = view.findViewById<ConstraintLayout>(R.id.item_group_price)
         val details = view.findViewById<ConstraintLayout>(R.id.item_details_price)
-        //val imageButton = view.findViewById<ImageButton>(R.id.info_price_button_arrow)
+        val icon = view.findViewById<ImageView>(R.id.info_price_image)
     }
 
     class AboutViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val group = view.findViewById<ConstraintLayout>(R.id.item_group_about)
         val details = view.findViewById<ConstraintLayout>(R.id.item_details_about)
         val link = view.findViewById<TextView>(R.id.info_about_link)
+        val icon = view.findViewById<ImageView>(R.id.info_about_image)
     }
 
     class PartnerViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val group = view.findViewById<ConstraintLayout>(R.id.item_group_partner)
         val details = view.findViewById<ConstraintLayout>(R.id.item_details_partner)
+        val icon = view.findViewById<ImageView>(R.id.info_partners_image)
     }
 
     private fun browserAboutPage() {
