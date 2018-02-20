@@ -13,15 +13,31 @@
         android:layout_height="wrap_content"
         android:background="@drawable/border_top">
 
-        <TextView
-            android:id="@+id/info_partners_button"
+        <ImageView
+            android:id="@+id/info_partners_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/info_partners_item_title"
-            style="@style/InfoTitle"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/picto_partenaires"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/info_partners_button"
+            style="@style/InfoTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:text="@string/info_partners_item_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/info_partners_image"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <ImageButton
             android:id="@+id/info_price_button_arrow"
