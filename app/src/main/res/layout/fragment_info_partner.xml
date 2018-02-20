@@ -57,11 +57,127 @@
         android:background="@drawable/border_top"
         android:padding="16dp">
 
-        <ImageView
-            android:id="@+id/info_partners_content"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="wrap_content"
-            android:layout_height="300dip"
-            android:src="@drawable/partners"/>
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/info_partners_afca"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/logo_1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/info_partners_sacd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/logo_2"
+                app:layout_constraintStart_toEndOf="@+id/info_partners_afca"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/info_partners_cp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/logo_3"
+                app:layout_constraintStart_toEndOf="@+id/info_partners_sacd"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/info_partners_procirep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/logo_4"
+                app:layout_constraintStart_toEndOf="@+id/info_partners_cp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/info_partners_arvor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/logo_5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/info_partners_afca" />
+
+            <ImageView
+                android:id="@+id/info_partners_bretagne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/logo_6"
+                app:layout_constraintStart_toEndOf="@+id/info_partners_arvor"
+                app:layout_constraintTop_toBottomOf="@+id/info_partners_sacd" />
+
+            <ImageView
+                android:id="@+id/info_partners_tnb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/logo_7"
+                app:layout_constraintStart_toEndOf="@+id/info_partners_bretagne"
+                app:layout_constraintTop_toBottomOf="@+id/info_partners_cp" />
+
+            <ImageView
+                android:id="@+id/info_partners_ille"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/logo_8"
+                app:layout_constraintStart_toEndOf="@+id/info_partners_tnb"
+                app:layout_constraintTop_toBottomOf="@+id/info_partners_procirep" />
+
+            <ImageView
+                android:id="@+id/info_partners_sacem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/logo_9"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/info_partners_arvor" />
+
+            <ImageView
+                android:id="@+id/info_partners_rennes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/logo_10"
+                app:layout_constraintStart_toEndOf="@+id/info_partners_sacem"
+                app:layout_constraintTop_toBottomOf="@+id/info_partners_bretagne" />
+        </android.support.constraint.ConstraintLayout>
+
     </android.support.constraint.ConstraintLayout>
 
 </LinearLayout>
