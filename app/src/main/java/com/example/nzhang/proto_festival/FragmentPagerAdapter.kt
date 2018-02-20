@@ -4,6 +4,7 @@ import android.content.Context
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import com.example.nzhang.proto_festival.fragment.FavoriteFragment
 import com.example.nzhang.proto_festival.fragment.InfoFragment
 import com.example.nzhang.proto_festival.fragment.PlanningFragment
 
@@ -18,7 +19,7 @@ class FragmentPagerAdapter(private val mContext: Context, fm: FragmentManager) :
         return when (position) {
             0 -> PlanningFragment()
             1 -> InfoFragment()
-            else -> FavoritesFragment()
+            else -> FavoriteFragment()
         }
     }
 

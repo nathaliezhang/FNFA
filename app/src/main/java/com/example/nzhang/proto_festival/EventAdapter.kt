@@ -1,5 +1,7 @@
 package com.example.nzhang.proto_festival
 
+import android.app.Activity
+import android.content.Context
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -10,12 +12,11 @@ import android.widget.TextView
 import com.example.nzhang.proto_festival.model.Categories
 import com.example.nzhang.proto_festival.model.Events
 import com.example.nzhang.proto_festival.model.Places
-import java.text.SimpleDateFormat
-import java.util.*
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
+
+
 
 class EventAdapter(
+        activity: Activity,
         private val headerPosition: List<Int>,
         private val events: List<Any>,
         private val places: List<Places.Place>,
@@ -26,6 +27,7 @@ class EventAdapter(
     private val TYPE_ITEM: Int = 1
     private var mExpandedPosition: Int = -1
     private var previousExpandedPosition: Int = -1
+    private val favoriteController = FavoriteController(activity)
 
     override fun getItemCount(): Int = events.size
 
@@ -92,9 +94,19 @@ class EventAdapter(
             })
             holder.categoryView.text = categorySb.toString()
 
-            holder.imageButton.setOnClickListener({
-                println(event.id)
+            if (event.id in favoriteController.getFavorites()) {
                 holder.imageButton.setImageResource(R.drawable.favorite_on)
+            } else {
+                holder.imageButton.setImageResource(R.drawable.favorite_off)
+            }
+
+            holder.imageButton.setOnClickListener({
+
+                //val activity = holder.imageButton.context as Activity
+
+                favoriteController.setFavorite(event.id)
+                notifyItemChanged(position)
+
             })
         }
     }

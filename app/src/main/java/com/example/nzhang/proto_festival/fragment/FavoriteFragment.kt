@@ -1,23 +1,28 @@
-package com.example.nzhang.proto_festival
+package com.example.nzhang.proto_festival.fragment
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.nzhang.proto_festival.EventAdapter
+import com.example.nzhang.proto_festival.FavoriteAdapter
+import com.example.nzhang.proto_festival.R
 
 
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [FavoritesFragment.OnFragmentInteractionListener] interface
+ * [FavoriteFragment.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [FavoritesFragment.newInstance] factory method to
+ * Use the [FavoriteFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class FavoritesFragment : Fragment() {
+class FavoriteFragment : Fragment() {
+
+    lateinit private var recycleView: RecyclerView
 
     /*private var mParam1: String? = null
     private var mParam2: String? = null
@@ -34,8 +39,16 @@ class FavoritesFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
         // Inflate the layout for this fragment
-        return inflater!!.inflate(R.layout.fragment_favorites, container, false)
+        val view = inflater!!.inflate(R.layout.fragment_favorite, container, false)
+        val mLayoutManager = LinearLayoutManager(context)
+
+        recycleView = view.findViewById(R.id.container_favorite)
+        recycleView.layoutManager = mLayoutManager
+        recycleView.adapter = FavoriteAdapter(activity)
+
+        return view
     }
 
     /*
@@ -85,11 +98,11 @@ class FavoritesFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment FavoritesFragment.
+         * @return A new instance of fragment FavoriteFragment.
          *//*
 
-        fun newInstance(param1: String, param2: String): FavoritesFragment {
-            val fragment = FavoritesFragment()
+        fun newInstance(param1: String, param2: String): FavoriteFragment {
+            val fragment = FavoriteFragment()
             val args = Bundle()
             args.putString(ARG_PARAM1, param1)
             args.putString(ARG_PARAM2, param2)

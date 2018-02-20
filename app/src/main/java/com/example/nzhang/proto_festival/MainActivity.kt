@@ -27,6 +27,17 @@ class MainActivity : AppCompatActivity() {
         val tabLayout: TabLayout = findViewById(R.id.sliding_tabs)
         tabLayout.setupWithViewPager(viewPager)
     }
+
+    override fun onStop() {
+        super.onStop()
+
+        val preferences = getPreferences(0)
+        val editor = preferences.edit()
+        val favorites: MutableSet<String> = FavoriteController(this).getFavorites()
+        editor.putStringSet("Events", favorites)
+        editor.apply()
+    }
+
 }
 
 
