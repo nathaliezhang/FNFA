@@ -20,6 +20,7 @@ class DataController(activity: Activity) {
 
     private val placeResponse = parseLoadJson(activity, Places::class.java, "places.json") as Places
     val places: List<Places.Place> = placeResponse.places
+    val placesText = getPlacesBuilder()
 
     private val categorieResponse = parseLoadJson(activity, Categories::class.java, "categories.json") as Categories
     val categories: List<Categories.Category> = categorieResponse.categories
@@ -34,6 +35,13 @@ class DataController(activity: Activity) {
 
     fun get(param: String): DataClass {
         return if (param == "pro") proDataClass else publicDataClass
+    }
+
+    fun getPlacesBuilder(): StringBuilder {
+        val places = places.map{it.name}.sortedBy{it}
+        val placesText = StringBuilder()
+        places.forEach{ if(places.indexOf(it) == places.size - 1) placesText.append(it) else placesText.append(it + " / ")}
+        return placesText
     }
 
     private fun loadJsonFromAssets(filename: String, activity: Activity) : String {

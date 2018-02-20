@@ -27,6 +27,12 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="InfoSubTitle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
     <style name="InfoArrow">
         <item name="android:layout_marginEnd">24dp</item>
         <item name="android:layout_marginRight">24dp</item>

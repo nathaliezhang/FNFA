@@ -22,7 +22,9 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
     private val TYPE_PARTNER: Int = 2
     private var mExpandedPosition: Int = -1
     private var previousExpandedPosition: Int = -1
+    private val placesText = DataController(activity).placesText
     val animation = RotateAnimation(0f, 90.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+
 
     override fun getItemCount(): Int = 3
 
@@ -61,6 +63,7 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
             } else {
                 holder.icon.setImageResource(R.drawable.picto_tarifs)
             }
+            holder.places.text = placesText
 
             holder.itemView.setOnClickListener {
                 mExpandedPosition = if (isExpanded) -1 else position
@@ -132,6 +135,7 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
         val details = view.findViewById<ConstraintLayout>(R.id.item_details_price)
         val icon = view.findViewById<ImageView>(R.id.info_price_image)
         val arrow = view.findViewById<ImageView>(R.id.info_price_button_arrow)
+        val places = view.findViewById<TextView>(R.id.info_price_places)
     }
 
     class AboutViewHolder(view: View) : RecyclerView.ViewHolder(view){

@@ -7,10 +7,12 @@
     <string name="saturday">Samedi</string>
     <string name="sunday">Dimanche</string>
 
-    <string name="info_price_item_title">Tarifs</string>
+    <string name="info_price_item_title">Infos Pratiques</string>
+    <string name="info_price_item_subtitle1">Tarifs</string>
     <string name="info_price_item_block">
         Projection : 3€ par élève - 1 accompagnateur gratuit pour un groupe de 10 élèves.\nAtelier : 4€ par élève - accompagnateur gratuit\nMatinée des métiers : 3€ par élève - 1 accompagnateur gratuit pour un groupe de 10 élèves.\nSecret de fabrication : 3€ par élève - 1 accompagnateur gratuit pour un groupe de 10 élèves.\nLe Salon des nouvelles écritures : visite libre, gratuit, sur réservation
     </string>
+    <string name="info_price_item_subtitle2">Lieux</string>
 
     <string name="info_about_item_title">Le festival</string>
     <string name="info_about_item_block">
