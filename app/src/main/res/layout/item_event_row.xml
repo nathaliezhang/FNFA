@@ -53,7 +53,6 @@
             android:text="Catégorie"
             android:textAllCaps="true"
             android:textColor="@color/black"
-            android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/img_time_list_item"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -68,7 +67,7 @@
             android:text="Titre de l'événement"
             android:textAllCaps="true"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/img_time_list_item"
@@ -161,6 +160,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:layout_marginStart="120dp"
+            android:layout_marginLeft="120dp"
             android:layout_marginTop="4dp"
             android:singleLine="false"
             android:text="Description"

@@ -52,14 +52,14 @@ class MainActivity : AppCompatActivity() {
         if (selected){
             val sb = SpannableStringBuilder(" ")
             val drawable = AppCompatResources.getDrawable(this@MainActivity, tabselected[position])
-            drawable!!.setBounds(0, 10, 200, 200)
+            drawable!!.setBounds(0, 10, 160, 160)
             val imageSpan = ImageSpan(drawable)
             sb.setSpan(imageSpan, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             tabLayout.getTabAt(position)!!.text = sb
         } else {
             val sb = SpannableStringBuilder(" ")
             val drawable = AppCompatResources.getDrawable(this@MainActivity, tabunselected[position])
-            drawable!!.setBounds(0, 10, 200, 200)
+            drawable!!.setBounds(0, 10, 160, 160)
             val imageSpan = ImageSpan(drawable)
             sb.setSpan(imageSpan, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             tabLayout.getTabAt(position)!!.text = sb

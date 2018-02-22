@@ -81,19 +81,13 @@ class EventAdapter(
             holder.itemView.isActivated = isExpanded
 
             if (isExpanded) {
+
                 previousExpandedPosition = position
                 when (holder.itemView.img_time_list_item.tag) {
                     R.drawable.picto_temps_1 -> holder.imageTime.setImageResource(R.drawable.picto_temps_1_cliquey)
                     R.drawable.picto_temps_2 -> holder.imageTime.setImageResource(R.drawable.picto_temps_2_cliquey)
                     R.drawable.picto_temps_3 -> holder.imageTime.setImageResource(R.drawable.picto_temps_3_cliquey)
                     else -> holder.imageTime.setImageResource(R.drawable.picto_temps_4_cliquey)
-                }
-            } else {
-                when (holder.itemView.img_time_list_item.tag) {
-                    R.drawable.picto_temps_1 -> holder.imageTime.setImageResource(R.drawable.picto_temps_1)
-                    R.drawable.picto_temps_2 -> holder.imageTime.setImageResource(R.drawable.picto_temps_2)
-                    R.drawable.picto_temps_3 -> holder.imageTime.setImageResource(R.drawable.picto_temps_3)
-                    else -> holder.imageTime.setImageResource(R.drawable.picto_temps_4)
                 }
             }
 

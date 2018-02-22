@@ -9,7 +9,7 @@
     <android.support.design.widget.TabLayout
         android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="90dp"
         app:tabIndicatorHeight="0dp"
         app:tabTextAppearance="@style/AppTabBar"
         app:tabMode="fixed" />
