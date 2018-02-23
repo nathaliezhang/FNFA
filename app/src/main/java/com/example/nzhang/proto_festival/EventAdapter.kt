@@ -10,10 +10,8 @@ import android.widget.TextView
 import com.example.nzhang.proto_festival.model.Categories
 import com.example.nzhang.proto_festival.model.Events
 import com.example.nzhang.proto_festival.model.Places
-import java.text.SimpleDateFormat
-import java.util.*
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
+import android.widget.ImageView
+import kotlinx.android.synthetic.main.item_event_row.view.*
 
 class EventAdapter(
         private val headerPosition: List<Int>,
@@ -50,8 +48,27 @@ class EventAdapter(
 
         } else if (holder is EventViewHolder) {
             val event = events[position] as Events.Event
+
             val placeSb = StringBuilder()
             val categorySb = StringBuilder()
+
+            val startingHour = event.getStartingHour()
+            val hour = startingHour.substringBefore("h").toInt()
+
+            when(hour) {
+                in 6..10 -> holder.imageTime.setImageResource(R.drawable.picto_temps_1)
+                in 11..14 -> holder.imageTime.setImageResource(R.drawable.picto_temps_2)
+                in 15..18 -> holder.imageTime.setImageResource(R.drawable.picto_temps_3)
+                else -> holder.imageTime.setImageResource(R.drawable.picto_temps_4)
+            }
+
+            // Set tag
+            when(hour) {
+                in 6..10 -> holder.imageTime.tag = R.drawable.picto_temps_1
+                in 11..14 -> holder.imageTime.tag = R.drawable.picto_temps_2
+                in 15..18 -> holder.imageTime.tag = R.drawable.picto_temps_3
+                else -> holder.imageTime.tag = R.drawable.picto_temps_4
+            }
 
             holder.titleView.text = event.name
             holder.timeView.text = event.getStartingHour()
@@ -63,11 +80,20 @@ class EventAdapter(
             holder.details.visibility = (if (isExpanded) View.VISIBLE else View.GONE)
             holder.itemView.isActivated = isExpanded
 
-            if (isExpanded)
+            if (isExpanded) {
+
                 previousExpandedPosition = position
+                when (holder.itemView.img_time_list_item.tag) {
+                    R.drawable.picto_temps_1 -> holder.imageTime.setImageResource(R.drawable.picto_temps_1_cliquey)
+                    R.drawable.picto_temps_2 -> holder.imageTime.setImageResource(R.drawable.picto_temps_2_cliquey)
+                    R.drawable.picto_temps_3 -> holder.imageTime.setImageResource(R.drawable.picto_temps_3_cliquey)
+                    else -> holder.imageTime.setImageResource(R.drawable.picto_temps_4_cliquey)
+                }
+            }
 
             holder.itemView.setOnClickListener {
                 mExpandedPosition = if (isExpanded) -1 else position
+
                 notifyItemChanged(previousExpandedPosition)
                 notifyItemChanged(position) 
             }
@@ -93,7 +119,7 @@ class EventAdapter(
             holder.categoryView.text = categorySb.toString()
 
             holder.imageButton.setOnClickListener({
-                println(event.id)
+                //println(event.id)
                 holder.imageButton.setImageResource(R.drawable.favorite_on)
             })
         }
@@ -105,6 +131,7 @@ class EventAdapter(
 
     class EventViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val categoryView = view.findViewById<TextView>(R.id.text_list_item_category)
+        val imageTime = view.findViewById<ImageView>(R.id.img_time_list_item)
         val titleView = view.findViewById<TextView>(R.id.text_list_item_title)
         val timeView = view.findViewById<TextView>(R.id.text_list_item_time)
         val durationView = view.findViewById<TextView>(R.id.text_list_item_duration)

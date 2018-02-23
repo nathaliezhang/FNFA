@@ -36,21 +36,21 @@ class FragmentPagerAdapter(private val mContext: Context, fm: FragmentManager) :
 
         if (position == 0) {
             val drawable = getDrawable(mContext, R.drawable.programme_clique)
-            drawable!!.setBounds(0, 10, 200, 200)
+            drawable!!.setBounds(0, 10, 160, 160)
             val imageSpan = ImageSpan(drawable)
             //to make our tabs icon only, set the Text as blank string with white space
             sb.setSpan(imageSpan, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
         if (position == 1) {
             val drawable = getDrawable(mContext, R.drawable.plus)
-            drawable!!.setBounds(0, 10, 200, 200)
+            drawable!!.setBounds(0, 10, 160, 160)
             val imageSpan = ImageSpan(drawable)
             //to make our tabs icon only, set the Text as blank string with white space
             sb.setSpan(imageSpan, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
         if (position == 2) {
             val drawable = getDrawable(mContext, R.drawable.favoris)
-            drawable!!.setBounds(0, 10, 200, 200)
+            drawable!!.setBounds(0, 10, 160, 160)
             val imageSpan = ImageSpan(drawable)
             //to make our tabs icon only, set the Text as blank string with white space
             sb.setSpan(imageSpan, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
