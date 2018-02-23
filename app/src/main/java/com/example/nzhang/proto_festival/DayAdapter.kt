@@ -15,7 +15,8 @@ class DayAdapter (
         private val days: List<List<Events.Event>>,
         private val places: List<Places.Place>,
         private val categories: List<Categories.Category>,
-        private val whichDayClickedInterface: WhichDayClickedInterface
+        private val whichDayClickedInterface: WhichDayClickedInterface,
+        private val filter: String?
 ) : RecyclerView.Adapter<DayAdapter.HeaderViewHolder>() {
 
     lateinit private var context: Context
@@ -43,7 +44,7 @@ class DayAdapter (
         val recycleView = holder.list
         val mLayoutManager = LinearLayoutManager(context)
         recycleView.layoutManager = mLayoutManager
-        recycleView.adapter = EventAdapter(days[position], places, categories)
+        recycleView.adapter = EventAdapter(days[position], places, categories, filter)
         recycleView.visibility = if (expandedDay == dayValue) View.VISIBLE else View.GONE
     }
 

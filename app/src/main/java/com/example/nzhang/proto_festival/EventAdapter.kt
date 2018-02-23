@@ -1,5 +1,6 @@
 package com.example.nzhang.proto_festival
 
+import android.content.Context
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -17,16 +18,18 @@ import kotlinx.android.synthetic.main.item_event_row.view.*
 class EventAdapter (
         private val events: List<Events.Event>,
         private val places: List<Places.Place>,
-        private val categories: List<Categories.Category>
+        private val categories: List<Categories.Category>,
+        private val filter: String?
 ) : RecyclerView.Adapter<EventAdapter.EventViewHolder>(){
 
     private var mExpandedPosition: Int = -1
     private var previousExpandedPosition: Int = -1
+    lateinit var context: Context
 
     override fun getItemCount(): Int = events.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : EventViewHolder {
-        val context = parent.context
+        context = parent.context
         val layoutInflater = LayoutInflater.from(context)
         val view = layoutInflater.inflate(R.layout.item_event_row, parent, false)
         return EventAdapter.EventViewHolder(view)
@@ -35,6 +38,14 @@ class EventAdapter (
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
 
         val event = events[position]
+        val params = holder.itemView.layoutParams
+        val height = params.height
+
+        if ( (filter == "pro" && event.pro == 0) || (filter == "public" && event.pro == 1)) {
+            params.height = 0
+        } else {
+            params.height = height
+        }
 
         val placeSb = StringBuilder()
         val categorySb = StringBuilder()

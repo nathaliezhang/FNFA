@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import com.example.nzhang.proto_festival.*
 import com.example.nzhang.proto_festival.model.Categories
 import com.example.nzhang.proto_festival.model.Events
@@ -46,8 +47,30 @@ class PlanningFragment : Fragment(), DayAdapter.WhichDayClickedInterface {
         recycleView = view.findViewById(R.id.day_list)
         val mLayoutManager = LinearLayoutManager(context)
         recycleView.layoutManager = mLayoutManager
-        recycleView.adapter = DayAdapter(finalItemsList, places, categories, this)
-        //recycleView.adapter = EventAdapter(headerPosition, finalItemsList, places, categories, this)
+        recycleView.adapter = DayAdapter(finalItemsList, places, categories, this, "")
+
+
+        val btn_pro = view.findViewById<ImageButton>(R.id.btn_list_item_pro)
+        val btn_public = view.findViewById<ImageButton>(R.id.btn_list_item_public)
+        btn_pro.setOnClickListener {
+            btn_pro.isSelected = !btn_pro.isSelected
+            btn_public.isSelected = false
+            if (btn_pro.isSelected) {
+                recycleView.adapter = DayAdapter(finalItemsList, places, categories, this, "pro")
+            } else {
+                recycleView.adapter = DayAdapter(finalItemsList, places, categories, this, "")
+            }
+        }
+        btn_public.setOnClickListener {
+            btn_public.isSelected = !btn_public.isSelected
+            btn_pro.isSelected = false
+            if (btn_public.isSelected) {
+                recycleView.adapter = DayAdapter(finalItemsList, places, categories, this, "public")
+            } else {
+                recycleView.adapter = DayAdapter(finalItemsList, places, categories, this, "")
+            }
+        }
+
 
         smoothScroller = object : LinearSmoothScroller(context) {
             override fun getVerticalSnapPreference(): Int {
