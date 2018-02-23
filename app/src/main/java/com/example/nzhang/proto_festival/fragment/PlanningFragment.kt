@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import com.example.nzhang.proto_festival.*
 import com.example.nzhang.proto_festival.model.Categories
 import com.example.nzhang.proto_festival.model.Events
@@ -50,23 +51,37 @@ class PlanningFragment : Fragment(), DayAdapter.WhichDayClickedInterface {
         recycleView.adapter = DayAdapter(finalItemsList, places, categories, this, "")
 
 
-        val btn_pro = view.findViewById<ImageButton>(R.id.btn_list_item_pro)
-        val btn_public = view.findViewById<ImageButton>(R.id.btn_list_item_public)
-        btn_pro.setOnClickListener {
-            btn_pro.isSelected = !btn_pro.isSelected
-            btn_public.isSelected = false
-            if (btn_pro.isSelected) {
+        val btnPro = view.findViewById<ImageButton>(R.id.btn_list_item_pro)
+        val btnProContainer = view.findViewById<LinearLayout>(R.id.btn_container_pro)
+        val btnPublic = view.findViewById<ImageButton>(R.id.btn_list_item_public)
+        val btnPublicContainer = view.findViewById<LinearLayout>(R.id.btn_container_public)
+        btnPro.setOnClickListener {
+            btnPro.isSelected = !btnPro.isSelected
+            btnPublic.isSelected = false
+            btnPublic.setBackgroundResource(R.drawable.bouton_tp)
+            btnPublicContainer.setBackgroundResource(R.drawable.borderlines)
+            if (btnPro.isSelected) {
+                btnProContainer.setBackgroundResource(R.drawable.borderlines_full_green)
+                btnPro.setBackgroundResource(R.drawable.bouton_pro_clique)
                 recycleView.adapter = DayAdapter(finalItemsList, places, categories, this, "pro")
             } else {
+                btnProContainer.setBackgroundResource(R.drawable.borderlines)
+                btnPro.setBackgroundResource(R.drawable.bouton_pro)
                 recycleView.adapter = DayAdapter(finalItemsList, places, categories, this, "")
             }
         }
-        btn_public.setOnClickListener {
-            btn_public.isSelected = !btn_public.isSelected
-            btn_pro.isSelected = false
-            if (btn_public.isSelected) {
+        btnPublic.setOnClickListener {
+            btnPublic.isSelected = !btnPublic.isSelected
+            btnPro.isSelected = false
+            btnPro.setBackgroundResource(R.drawable.bouton_pro)
+            btnProContainer.setBackgroundResource(R.drawable.borderlines)
+            if (btnPublic.isSelected) {
+                btnPublicContainer.setBackgroundResource(R.drawable.borderlines_full_green)
+                btnPublic.setBackgroundResource(R.drawable.bouton_tp_clique)
                 recycleView.adapter = DayAdapter(finalItemsList, places, categories, this, "public")
             } else {
+                btnPublicContainer.setBackgroundResource(R.drawable.borderlines)
+                btnPublic.setBackgroundResource(R.drawable.bouton_tp)
                 recycleView.adapter = DayAdapter(finalItemsList, places, categories, this, "")
             }
         }
