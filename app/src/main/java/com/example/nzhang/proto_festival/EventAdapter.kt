@@ -13,120 +13,101 @@ import com.example.nzhang.proto_festival.model.Places
 import android.widget.ImageView
 import kotlinx.android.synthetic.main.item_event_row.view.*
 
-class EventAdapter(
-        private val headerPosition: List<Int>,
-        private val events: List<Any>,
+
+class EventAdapter (
+        private val events: List<Events.Event>,
         private val places: List<Places.Place>,
         private val categories: List<Categories.Category>
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+) : RecyclerView.Adapter<EventAdapter.EventViewHolder>(){
 
-    private val TYPE_HEADER: Int = 0
-    private val TYPE_ITEM: Int = 1
     private var mExpandedPosition: Int = -1
     private var previousExpandedPosition: Int = -1
 
     override fun getItemCount(): Int = events.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : EventViewHolder {
         val context = parent.context
         val layoutInflater = LayoutInflater.from(context)
-
-        if (viewType == TYPE_HEADER) {
-            val view = layoutInflater.inflate(R.layout.item_event_header, parent, false)
-            return EventAdapter.HeaderViewHolder(view)
-        } else if (viewType == TYPE_ITEM) {
-            val view = layoutInflater.inflate(R.layout.item_event_row, parent, false)
-            return EventAdapter.EventViewHolder(view)
-        }
-        throw RuntimeException("Not match type for" + viewType + ".")
+        val view = layoutInflater.inflate(R.layout.item_event_row, parent, false)
+        return EventAdapter.EventViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
 
-        if (holder is HeaderViewHolder) {
-            holder.dayTitleView.text = events[position] as String
+        val event = events[position]
 
-        } else if (holder is EventViewHolder) {
-            val event = events[position] as Events.Event
+        val placeSb = StringBuilder()
+        val categorySb = StringBuilder()
 
-            val placeSb = StringBuilder()
-            val categorySb = StringBuilder()
+        val startingHour = event.getStartingHour()
+        val hour = startingHour.substringBefore("h").toInt()
 
-            val startingHour = event.getStartingHour()
-            val hour = startingHour.substringBefore("h").toInt()
-
-            when(hour) {
-                in 6..10 -> holder.imageTime.setImageResource(R.drawable.picto_temps_1)
-                in 11..14 -> holder.imageTime.setImageResource(R.drawable.picto_temps_2)
-                in 15..18 -> holder.imageTime.setImageResource(R.drawable.picto_temps_3)
-                else -> holder.imageTime.setImageResource(R.drawable.picto_temps_4)
-            }
-
-            // Set tag
-            when(hour) {
-                in 6..10 -> holder.imageTime.tag = R.drawable.picto_temps_1
-                in 11..14 -> holder.imageTime.tag = R.drawable.picto_temps_2
-                in 15..18 -> holder.imageTime.tag = R.drawable.picto_temps_3
-                else -> holder.imageTime.tag = R.drawable.picto_temps_4
-            }
-
-            holder.titleView.text = event.name
-            holder.timeView.text = event.getStartingHour()
-            holder.durationView.text = event.getTimeDurationHour()
-            holder.descriptionView.text = event.description
-            holder.itemView.alpha = if (event.getEndingDate().time >= System.currentTimeMillis()) 1.0f else 0.5f
-
-            val isExpanded = position == mExpandedPosition
-            holder.details.visibility = (if (isExpanded) View.VISIBLE else View.GONE)
-            holder.itemView.isActivated = isExpanded
-
-            if (isExpanded) {
-
-                previousExpandedPosition = position
-                when (holder.itemView.img_time_list_item.tag) {
-                    R.drawable.picto_temps_1 -> holder.imageTime.setImageResource(R.drawable.picto_temps_1_cliquey)
-                    R.drawable.picto_temps_2 -> holder.imageTime.setImageResource(R.drawable.picto_temps_2_cliquey)
-                    R.drawable.picto_temps_3 -> holder.imageTime.setImageResource(R.drawable.picto_temps_3_cliquey)
-                    else -> holder.imageTime.setImageResource(R.drawable.picto_temps_4_cliquey)
-                }
-            }
-
-            holder.itemView.setOnClickListener {
-                mExpandedPosition = if (isExpanded) -1 else position
-
-                notifyItemChanged(previousExpandedPosition)
-                notifyItemChanged(position) 
-            }
-
-            event.placeIds.forEach({
-                id -> val name = places[places.indexOfFirst({it.id == id.toString()})].name
-                if (event.placeIds.indexOf(id) == event.placeIds.size - 1 ){
-                    placeSb.append(name)
-                } else {
-                    placeSb.append(name + " / ")
-                }
-            })
-            holder.placeView.text = placeSb.toString()
-
-            event.categoryIds.forEach({
-                id -> val name = categories[categories.indexOfFirst({it.id == id.toString()})].name
-                if (event.categoryIds.indexOf(id) == event.categoryIds.size - 1 ){
-                    categorySb.append(name)
-                } else {
-                    categorySb.append(name + " / ")
-                }
-            })
-            holder.categoryView.text = categorySb.toString()
-
-            holder.imageButton.setOnClickListener({
-                //println(event.id)
-                holder.imageButton.setImageResource(R.drawable.favorite_on)
-            })
+        when(hour) {
+            in 6..10 -> holder.imageTime.setImageResource(R.drawable.picto_temps_1)
+            in 11..14 -> holder.imageTime.setImageResource(R.drawable.picto_temps_2)
+            in 15..18 -> holder.imageTime.setImageResource(R.drawable.picto_temps_3)
+            else -> holder.imageTime.setImageResource(R.drawable.picto_temps_4)
         }
-    }
 
-    override fun getItemViewType(position: Int): Int {
-        return if (position in headerPosition) TYPE_HEADER else TYPE_ITEM
+        // Set tag
+        when(hour) {
+            in 6..10 -> holder.imageTime.tag = R.drawable.picto_temps_1
+            in 11..14 -> holder.imageTime.tag = R.drawable.picto_temps_2
+            in 15..18 -> holder.imageTime.tag = R.drawable.picto_temps_3
+            else -> holder.imageTime.tag = R.drawable.picto_temps_4
+        }
+
+        holder.titleView.text = event.name
+        holder.timeView.text = event.getStartingHour()
+        holder.durationView.text = event.getTimeDurationHour()
+        holder.descriptionView.text = event.description
+        holder.itemView.alpha = if (event.getEndingDate().time >= System.currentTimeMillis()) 1.0f else 0.5f
+
+        val isExpanded = position == mExpandedPosition
+        holder.details.visibility = (if (isExpanded) View.VISIBLE else View.GONE)
+        holder.itemView.isActivated = isExpanded
+
+        if (isExpanded) {
+            previousExpandedPosition = position
+            when (holder.itemView.img_time_list_item.tag) {
+                R.drawable.picto_temps_1 -> holder.imageTime.setImageResource(R.drawable.picto_temps_1_cliquey)
+                R.drawable.picto_temps_2 -> holder.imageTime.setImageResource(R.drawable.picto_temps_2_cliquey)
+                R.drawable.picto_temps_3 -> holder.imageTime.setImageResource(R.drawable.picto_temps_3_cliquey)
+                else -> holder.imageTime.setImageResource(R.drawable.picto_temps_4_cliquey)
+            }
+        }
+
+        holder.itemView.setOnClickListener {
+            mExpandedPosition = if (isExpanded) -1 else position
+
+            notifyItemChanged(previousExpandedPosition)
+            notifyItemChanged(position)
+        }
+
+        event.placeIds.forEach({
+            id -> val name = places[places.indexOfFirst({it.id == id.toString()})].name
+            if (event.placeIds.indexOf(id) == event.placeIds.size - 1 ){
+                placeSb.append(name)
+            } else {
+                placeSb.append(name + " / ")
+            }
+        })
+        holder.placeView.text = placeSb.toString()
+
+        event.categoryIds.forEach({
+            id -> val name = categories[categories.indexOfFirst({it.id == id.toString()})].name
+            if (event.categoryIds.indexOf(id) == event.categoryIds.size - 1 ){
+                categorySb.append(name)
+            } else {
+                categorySb.append(name + " / ")
+            }
+        })
+        holder.categoryView.text = categorySb.toString()
+
+        holder.imageButton.setOnClickListener({
+            //println(event.id)
+            holder.imageButton.setImageResource(R.drawable.favorite_on)
+        })
     }
 
     class EventViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -142,8 +123,5 @@ class EventAdapter(
         val descriptionView = view.findViewById<TextView>(R.id.text_list_item_description)
     }
 
-    class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val dayTitleView = view.findViewById<TextView>(R.id.text_list_header_title)
-    }
 
 }

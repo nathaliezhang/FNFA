@@ -7,39 +7,35 @@ import android.content.IntentFilter
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.LinearSmoothScroller
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.nzhang.proto_festival.*
 import com.example.nzhang.proto_festival.model.Categories
+import com.example.nzhang.proto_festival.model.Events
 import com.example.nzhang.proto_festival.model.Places
 import java.sql.Date
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class PlanningFragment : Fragment() {
+class PlanningFragment : Fragment(), DayAdapter.WhichDayClickedInterface {
 
     lateinit private var recycleView: RecyclerView
     lateinit private var tickReceiver: BroadcastReceiver
     lateinit private var places: List<Places.Place>
     lateinit private var categories: List<Categories.Category>
-    lateinit private var finalItemsList: List<Any>
-    lateinit private var daysLimits: Map<Int, String>
-    lateinit private var headerPosition: List<Int>
-    lateinit private var days: List<String>
+    lateinit private var finalItemsList: List<List<Events.Event>>
+    lateinit private var smoothScroller: RecyclerView.SmoothScroller
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val dataController = DataController(activity)
         places = dataController.places
         categories = dataController.categories
-        val dataClass = dataController.getData()
-        finalItemsList = dataClass.getFinalItemsList()
-        daysLimits = dataClass.getDaysLimits()
-        days = dataClass.allDays
-        headerPosition = dataClass.getHeaderPosition()
+        finalItemsList = dataController.data
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
@@ -47,11 +43,17 @@ class PlanningFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater!!.inflate(R.layout.fragment_planning, container, false)
 
+        recycleView = view.findViewById(R.id.day_list)
         val mLayoutManager = LinearLayoutManager(context)
-
-        recycleView = view.findViewById(R.id.container_list)
         recycleView.layoutManager = mLayoutManager
-        recycleView.adapter = EventAdapter(headerPosition, finalItemsList, places, categories)
+        recycleView.adapter = DayAdapter(finalItemsList, places, categories, this)
+        //recycleView.adapter = EventAdapter(headerPosition, finalItemsList, places, categories, this)
+
+        smoothScroller = object : LinearSmoothScroller(context) {
+            override fun getVerticalSnapPreference(): Int {
+                return LinearSmoothScroller.SNAP_TO_START
+            }
+        }
 
         tickReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
@@ -62,6 +64,11 @@ class PlanningFragment : Fragment() {
         activity.registerReceiver(tickReceiver, IntentFilter(Intent.ACTION_TIME_TICK))
 
         return view
+    }
+
+    override fun onDayClicked(number: Int) {
+        smoothScroller.targetPosition = number
+        recycleView.layoutManager.startSmoothScroll(smoothScroller)
     }
 
     private fun updateEventAdapter() {
@@ -77,6 +84,7 @@ class PlanningFragment : Fragment() {
     private fun convertDay(date: Date): String {
         return SimpleDateFormat("EEEE d MMMM", Locale.FRANCE).format(date).toString()
     }
+
 }
 
 

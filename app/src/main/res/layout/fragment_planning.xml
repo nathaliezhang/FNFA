@@ -5,10 +5,10 @@
     tools:context="com.example.nzhang.proto_festival.fragment.PlanningFragment">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/container_list"
+        android:id="@+id/day_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/item_event_row">
+        tools:listitem="@layout/item_event_header">
     </android.support.v7.widget.RecyclerView>
 
 </FrameLayout>
