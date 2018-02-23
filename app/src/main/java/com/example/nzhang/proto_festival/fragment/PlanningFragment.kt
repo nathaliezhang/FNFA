@@ -1,73 +1,81 @@
 package com.example.nzhang.proto_festival.fragment
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
-import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
-import android.support.v4.view.ViewPager
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.nzhang.proto_festival.*
-import android.support.v7.content.res.AppCompatResources
-import android.text.SpannableStringBuilder
-import android.text.Spanned
-import android.text.style.ImageSpan
+import com.example.nzhang.proto_festival.model.Categories
+import com.example.nzhang.proto_festival.model.Places
+import java.sql.Date
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class PlanningFragment : Fragment() {
 
-    lateinit private var tabLayout: TabLayout
-    private val tabunselected = arrayListOf(R.drawable.bouton_tp, R.drawable.bouton_pro)
-    private val tabselected = arrayListOf(R.drawable.bouton_tp_clique, R.drawable.bouton_pro_clique)
+    lateinit private var recycleView: RecyclerView
+    lateinit private var tickReceiver: BroadcastReceiver
+    lateinit private var places: List<Places.Place>
+    lateinit private var categories: List<Categories.Category>
+    lateinit private var finalItemsList: List<Any>
+    lateinit private var daysLimits: Map<Int, String>
+    lateinit private var headerPosition: List<Int>
+    lateinit private var days: List<String>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val dataController = DataController(activity)
+        places = dataController.places
+        categories = dataController.categories
+        val dataClass = dataController.getData()
+        finalItemsList = dataClass.getFinalItemsList()
+        daysLimits = dataClass.getDaysLimits()
+        days = dataClass.allDays
+        headerPosition = dataClass.getHeaderPosition()
+    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater!!.inflate(R.layout.fragment_planning, container, false)
 
-        // Find the view pager that will allow the user to swipe between fragments
-        val viewPager: ViewPager = view.findViewById(R.id.planning_viewpager)
+        val mLayoutManager = LinearLayoutManager(context)
 
-        // Create an adapter that knows which fragment should be shown on each page
-        val adapter = ListPagerAdapter(context, childFragmentManager)
+        recycleView = view.findViewById(R.id.container_list)
+        recycleView.layoutManager = mLayoutManager
+        recycleView.adapter = EventAdapter(headerPosition, finalItemsList, places, categories)
 
-        // Set the adapter onto the view pager
-        viewPager.adapter = adapter
-
-        // Give the TabLayout the ViewPager
-        tabLayout = view.findViewById(R.id.planning_tabs)
-        tabLayout.setupWithViewPager(viewPager)
-
-        tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(tab: TabLayout.Tab?) {}
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {}
-
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                changeTabs(0, tab!!.position == 0)
-                changeTabs(1, tab.position == 1)
+        tickReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                updateEventAdapter()
             }
-        })
+        }
+        //Register the broadcast receiver to receive TIME_TICK
+        activity.registerReceiver(tickReceiver, IntentFilter(Intent.ACTION_TIME_TICK))
 
         return view
     }
 
-    fun changeTabs(position: Int, selected: Boolean) {
-        if (selected){
-            val sb = SpannableStringBuilder(" ")
-            val drawable = AppCompatResources.getDrawable(context, tabselected[position])
-            drawable!!.setBounds(0, 0, 500, 165)
-            val imageSpan = ImageSpan(drawable)
-            sb.setSpan(imageSpan, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-            tabLayout.getTabAt(position)!!.text = sb
-        } else {
-            val sb = SpannableStringBuilder(" ")
-            val drawable = AppCompatResources.getDrawable(context, tabunselected[position])
-            drawable!!.setBounds(0, 0, 500, 165)
-            val imageSpan = ImageSpan(drawable)
-            sb.setSpan(imageSpan, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-            tabLayout.getTabAt(position)!!.text = sb
-        }
+    private fun updateEventAdapter() {
+        recycleView.adapter.notifyDataSetChanged()
+    }
+
+    private fun getCurrentDay(): String {
+        val current = System.currentTimeMillis()
+        val date = Date(current)
+        return convertDay(date)
+    }
+
+    private fun convertDay(date: Date): String {
+        return SimpleDateFormat("EEEE d MMMM", Locale.FRANCE).format(date).toString()
     }
 }
 

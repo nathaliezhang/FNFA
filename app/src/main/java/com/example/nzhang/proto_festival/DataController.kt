@@ -27,14 +27,10 @@ class DataController(activity: Activity) {
 
     // Order by date and by name
     private val orderedEvents = eventResponse.events.sortedWith(compareBy({it.getStartingDate().time}, {it.name}))
+    private val data = DataClass(orderedEvents)
 
-    private val publicEvents: List<Events.Event> = orderedEvents.filter({it.pro == 0})
-    private val proEvents: List<Events.Event> = orderedEvents.filter({it.pro == 1})
-    private val proDataClass = DataClass(proEvents)
-    private val publicDataClass = DataClass(publicEvents)
-
-    fun get(param: String): DataClass {
-        return if (param == "pro") proDataClass else publicDataClass
+    fun getData(): DataClass {
+        return data
     }
 
     fun getPlacesBuilder(): StringBuilder {

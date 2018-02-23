@@ -2,30 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.nzhang.proto_festival.fragment.PlanningFragment">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/container_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:orientation="vertical">
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/planning_viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/white" />
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/planning_tabs"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            app:tabIndicatorHeight="0dp"
-            app:tabTextAppearance="@style/AppTabBar"
-            app:tabBackground="@drawable/tab_background"
-            app:tabMode="fixed" />
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/item_event_row">
+    </android.support.v7.widget.RecyclerView>
 
 </FrameLayout>
