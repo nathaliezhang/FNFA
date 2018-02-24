@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:id="@+id/bottom_sheet"
+    android:background="@drawable/border_top_black"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="80dp"
+    android:focusable="true"
+    android:clickable="true"
+    app:layout_behavior="@string/bottom_sheet_behavior">
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/bottom_sheet_gif"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/tigrou"/>
+
+    <TextView
+        android:id="@+id/bottom_sheet_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/borderlines_message"
+        android:maxWidth="250dp"
+        android:padding="8dp"
+        android:text=""
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bottom_sheet_gif"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>

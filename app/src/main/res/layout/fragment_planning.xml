@@ -4,64 +4,74 @@
     android:layout_height="match_parent"
     tools:context="com.example.nzhang.proto_festival.fragment.PlanningFragment">
 
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/planning_coordinator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_weight="1"
+                android:layout_height="0dp">
 
-                <LinearLayout
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/day_list"
                     android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:layout_height="0dp">
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/day_list"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:listitem="@layout/item_event_header">
-                    </android.support.v7.widget.RecyclerView>
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="65dp"
-                    android:weightSum="1.0">
-
-                    <LinearLayout
-                        android:id="@+id/btn_container_pro"
-                        android:background="@drawable/borderlines"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_height="match_parent">
-
-                        <ImageButton
-                            android:id="@+id/btn_list_item_pro"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bouton_pro" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/btn_container_public"
-                        android:background="@drawable/borderlines"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_height="match_parent">
-
-                        <ImageButton
-                            android:id="@+id/btn_list_item_public"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bouton_tp" />
-                    </LinearLayout>
-
-                </LinearLayout>
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/item_event_header">
+                </android.support.v7.widget.RecyclerView>
 
             </LinearLayout>
 
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:id="@+id/planning_bottom_bar"
+                android:weightSum="1.0">
+
+                <LinearLayout
+                    android:id="@+id/btn_container_pro"
+                    android:background="@drawable/borderlines"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="match_parent">
+
+                    <ImageButton
+                        android:id="@+id/btn_list_item_pro"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bouton_pro" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_container_public"
+                    android:background="@drawable/borderlines"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="match_parent">
+
+                    <ImageButton
+                        android:id="@+id/btn_list_item_public"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bouton_tp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <include layout="@layout/black_opacity"/>
+
+        <include layout="@layout/bottom_sheet"/>
+
+    </android.support.design.widget.CoordinatorLayout>
 
 </FrameLayout>
