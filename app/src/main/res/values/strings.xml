@@ -27,7 +27,7 @@
     <string name="info_partners_item_title">Partenaires</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="bottom_sheet_filter_pro">Le filtre pour les évènements de type professionnels a bien été appliqué</string>
-    <string name="bottom_sheet_filter_public">Le filtre pour les évènements de type public a bien été appliqué</string>
-    <string name="bottom_sheet_no_filter">Tous les filtres ont bien été retirés</string>
+    <string name="bottom_sheet_filter_pro">Le filtre pour les évènements de type professionnel est en train d\'être appliqué</string>
+    <string name="bottom_sheet_filter_public">Le filtre pour les évènements de type public est en train d\'être appliqué</string>
+    <string name="bottom_sheet_no_filter">Tous les filtres sont en train d\'être retirés</string>
 </resources>
