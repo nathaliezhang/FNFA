@@ -13,6 +13,7 @@ import com.example.nzhang.proto_festival.model.Events
 import com.example.nzhang.proto_festival.model.Places
 import android.widget.ImageView
 import kotlinx.android.synthetic.main.item_event_row.view.*
+import java.sql.Date
 
 
 class EventAdapter (
@@ -58,6 +59,10 @@ class EventAdapter (
             val event = events[position]
             val params = holder.itemView.layoutParams
             val height = params.height
+
+            if (event.getEndingDate() < getCurrentTime()) {
+                holder.itemView.alpha = 0.5f
+            }
 
             if ( (filter == "pro" && event.pro == 0) || (filter == "public" && event.pro == 1)) {
                 params.height = 0
@@ -156,5 +161,9 @@ class EventAdapter (
         val descriptionView = view.findViewById<TextView>(R.id.text_list_item_description)
     }
 
+    fun getCurrentTime(): Date {
+        val current = System.currentTimeMillis()
+        return Date(current)
+    }
 
 }
