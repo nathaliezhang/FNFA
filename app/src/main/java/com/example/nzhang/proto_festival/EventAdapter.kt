@@ -20,21 +20,15 @@ class EventAdapter (
         private val events: List<Events.Event>,
         private val places: List<Places.Place>,
         private val categories: List<Categories.Category>,
-        private val filter: String?
+        private val isEmpty: Boolean
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private var mExpandedPosition: Int = -1
     private var previousExpandedPosition: Int = -1
     lateinit var context: Context
-    private var isEmpty: Boolean = false
 
     override fun getItemCount(): Int {
-        if((filter == "pro" && events.filter { it.pro == 1 }.isNotEmpty()) ||
-                (filter == "public" && events.filter { it.pro == 0 }.isNotEmpty()) || filter == "")
-            return events.size
-        else
-            isEmpty = true
-            return 1
+        return if(isEmpty) 1 else events.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RecyclerView.ViewHolder {
@@ -57,17 +51,9 @@ class EventAdapter (
 
         if (holder is EventViewHolder) {
             val event = events[position]
-            val params = holder.itemView.layoutParams
-            val height = params.height
 
             if (event.getEndingDate() < getCurrentTime()) {
                 holder.itemView.alpha = 0.5f
-            }
-
-            if ( (filter == "pro" && event.pro == 0) || (filter == "public" && event.pro == 1)) {
-                params.height = 0
-            } else {
-                params.height = height
             }
 
             val placeSb = StringBuilder()
@@ -113,7 +99,6 @@ class EventAdapter (
 
             holder.itemView.setOnClickListener {
                 mExpandedPosition = if (isExpanded) -1 else position
-
                 notifyItemChanged(previousExpandedPosition)
                 notifyItemChanged(position)
             }

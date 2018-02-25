@@ -20,7 +20,8 @@ class DayAdapter (
 ) : RecyclerView.Adapter<DayAdapter.HeaderViewHolder>() {
 
     lateinit private var context: Context
-    private var expandedDay: String = "none"
+    lateinit private var recycleView: RecyclerView
+    private var mExpandedPosition: Int = -1
 
     override fun getItemCount(): Int = days.size
 
@@ -34,18 +35,25 @@ class DayAdapter (
     override fun onBindViewHolder(holder: HeaderViewHolder, position: Int) {
         val dayValue = days[position][0].getFullStartingDate()
         holder.dayTitleView.text = dayValue  //"mercredi 4 avril"
+        val filteredList = when (filter) {
+            "pro" -> days[position].filter { it.pro == 1 }
+            "public" -> days[position].filter { it.pro == 0 }
+            else -> days[position]
+        }
+        val isEmpty = !filteredList.isNotEmpty()
+        val isExpanded = position == mExpandedPosition
 
         holder.dayTitleView.setOnClickListener{
-            expandedDay = if (expandedDay != dayValue) dayValue else "none"
+            mExpandedPosition = if (mExpandedPosition != position) position else -1
             notifyItemChanged(position)
             whichDayClickedInterface.onDayClicked(position)
         }
 
-        val recycleView = holder.list
+        recycleView = holder.list
         val mLayoutManager = LinearLayoutManager(context)
         recycleView.layoutManager = mLayoutManager
-        recycleView.adapter = EventAdapter(days[position], places, categories, filter)
-        recycleView.visibility = if (expandedDay == dayValue) View.VISIBLE else View.GONE
+        recycleView.adapter = EventAdapter(filteredList, places, categories, isEmpty)
+        recycleView.visibility = if (isExpanded) View.VISIBLE else View.GONE
     }
 
     class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
