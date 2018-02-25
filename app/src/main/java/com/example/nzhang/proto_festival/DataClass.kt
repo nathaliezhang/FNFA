@@ -17,7 +17,7 @@ class DataClass(private val listEvent: List<Events.Event>) {
             val position = listEvent.indexOf(event)
             for (day in allDays) {
                 if (position == listEvent.indexOfFirst({it.getFullStartingDate() == day})){
-                    finalItemsList.add(getDayName(day))
+                    finalItemsList.add(day)
                 }
             }
             finalItemsList.add(event)
@@ -25,15 +25,8 @@ class DataClass(private val listEvent: List<Events.Event>) {
         return finalItemsList
     }
 
-    fun getDaysLimits(): Map<Int, String> {
-        val dayLimits = mutableMapOf<Int, String>()
-        dayLimits.putAll(allDays.map({ day -> finalItemsList.indexOfFirst({it is String && it == getDayName(day) }) to day}))
-        dayLimits.putAll(allDays.map({ day -> finalItemsList.indexOfLast({it is Events.Event && it.getFullStartingDate() == day}) to day }))
-        return dayLimits
-    }
-
     fun getHeaderPosition(): List<Int> {
-        return allDays.map({day -> finalItemsList.indexOfFirst({it is String && it == getDayName(day)})})
+        return allDays.map({day -> finalItemsList.indexOfFirst({it is String && it == day})})
     }
 
     private fun getDayName(day: String): String {

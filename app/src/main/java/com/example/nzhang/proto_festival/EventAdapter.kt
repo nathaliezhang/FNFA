@@ -1,5 +1,6 @@
 package com.example.nzhang.proto_festival
 
+import android.content.Context
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -12,42 +13,48 @@ import com.example.nzhang.proto_festival.model.Events
 import com.example.nzhang.proto_festival.model.Places
 import android.widget.ImageView
 import kotlinx.android.synthetic.main.item_event_row.view.*
+import java.sql.Date
 
-class EventAdapter(
-        private val headerPosition: List<Int>,
-        private val events: List<Any>,
+
+class EventAdapter (
+        private val events: List<Events.Event>,
         private val places: List<Places.Place>,
-        private val categories: List<Categories.Category>
+        private val categories: List<Categories.Category>,
+        private val isEmpty: Boolean
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
-    private val TYPE_HEADER: Int = 0
-    private val TYPE_ITEM: Int = 1
     private var mExpandedPosition: Int = -1
     private var previousExpandedPosition: Int = -1
+    lateinit var context: Context
 
-    override fun getItemCount(): Int = events.size
+    override fun getItemCount(): Int {
+        return if(isEmpty) 1 else events.size
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RecyclerView.ViewHolder {
-        val context = parent.context
+        context = parent.context
         val layoutInflater = LayoutInflater.from(context)
 
-        if (viewType == TYPE_HEADER) {
-            val view = layoutInflater.inflate(R.layout.item_event_header, parent, false)
-            return EventAdapter.HeaderViewHolder(view)
-        } else if (viewType == TYPE_ITEM) {
-            val view = layoutInflater.inflate(R.layout.item_event_row, parent, false)
-            return EventAdapter.EventViewHolder(view)
+        return when (isEmpty) {
+            true -> {
+                val view = layoutInflater.inflate(R.layout.item_event_row_null, parent, false)
+                EmptyViewHolder(view)
+            }
+            false -> {
+                val view = layoutInflater.inflate(R.layout.item_event_row, parent, false)
+                EventAdapter.EventViewHolder(view)
+            }
         }
-        throw RuntimeException("Not match type for" + viewType + ".")
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        if (holder is HeaderViewHolder) {
-            holder.dayTitleView.text = events[position] as String
+        if (holder is EventViewHolder) {
+            val event = events[position]
 
-        } else if (holder is EventViewHolder) {
-            val event = events[position] as Events.Event
+            if (event.getEndingDate() < getCurrentTime()) {
+                holder.itemView.alpha = 0.5f
+            }
 
             val placeSb = StringBuilder()
             val categorySb = StringBuilder()
@@ -81,7 +88,6 @@ class EventAdapter(
             holder.itemView.isActivated = isExpanded
 
             if (isExpanded) {
-
                 previousExpandedPosition = position
                 when (holder.itemView.img_time_list_item.tag) {
                     R.drawable.picto_temps_1 -> holder.imageTime.setImageResource(R.drawable.picto_temps_1_cliquey)
@@ -93,9 +99,8 @@ class EventAdapter(
 
             holder.itemView.setOnClickListener {
                 mExpandedPosition = if (isExpanded) -1 else position
-
                 notifyItemChanged(previousExpandedPosition)
-                notifyItemChanged(position) 
+                notifyItemChanged(position)
             }
 
             event.placeIds.forEach({
@@ -123,11 +128,10 @@ class EventAdapter(
                 holder.imageButton.setImageResource(R.drawable.favorite_on)
             })
         }
+
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return if (position in headerPosition) TYPE_HEADER else TYPE_ITEM
-    }
+    class EmptyViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     class EventViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val categoryView = view.findViewById<TextView>(R.id.text_list_item_category)
@@ -142,8 +146,9 @@ class EventAdapter(
         val descriptionView = view.findViewById<TextView>(R.id.text_list_item_description)
     }
 
-    class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val dayTitleView = view.findViewById<TextView>(R.id.text_list_header_title)
+    fun getCurrentTime(): Date {
+        val current = System.currentTimeMillis()
+        return Date(current)
     }
 
 }

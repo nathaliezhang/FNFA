@@ -1,74 +1,156 @@
 package com.example.nzhang.proto_festival.fragment
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
-import android.support.design.widget.TabLayout
+import android.os.Handler
+import android.support.constraint.ConstraintLayout
+import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
-import android.support.v4.view.ViewPager
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.LinearSmoothScroller
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.LinearLayout
+import android.widget.TextView
 import com.example.nzhang.proto_festival.*
-import android.support.v7.content.res.AppCompatResources
-import android.text.SpannableStringBuilder
-import android.text.Spanned
-import android.text.style.ImageSpan
+import com.example.nzhang.proto_festival.model.Categories
+import com.example.nzhang.proto_festival.model.Events
+import com.example.nzhang.proto_festival.model.Places
+import java.sql.Date
+import java.text.SimpleDateFormat
+import java.util.*
 
 
-class PlanningFragment : Fragment() {
+class PlanningFragment : Fragment(), DayAdapter.WhichDayClickedInterface {
 
-    lateinit private var tabLayout: TabLayout
-    private val tabunselected = arrayListOf(R.drawable.bouton_tp, R.drawable.bouton_pro)
-    private val tabselected = arrayListOf(R.drawable.bouton_tp_clique, R.drawable.bouton_pro_clique)
+    lateinit private var recycleView: RecyclerView
+    lateinit private var tickReceiver: BroadcastReceiver
+    lateinit private var places: List<Places.Place>
+    lateinit private var categories: List<Categories.Category>
+    lateinit private var finalItemsList: List<List<Events.Event>>
+    lateinit private var smoothScroller: RecyclerView.SmoothScroller
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val dataController = DataController(activity)
+        places = dataController.places
+        categories = dataController.categories
+        finalItemsList = dataController.data
+    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater!!.inflate(R.layout.fragment_planning, container, false)
+        recycleView = view.findViewById(R.id.day_list)
+        val mLayoutManager = LinearLayoutManager(context)
+        recycleView.layoutManager = mLayoutManager
+        recycleView.adapter = DayAdapter(finalItemsList, places, categories, this, "")
 
-        // Find the view pager that will allow the user to swipe between fragments
-        val viewPager: ViewPager = view.findViewById(R.id.planning_viewpager)
+        val cover = view.findViewById<ConstraintLayout>(R.id.black_opacity_cover)
+        val btnPro = view.findViewById<ImageButton>(R.id.btn_list_item_pro)
+        val btnProContainer = view.findViewById<LinearLayout>(R.id.btn_container_pro)
+        val btnPublic = view.findViewById<ImageButton>(R.id.btn_list_item_public)
+        val btnPublicContainer = view.findViewById<LinearLayout>(R.id.btn_container_public)
+        val bottomSheet = view.findViewById<ConstraintLayout>(R.id.bottom_sheet)
+        val bottomSheetText = view.findViewById<TextView>(R.id.bottom_sheet_text)
+        val bottomBehavior = BottomSheetBehavior.from(bottomSheet)
+        bottomBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
-        // Create an adapter that knows which fragment should be shown on each page
-        val adapter = ListPagerAdapter(context, childFragmentManager)
+        val handler = Handler()
 
-        // Set the adapter onto the view pager
-        viewPager.adapter = adapter
+        btnPro.setOnClickListener {
+            btnPro.isSelected = !btnPro.isSelected
+            btnPublic.isSelected = false
+            btnPublic.setBackgroundResource(R.drawable.bouton_tp)
+            btnPublicContainer.setBackgroundResource(R.drawable.borderlines)
+            cover.visibility = View.VISIBLE
 
-        // Give the TabLayout the ViewPager
-        tabLayout = view.findViewById(R.id.planning_tabs)
-        tabLayout.setupWithViewPager(viewPager)
-
-        tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(tab: TabLayout.Tab?) {}
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {}
-
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                changeTabs(0, tab!!.position == 0)
-                changeTabs(1, tab.position == 1)
+            if (btnPro.isSelected) {
+                btnProContainer.setBackgroundResource(R.drawable.borderlines_full_green)
+                btnPro.setBackgroundResource(R.drawable.bouton_pro_clique)
+                recycleView.adapter = DayAdapter(finalItemsList, places, categories, this, "pro")
+                bottomSheetText.text = resources.getString(R.string.bottom_sheet_filter_pro)
+            } else {
+                btnProContainer.setBackgroundResource(R.drawable.borderlines)
+                btnPro.setBackgroundResource(R.drawable.bouton_pro)
+                recycleView.adapter = DayAdapter(finalItemsList, places, categories, this, "")
+                bottomSheetText.text = resources.getString(R.string.bottom_sheet_no_filter)
             }
-        })
+            bottomBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            handler.postDelayed({
+                bottomBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                cover.visibility = View.GONE
+            }, 4000)
+        }
+        btnPublic.setOnClickListener {
+            btnPublic.isSelected = !btnPublic.isSelected
+            btnPro.isSelected = false
+            btnPro.setBackgroundResource(R.drawable.bouton_pro)
+            btnProContainer.setBackgroundResource(R.drawable.borderlines)
+            cover.visibility = View.VISIBLE
+
+                if (btnPublic.isSelected) {
+                    btnPublicContainer.setBackgroundResource(R.drawable.borderlines_full_green)
+                    btnPublic.setBackgroundResource(R.drawable.bouton_tp_clique)
+                    recycleView.adapter = DayAdapter(finalItemsList, places, categories, this, "public")
+                    bottomSheetText.text = resources.getString(R.string.bottom_sheet_filter_public)
+                } else {
+                    btnPublicContainer.setBackgroundResource(R.drawable.borderlines)
+                    btnPublic.setBackgroundResource(R.drawable.bouton_tp)
+                    recycleView.adapter = DayAdapter(finalItemsList, places, categories, this, "")
+                    bottomSheetText.text = resources.getString(R.string.bottom_sheet_no_filter)
+                }
+            bottomBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            handler.postDelayed({
+                bottomBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                cover.visibility = View.GONE
+            }, 4000)
+        }
+
+
+        smoothScroller = object : LinearSmoothScroller(context) {
+            override fun getVerticalSnapPreference(): Int {
+                return LinearSmoothScroller.SNAP_TO_START
+            }
+        }
+
+        tickReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                updateEventAdapter()
+            }
+        }
+        //Register the broadcast receiver to receive TIME_TICK
+        activity.registerReceiver(tickReceiver, IntentFilter(Intent.ACTION_TIME_TICK))
 
         return view
     }
 
-    fun changeTabs(position: Int, selected: Boolean) {
-        if (selected){
-            val sb = SpannableStringBuilder(" ")
-            val drawable = AppCompatResources.getDrawable(context, tabselected[position])
-            drawable!!.setBounds(0, 0, 500, 165)
-            val imageSpan = ImageSpan(drawable)
-            sb.setSpan(imageSpan, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-            tabLayout.getTabAt(position)!!.text = sb
-        } else {
-            val sb = SpannableStringBuilder(" ")
-            val drawable = AppCompatResources.getDrawable(context, tabunselected[position])
-            drawable!!.setBounds(0, 0, 500, 165)
-            val imageSpan = ImageSpan(drawable)
-            sb.setSpan(imageSpan, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-            tabLayout.getTabAt(position)!!.text = sb
-        }
+    override fun onDayClicked(number: Int) {
+        smoothScroller.targetPosition = number
+        recycleView.layoutManager.startSmoothScroll(smoothScroller)
     }
+
+    private fun updateEventAdapter() {
+        recycleView.adapter.notifyDataSetChanged()
+    }
+
+    private fun getCurrentDay(): String {
+        val current = System.currentTimeMillis()
+        val date = Date(current)
+        return convertDay(date)
+    }
+
+    private fun convertDay(date: Date): String {
+        return SimpleDateFormat("EEEE d MMMM", Locale.FRANCE).format(date).toString()
+    }
+
 }
 
 

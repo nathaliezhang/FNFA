@@ -27,15 +27,13 @@ class DataController(activity: Activity) {
 
     // Order by date and by name
     private val orderedEvents = eventResponse.events.sortedWith(compareBy({it.getStartingDate().time}, {it.name}))
+    private val mercredi = orderedEvents.filter { it.getFullStartingDate() == "mercredi 4 avril" }
+    private val jeudi = orderedEvents.filter { it.getFullStartingDate() == "jeudi 5 avril" }
+    private val vendredi = orderedEvents.filter { it.getFullStartingDate() == "vendredi 6 avril" }
+    private val samedi = orderedEvents.filter { it.getFullStartingDate() == "samedi 7 avril" }
+    private val dimanche = orderedEvents.filter { it.getFullStartingDate() == "dimanche 8 avril" }
 
-    private val publicEvents: List<Events.Event> = orderedEvents.filter({it.pro == 0})
-    private val proEvents: List<Events.Event> = orderedEvents.filter({it.pro == 1})
-    private val proDataClass = DataClass(proEvents)
-    private val publicDataClass = DataClass(publicEvents)
-
-    fun get(param: String): DataClass {
-        return if (param == "pro") proDataClass else publicDataClass
-    }
+    val data = listOf(mercredi, jeudi, vendredi, samedi, dimanche)
 
     fun getPlacesBuilder(): StringBuilder {
         val places = places.map{it.name}.sortedBy{it}
