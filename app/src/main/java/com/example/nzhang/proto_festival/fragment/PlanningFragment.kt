@@ -31,17 +31,18 @@ class PlanningFragment : Fragment(), DayAdapter.WhichDayClickedInterface {
 
     lateinit private var recycleView: RecyclerView
     lateinit private var tickReceiver: BroadcastReceiver
+    lateinit private var smoothScroller: RecyclerView.SmoothScroller
+    lateinit private var mainActivity: MainActivity
     lateinit private var places: List<Places.Place>
     lateinit private var categories: List<Categories.Category>
     lateinit private var finalItemsList: List<List<Events.Event>>
-    lateinit private var smoothScroller: RecyclerView.SmoothScroller
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val dataController = DataController(activity)
-        places = dataController.places
-        categories = dataController.categories
-        finalItemsList = dataController.data
+        mainActivity = activity as MainActivity
+        places = mainActivity.places
+        categories = mainActivity.categories
+        finalItemsList = mainActivity.finalItemsList
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
