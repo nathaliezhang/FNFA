@@ -12,16 +12,13 @@ import android.widget.TextView
 import com.example.nzhang.proto_festival.model.Categories
 import com.example.nzhang.proto_festival.model.Events
 import com.example.nzhang.proto_festival.model.Places
-import android.widget.ImageView
-import kotlinx.android.synthetic.main.item_event_row.view.*
 import java.sql.Date
 
-
-class EventAdapter (
+class FavoriteAdapter (
         private val events: List<Events.Event>,
         private val places: List<Places.Place>,
         private val categories: List<Categories.Category>,
-        private val isEmpty: Boolean
+        private val emptyFavoriteInterface: EmptyFavoriteInterface
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private var mExpandedPosition: Int = -1
@@ -30,9 +27,19 @@ class EventAdapter (
     lateinit var preferences: SharedPreferences
     lateinit var favorites: MutableMap<String, *>
     lateinit var editor: SharedPreferences.Editor
+    private var isEmpty = false
+    private var tempEvents = events.toMutableList()
 
     override fun getItemCount(): Int {
-        return if(isEmpty) 1 else events.size
+        return when (tempEvents.isNotEmpty()) {
+            true -> {
+                tempEvents.size
+            }
+            false -> {
+                isEmpty = true
+                1
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RecyclerView.ViewHolder {
@@ -49,8 +56,8 @@ class EventAdapter (
                 EmptyViewHolder(view)
             }
             false -> {
-                val view = layoutInflater.inflate(R.layout.item_event_row, parent, false)
-                EventAdapter.EventViewHolder(view)
+                val view = layoutInflater.inflate(R.layout.item_favorite_row, parent, false)
+                FavoriteAdapter.EventViewHolder(view)
             }
         }
     }
@@ -67,26 +74,9 @@ class EventAdapter (
             val placeSb = StringBuilder()
             val categorySb = StringBuilder()
 
-            val startingHour = event.getStartingHour()
-            val hour = startingHour.substringBefore("h").toInt()
-
-            when(hour) {
-                in 6..10 -> holder.imageTime.setImageResource(R.drawable.picto_temps_1)
-                in 11..14 -> holder.imageTime.setImageResource(R.drawable.picto_temps_2)
-                in 15..18 -> holder.imageTime.setImageResource(R.drawable.picto_temps_3)
-                else -> holder.imageTime.setImageResource(R.drawable.picto_temps_4)
-            }
-
-            // Set tag
-            when(hour) {
-                in 6..10 -> holder.imageTime.tag = R.drawable.picto_temps_1
-                in 11..14 -> holder.imageTime.tag = R.drawable.picto_temps_2
-                in 15..18 -> holder.imageTime.tag = R.drawable.picto_temps_3
-                else -> holder.imageTime.tag = R.drawable.picto_temps_4
-            }
-
             holder.titleView.text = event.name
             holder.timeView.text = event.getStartingHour()
+            holder.dateView.text = event.getFullStartingDate()
             holder.durationView.text = event.getTimeDurationHour()
             holder.descriptionView.text = event.description
             holder.itemView.alpha = if (event.getEndingDate().time >= System.currentTimeMillis()) 1.0f else 0.5f
@@ -97,12 +87,6 @@ class EventAdapter (
 
             if (isExpanded) {
                 previousExpandedPosition = position
-                when (holder.itemView.img_time_list_item.tag) {
-                    R.drawable.picto_temps_1 -> holder.imageTime.setImageResource(R.drawable.picto_temps_1_cliquey)
-                    R.drawable.picto_temps_2 -> holder.imageTime.setImageResource(R.drawable.picto_temps_2_cliquey)
-                    R.drawable.picto_temps_3 -> holder.imageTime.setImageResource(R.drawable.picto_temps_3_cliquey)
-                    else -> holder.imageTime.setImageResource(R.drawable.picto_temps_4_cliquey)
-                }
             }
 
             holder.itemView.setOnClickListener {
@@ -130,24 +114,17 @@ class EventAdapter (
                 }
             })
             holder.categoryView.text = categorySb.toString()
-
-            if (event.id in favorites) {
-                holder.imageButton.setImageResource(R.drawable.favorite_on)
-            } else {
-                holder.imageButton.setImageResource(R.drawable.favorite_off)
-            }
+            holder.imageButton.setImageResource(R.drawable.favorite_on)
 
             holder.imageButton.setOnClickListener({
                 editor = preferences.edit()
-                if (event.id in favorites) {
-                    editor.remove(event.id)
-                    holder.imageButton.setImageResource(R.drawable.favorite_off)
-                }
-                else {
-                    editor.putBoolean(event.id, true)
-                    holder.imageButton.setImageResource(R.drawable.favorite_on)
-                }
+                editor.remove(event.id)
                 editor.apply()
+                tempEvents.remove(event)
+                if (tempEvents.isNotEmpty())
+                    notifyDataSetChanged()
+                else
+                    emptyFavoriteInterface.onEmptyFavorite()
             })
         }
 
@@ -156,16 +133,20 @@ class EventAdapter (
     class EmptyViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     class EventViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val categoryView = view.findViewById<TextView>(R.id.text_list_item_category)
-        val imageTime = view.findViewById<ImageView>(R.id.img_time_list_item)
-        val titleView = view.findViewById<TextView>(R.id.text_list_item_title)
-        val timeView = view.findViewById<TextView>(R.id.text_list_item_time)
-        val durationView = view.findViewById<TextView>(R.id.text_list_item_duration)
-        val placeView = view.findViewById<TextView>(R.id.text_list_item_place)
-        val imageButton = view.findViewById<ImageButton>(R.id.imageButton)
-        val details = view.findViewById<ConstraintLayout>(R.id.item_details)
-        val group = view.findViewById<ConstraintLayout>(R.id.item_group)
-        val descriptionView = view.findViewById<TextView>(R.id.text_list_item_description)
+        val categoryView = view.findViewById<TextView>(R.id.text_fav_item_category)
+        val titleView = view.findViewById<TextView>(R.id.text_fav_item_title)
+        val dateView = view.findViewById<TextView>(R.id.text_fav_item_date)
+        val timeView = view.findViewById<TextView>(R.id.text_fav_item_time)
+        val durationView = view.findViewById<TextView>(R.id.text_fav_item_duration)
+        val placeView = view.findViewById<TextView>(R.id.text_fav_item_place)
+        val imageButton = view.findViewById<ImageButton>(R.id.image_fav_item)
+        val details = view.findViewById<ConstraintLayout>(R.id.fav_item_details)
+        val group = view.findViewById<ConstraintLayout>(R.id.fav_item_group)
+        val descriptionView = view.findViewById<TextView>(R.id.text_fav_item_description)
+    }
+
+    interface EmptyFavoriteInterface {
+        fun onEmptyFavorite()
     }
 
     fun getCurrentTime(): Date {

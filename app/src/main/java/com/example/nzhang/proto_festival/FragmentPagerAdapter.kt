@@ -10,6 +10,7 @@ import com.example.nzhang.proto_festival.fragment.PlanningFragment
 import android.text.Spanned
 import android.text.style.ImageSpan
 import android.text.SpannableStringBuilder
+import com.example.nzhang.proto_festival.fragment.FavoriteFragment
 
 
 class FragmentPagerAdapter(private val mContext: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
@@ -19,7 +20,7 @@ class FragmentPagerAdapter(private val mContext: Context, fm: FragmentManager) :
         return when (position) {
             0 -> PlanningFragment()
             1 -> InfoFragment()
-            else -> FavoritesFragment()
+            else -> FavoriteFragment()
         }
     }
 

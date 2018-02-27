@@ -26,7 +26,7 @@ class DataController(activity: Activity) {
     val categories: List<Categories.Category> = categorieResponse.categories
 
     // Order by date and by name
-    private val orderedEvents = eventResponse.events.sortedWith(compareBy({it.getStartingDate().time}, {it.name}))
+    val orderedEvents = eventResponse.events.sortedWith(compareBy({it.getStartingDate().time}, {it.name}))
     private val mercredi = orderedEvents.filter { it.getFullStartingDate() == "mercredi 4 avril" }
     private val jeudi = orderedEvents.filter { it.getFullStartingDate() == "jeudi 5 avril" }
     private val vendredi = orderedEvents.filter { it.getFullStartingDate() == "vendredi 6 avril" }

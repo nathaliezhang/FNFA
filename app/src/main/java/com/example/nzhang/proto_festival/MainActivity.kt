@@ -8,6 +8,9 @@ import android.support.v7.content.res.AppCompatResources
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ImageSpan
+import com.example.nzhang.proto_festival.model.Categories
+import com.example.nzhang.proto_festival.model.Events
+import com.example.nzhang.proto_festival.model.Places
 
 
 class MainActivity : AppCompatActivity() {
@@ -15,9 +18,20 @@ class MainActivity : AppCompatActivity() {
     lateinit var tabLayout: TabLayout
     val tabunselected = arrayListOf(R.drawable.programme, R.drawable.plus, R.drawable.favoris)
     val tabselected = arrayListOf(R.drawable.programme_clique, R.drawable.plus_clique, R.drawable.favoris_clique)
+    lateinit var dataController: DataController
+    lateinit var places: List<Places.Place>
+    lateinit var categories: List<Categories.Category>
+    lateinit var finalItemsList: List<List<Events.Event>>
+    lateinit var orderedList: List<Events.Event>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        dataController = DataController(this)
+        places = dataController.places
+        categories = dataController.categories
+        finalItemsList = dataController.data
+        orderedList = dataController.orderedEvents
 
         // Set the content of the activity to use the  activity_main.xml layout file
         setContentView(R.layout.activity_main)
