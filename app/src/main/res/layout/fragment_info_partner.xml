@@ -175,6 +175,17 @@
                 android:src="@drawable/logo_10"
                 app:layout_constraintStart_toEndOf="@+id/info_partners_sacem"
                 app:layout_constraintTop_toBottomOf="@+id/info_partners_bretagne" />
+
+            <ImageView
+                android:id="@+id/info_partners_gebelins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/logo_11"
+                app:layout_constraintStart_toEndOf="@+id/info_partners_rennes"
+                app:layout_constraintTop_toBottomOf="@+id/info_partners_tnb" />
         </android.support.constraint.ConstraintLayout>
 
     </android.support.constraint.ConstraintLayout>
