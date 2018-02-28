@@ -15,7 +15,7 @@ import com.example.nzhang.proto_festival.model.Places
 import java.sql.Date
 
 class FavoriteAdapter (
-        private val events: List<Events.Event>,
+        events: List<Events.Event>,
         private val places: List<Places.Place>,
         private val categories: List<Categories.Category>,
         private val emptyFavoriteInterface: EmptyFavoriteInterface
@@ -65,7 +65,7 @@ class FavoriteAdapter (
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         if (holder is EventViewHolder) {
-            val event = events[position]
+            val event = tempEvents[position]
 
             if (event.getEndingDate() < getCurrentTime()) {
                 holder.itemView.alpha = 0.5f
