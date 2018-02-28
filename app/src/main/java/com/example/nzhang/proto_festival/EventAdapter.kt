@@ -1,7 +1,10 @@
 package com.example.nzhang.proto_festival
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -18,6 +21,7 @@ import java.sql.Date
 
 
 class EventAdapter (
+        private val activity: Activity,
         private val events: List<Events.Event>,
         private val places: List<Places.Place>,
         private val categories: List<Categories.Category>,
@@ -121,6 +125,10 @@ class EventAdapter (
             })
             holder.placeView.text = placeSb.toString()
 
+            holder.linkView.setOnClickListener {
+                browserFNFAPage()
+            }
+
             event.categoryIds.forEach({
                 id -> val name = categories[categories.indexOfFirst({it.id == id.toString()})].name
                 if (event.categoryIds.indexOf(id) == event.categoryIds.size - 1 ){
@@ -162,6 +170,7 @@ class EventAdapter (
         val timeView = view.findViewById<TextView>(R.id.text_list_item_time)
         val durationView = view.findViewById<TextView>(R.id.text_list_item_duration)
         val placeView = view.findViewById<TextView>(R.id.text_list_item_place)
+        val linkView = view.findViewById<TextView>(R.id.text_list_item_web)
         val imageButton = view.findViewById<ImageButton>(R.id.imageButton)
         val details = view.findViewById<ConstraintLayout>(R.id.item_details)
         val group = view.findViewById<ConstraintLayout>(R.id.item_group)
@@ -171,6 +180,11 @@ class EventAdapter (
     fun getCurrentTime(): Date {
         val current = System.currentTimeMillis()
         return Date(current)
+    }
+
+    private fun browserFNFAPage() {
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://festival-film-animation.fr"))
+        activity.startActivity(browserIntent)
     }
 
 }

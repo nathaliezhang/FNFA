@@ -1,5 +1,6 @@
 package com.example.nzhang.proto_festival
 
+import android.app.Activity
 import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -12,6 +13,7 @@ import com.example.nzhang.proto_festival.model.Events
 import com.example.nzhang.proto_festival.model.Places
 
 class DayAdapter (
+        private val activity: Activity,
         private val days: List<List<Events.Event>>,
         private val places: List<Places.Place>,
         private val categories: List<Categories.Category>,
@@ -52,7 +54,7 @@ class DayAdapter (
         recycleView = holder.list
         val mLayoutManager = LinearLayoutManager(context)
         recycleView.layoutManager = mLayoutManager
-        recycleView.adapter = EventAdapter(filteredList, places, categories, isEmpty)
+        recycleView.adapter = EventAdapter(activity, filteredList, places, categories, isEmpty)
         recycleView.visibility = if (isExpanded) View.VISIBLE else View.GONE
     }
 

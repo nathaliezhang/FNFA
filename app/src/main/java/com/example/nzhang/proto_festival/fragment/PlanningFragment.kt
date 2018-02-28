@@ -52,7 +52,7 @@ class PlanningFragment : Fragment(), DayAdapter.WhichDayClickedInterface {
         recycleView = view.findViewById(R.id.day_list)
         val mLayoutManager = LinearLayoutManager(context)
         recycleView.layoutManager = mLayoutManager
-        recycleView.adapter = DayAdapter(finalItemsList, places, categories, this, "")
+        recycleView.adapter = DayAdapter(activity, finalItemsList, places, categories, this, "")
 
         val cover = view.findViewById<ConstraintLayout>(R.id.black_opacity_cover)
         val btnPro = view.findViewById<ImageButton>(R.id.btn_list_item_pro)
@@ -76,12 +76,12 @@ class PlanningFragment : Fragment(), DayAdapter.WhichDayClickedInterface {
             if (btnPro.isSelected) {
                 btnProContainer.setBackgroundResource(R.drawable.borderlines_full_green)
                 btnPro.setBackgroundResource(R.drawable.bouton_pro_clique)
-                recycleView.adapter = DayAdapter(finalItemsList, places, categories, this, "pro")
+                recycleView.adapter = DayAdapter(activity, finalItemsList, places, categories, this, "pro")
                 bottomSheetText.text = resources.getString(R.string.bottom_sheet_filter_pro)
             } else {
                 btnProContainer.setBackgroundResource(R.drawable.borderlines)
                 btnPro.setBackgroundResource(R.drawable.bouton_pro)
-                recycleView.adapter = DayAdapter(finalItemsList, places, categories, this, "")
+                recycleView.adapter = DayAdapter(activity, finalItemsList, places, categories, this, "")
                 bottomSheetText.text = resources.getString(R.string.bottom_sheet_no_filter)
             }
             bottomBehavior.state = BottomSheetBehavior.STATE_EXPANDED
@@ -100,12 +100,12 @@ class PlanningFragment : Fragment(), DayAdapter.WhichDayClickedInterface {
                 if (btnPublic.isSelected) {
                     btnPublicContainer.setBackgroundResource(R.drawable.borderlines_full_green)
                     btnPublic.setBackgroundResource(R.drawable.bouton_tp_clique)
-                    recycleView.adapter = DayAdapter(finalItemsList, places, categories, this, "public")
+                    recycleView.adapter = DayAdapter(activity, finalItemsList, places, categories, this, "public")
                     bottomSheetText.text = resources.getString(R.string.bottom_sheet_filter_public)
                 } else {
                     btnPublicContainer.setBackgroundResource(R.drawable.borderlines)
                     btnPublic.setBackgroundResource(R.drawable.bouton_tp)
-                    recycleView.adapter = DayAdapter(finalItemsList, places, categories, this, "")
+                    recycleView.adapter = DayAdapter(activity, finalItemsList, places, categories, this, "")
                     bottomSheetText.text = resources.getString(R.string.bottom_sheet_no_filter)
                 }
             bottomBehavior.state = BottomSheetBehavior.STATE_EXPANDED
