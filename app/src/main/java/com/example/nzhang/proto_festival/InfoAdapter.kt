@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
 import android.widget.TextView
 import android.view.animation.Animation
@@ -54,10 +55,10 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
 
             if (isExpanded) {
                 holder.icon.setImageResource(R.drawable.picto_tarifs_cliquey)
-                animation.interpolator = DecelerateInterpolator()
+                animation.interpolator = AccelerateDecelerateInterpolator()
                 animation.repeatCount = 0
                 animation.fillAfter = true
-                animation.duration = 300
+                animation.duration = 600
                 holder.arrow.startAnimation(animation)
                 previousExpandedPosition = position
             } else {
@@ -76,10 +77,10 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
 
             if (isExpanded) {
                 holder.icon.setImageResource(R.drawable.picto_festival_cliquey)
-                animation.interpolator = DecelerateInterpolator()
+                animation.interpolator = AccelerateDecelerateInterpolator()
                 animation.repeatCount = 0
                 animation.fillAfter = true
-                animation.duration = 300
+                animation.duration = 600
                 holder.arrow.startAnimation(animation)
                 previousExpandedPosition = position
             } else {
@@ -108,10 +109,10 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
 
             if (isExpanded) {
                 holder.icon.setImageResource(R.drawable.picto_partenaires_cliquey)
-                animation.interpolator = DecelerateInterpolator()
+                animation.interpolator = AccelerateDecelerateInterpolator()
                 animation.repeatCount = 0
                 animation.fillAfter = true
-                animation.duration = 300
+                animation.duration = 600
                 holder.arrow.startAnimation(animation)
                 previousExpandedPosition = position
             } else {

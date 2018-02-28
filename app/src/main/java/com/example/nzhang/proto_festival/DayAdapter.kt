@@ -7,6 +7,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.Animation
+import android.view.animation.DecelerateInterpolator
+import android.view.animation.RotateAnimation
+import android.widget.ImageView
 import android.widget.TextView
 import com.example.nzhang.proto_festival.model.Categories
 import com.example.nzhang.proto_festival.model.Events
@@ -24,6 +29,7 @@ class DayAdapter (
     lateinit private var context: Context
     lateinit private var recycleView: RecyclerView
     private var mExpandedPosition: Int = -1
+    val animation_show = RotateAnimation(0f, 90.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
 
     override fun getItemCount(): Int = days.size
 
@@ -45,6 +51,16 @@ class DayAdapter (
         val isEmpty = !filteredList.isNotEmpty()
         val isExpanded = position == mExpandedPosition
 
+        if (isExpanded) {
+            animation_show.interpolator = AccelerateDecelerateInterpolator()
+            animation_show.repeatCount = 0
+            animation_show.fillAfter = true
+            animation_show.duration = 600
+            holder.arrowView.startAnimation(animation_show)
+        } else {
+
+        }
+
         holder.dayTitleView.setOnClickListener{
             mExpandedPosition = if (mExpandedPosition != position) position else -1
             notifyItemChanged(position)
@@ -60,6 +76,7 @@ class DayAdapter (
 
     class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val dayTitleView = view.findViewById<TextView>(R.id.text_list_header_title)
+        val arrowView = view.findViewById<ImageView>(R.id.arrow_list_header_title)
         val list = view.findViewById<RecyclerView>(R.id.container_list)
     }
 
