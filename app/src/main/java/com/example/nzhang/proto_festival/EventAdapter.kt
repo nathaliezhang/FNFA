@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
+import android.media.Image
 import android.net.Uri
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
@@ -89,6 +91,8 @@ class EventAdapter (
                 else -> holder.imageTime.tag = R.drawable.picto_temps_4
             }
 
+            holder.bgView.setBackgroundResource(R.color.white)
+            holder.bgDetailView.setBackgroundResource(R.color.white)
             holder.titleView.text = event.name
             holder.timeView.text = event.getStartingHour()
             holder.durationView.text = event.getTimeDurationHour()
@@ -107,6 +111,8 @@ class EventAdapter (
                     R.drawable.picto_temps_3 -> holder.imageTime.setImageResource(R.drawable.picto_temps_3_cliquey)
                     else -> holder.imageTime.setImageResource(R.drawable.picto_temps_4_cliquey)
                 }
+                holder.bgView.setBackgroundResource(R.color.green)
+                holder.bgDetailView.setBackgroundResource(R.color.green)
             }
 
             holder.itemView.setOnClickListener {
@@ -164,6 +170,8 @@ class EventAdapter (
     class EmptyViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     class EventViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val bgView = view.findViewById<ImageView>(R.id.bg_list_item)
+        val bgDetailView = view.findViewById<ImageView>(R.id.bg_list_item_detail)
         val categoryView = view.findViewById<TextView>(R.id.text_list_item_category)
         val imageTime = view.findViewById<ImageView>(R.id.img_time_list_item)
         val titleView = view.findViewById<TextView>(R.id.text_list_item_title)
