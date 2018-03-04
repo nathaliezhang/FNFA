@@ -1,7 +1,10 @@
 package com.example.nzhang.proto_festival
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -18,6 +21,7 @@ import java.sql.Date
 
 
 class EventAdapter (
+        private val activity: Activity,
         private val events: List<Events.Event>,
         private val places: List<Places.Place>,
         private val categories: List<Categories.Category>,
@@ -64,6 +68,11 @@ class EventAdapter (
                 holder.itemView.alpha = 0.5f
             }
 
+            if (event.getStartingDate() < getCurrentTime() && event.getEndingDate() > getCurrentTime()) {
+                holder.currentArrowView.visibility = View.VISIBLE
+            }
+
+
             val placeSb = StringBuilder()
             val categorySb = StringBuilder()
 
@@ -85,6 +94,8 @@ class EventAdapter (
                 else -> holder.imageTime.tag = R.drawable.picto_temps_4
             }
 
+            holder.bgView.setBackgroundResource(R.color.white)
+            holder.bgDetailView.setBackgroundResource(R.color.white)
             holder.titleView.text = event.name
             holder.timeView.text = event.getStartingHour()
             holder.durationView.text = event.getTimeDurationHour()
@@ -103,6 +114,8 @@ class EventAdapter (
                     R.drawable.picto_temps_3 -> holder.imageTime.setImageResource(R.drawable.picto_temps_3_cliquey)
                     else -> holder.imageTime.setImageResource(R.drawable.picto_temps_4_cliquey)
                 }
+                holder.bgView.setBackgroundResource(R.color.green)
+                holder.bgDetailView.setBackgroundResource(R.color.green)
             }
 
             holder.itemView.setOnClickListener {
@@ -120,6 +133,10 @@ class EventAdapter (
                 }
             })
             holder.placeView.text = placeSb.toString()
+
+            holder.linkView.setOnClickListener {
+                browserFNFAPage()
+            }
 
             event.categoryIds.forEach({
                 id -> val name = categories[categories.indexOfFirst({it.id == id.toString()})].name
@@ -156,12 +173,16 @@ class EventAdapter (
     class EmptyViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     class EventViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val bgView = view.findViewById<ImageView>(R.id.bg_list_item)
+        val bgDetailView = view.findViewById<ImageView>(R.id.bg_list_item_detail)
+        val currentArrowView = view.findViewById<ImageView>(R.id.current_list_item_arrow)
         val categoryView = view.findViewById<TextView>(R.id.text_list_item_category)
         val imageTime = view.findViewById<ImageView>(R.id.img_time_list_item)
         val titleView = view.findViewById<TextView>(R.id.text_list_item_title)
         val timeView = view.findViewById<TextView>(R.id.text_list_item_time)
         val durationView = view.findViewById<TextView>(R.id.text_list_item_duration)
         val placeView = view.findViewById<TextView>(R.id.text_list_item_place)
+        val linkView = view.findViewById<TextView>(R.id.text_list_item_web)
         val imageButton = view.findViewById<ImageButton>(R.id.imageButton)
         val details = view.findViewById<ConstraintLayout>(R.id.item_details)
         val group = view.findViewById<ConstraintLayout>(R.id.item_group)
@@ -171,6 +192,11 @@ class EventAdapter (
     fun getCurrentTime(): Date {
         val current = System.currentTimeMillis()
         return Date(current)
+    }
+
+    private fun browserFNFAPage() {
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://festival-film-animation.fr"))
+        activity.startActivity(browserIntent)
     }
 
 }
