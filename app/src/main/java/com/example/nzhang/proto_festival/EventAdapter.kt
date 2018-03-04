@@ -4,8 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
-import android.media.Image
 import android.net.Uri
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
@@ -22,12 +20,15 @@ import kotlinx.android.synthetic.main.item_event_row.view.*
 import java.sql.Date
 
 
+
+
 class EventAdapter (
         private val activity: Activity,
         private val events: List<Events.Event>,
         private val places: List<Places.Place>,
         private val categories: List<Categories.Category>,
-        private val isEmpty: Boolean
+        private val isEmpty: Boolean,
+        private val currentDay: Int
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private var mExpandedPosition: Int = -1
@@ -36,6 +37,7 @@ class EventAdapter (
     lateinit var preferences: SharedPreferences
     lateinit var favorites: MutableMap<String, *>
     lateinit var editor: SharedPreferences.Editor
+    private var notFinishedEvent: MutableList<Int> = arrayListOf()
 
     override fun getItemCount(): Int {
         return if(isEmpty) 1 else events.size
@@ -68,6 +70,20 @@ class EventAdapter (
 
             if (event.getEndingDate() < getCurrentTime()) {
                 holder.itemView.alpha = 0.5f
+            }
+
+            if (currentDay == 1) {
+                if (event.getStartingDate() > getCurrentTime()) {
+                    notFinishedEvent.add(holder.adapterPosition)
+                }
+                if (!notFinishedEvent.isEmpty()) {
+                    val currentEventIndex = notFinishedEvent[0]
+                    if (holder.adapterPosition == currentEventIndex) {
+                        holder.currentArrowView.visibility = View.VISIBLE
+                    } else {
+                        holder.currentArrowView.visibility = View.INVISIBLE
+                    }
+                }
             }
 
             val placeSb = StringBuilder()
@@ -172,6 +188,7 @@ class EventAdapter (
     class EventViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val bgView = view.findViewById<ImageView>(R.id.bg_list_item)
         val bgDetailView = view.findViewById<ImageView>(R.id.bg_list_item_detail)
+        val currentArrowView = view.findViewById<ImageView>(R.id.current_list_item_arrow)
         val categoryView = view.findViewById<TextView>(R.id.text_list_item_category)
         val imageTime = view.findViewById<ImageView>(R.id.img_time_list_item)
         val titleView = view.findViewById<TextView>(R.id.text_list_item_title)

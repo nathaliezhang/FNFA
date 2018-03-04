@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/border_top"
@@ -14,9 +15,23 @@
 
         <ImageView
             android:id="@+id/bg_list_item"
-            android:layout_width="85dp"
+            android:layout_width="95dp"
             android:layout_height="match_parent"
             android:layout_marginTop="1dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/current_list_item_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:visibility="invisible"
+            android:background="@drawable/current_event"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,15 +39,15 @@
             android:id="@+id/text_list_item_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
             android:text="Time"
             android:textAllCaps="true"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/current_list_item_arrow"
             app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -51,7 +66,7 @@
 
         <TextView
             android:id="@+id/text_list_item_category"
-            android:layout_width="210dip"
+            android:layout_width="200dip"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
@@ -65,7 +80,7 @@
 
         <TextView
             android:id="@+id/text_list_item_title"
-            android:layout_width="210dip"
+            android:layout_width="200dip"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:layout_marginStart="16dp"
@@ -120,7 +135,7 @@
 
         <ImageView
             android:id="@+id/bg_list_item_detail"
-            android:layout_width="85dp"
+            android:layout_width="95dp"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
