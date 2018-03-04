@@ -45,7 +45,6 @@ class EventAdapter (
 
         // Favorites
         preferences = context.getSharedPreferences("favorites", 0)
-        favorites = preferences.all
 
         return when (isEmpty) {
             true -> {
@@ -63,6 +62,7 @@ class EventAdapter (
 
         if (holder is EventViewHolder) {
             val event = events[position]
+            favorites = preferences.all
 
             if (event.getEndingDate() < getCurrentTime()) {
                 holder.itemView.alpha = 0.5f
