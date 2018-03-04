@@ -20,15 +20,12 @@ import kotlinx.android.synthetic.main.item_event_row.view.*
 import java.sql.Date
 
 
-
-
 class EventAdapter (
         private val activity: Activity,
         private val events: List<Events.Event>,
         private val places: List<Places.Place>,
         private val categories: List<Categories.Category>,
-        private val isEmpty: Boolean,
-        private val currentDay: Int
+        private val isEmpty: Boolean
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private var mExpandedPosition: Int = -1
@@ -37,7 +34,6 @@ class EventAdapter (
     lateinit var preferences: SharedPreferences
     lateinit var favorites: MutableMap<String, *>
     lateinit var editor: SharedPreferences.Editor
-    private var notFinishedEvent: MutableList<Int> = arrayListOf()
 
     override fun getItemCount(): Int {
         return if(isEmpty) 1 else events.size
@@ -72,19 +68,10 @@ class EventAdapter (
                 holder.itemView.alpha = 0.5f
             }
 
-            if (currentDay == 1) {
-                if (event.getStartingDate() > getCurrentTime()) {
-                    notFinishedEvent.add(holder.adapterPosition)
-                }
-                if (!notFinishedEvent.isEmpty()) {
-                    val currentEventIndex = notFinishedEvent[0]
-                    if (holder.adapterPosition == currentEventIndex) {
-                        holder.currentArrowView.visibility = View.VISIBLE
-                    } else {
-                        holder.currentArrowView.visibility = View.INVISIBLE
-                    }
-                }
+            if (event.getStartingDate() < getCurrentTime() && event.getEndingDate() > getCurrentTime()) {
+                holder.currentArrowView.visibility = View.VISIBLE
             }
+
 
             val placeSb = StringBuilder()
             val categorySb = StringBuilder()

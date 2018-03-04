@@ -15,7 +15,6 @@ import android.widget.TextView
 import com.example.nzhang.proto_festival.model.Categories
 import com.example.nzhang.proto_festival.model.Events
 import com.example.nzhang.proto_festival.model.Places
-import java.sql.Date
 
 class DayAdapter (
         private val activity: Activity,
@@ -30,7 +29,6 @@ class DayAdapter (
     lateinit private var recycleView: RecyclerView
     private var mExpandedPosition: Int = -1
     val animation_show = RotateAnimation(0f, 90.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
-    private var currentDay: Int = -1
 
     override fun getItemCount(): Int = days.size
 
@@ -43,7 +41,6 @@ class DayAdapter (
 
     override fun onBindViewHolder(holder: HeaderViewHolder, position: Int) {
         val dayValue = days[position][0].getFullStartingDate()
-        val dayStart = days[position][0].getStartingDate()
 
         holder.dayTitleView.text = dayValue  //"mercredi 4 avril"
         val filteredList = when (filter) {
@@ -60,8 +57,6 @@ class DayAdapter (
             animation_show.fillAfter = true
             animation_show.duration = 600
             holder.arrowView.startAnimation(animation_show)
-        } else {
-
         }
 
         holder.dayTitleView.setOnClickListener{
@@ -70,15 +65,10 @@ class DayAdapter (
             whichDayClickedInterface.onDayClicked(position)
         }
 
-        when (dayStart < getCurrentTime()) {
-            true -> currentDay = 1
-            false -> currentDay = -1
-        }
-
         recycleView = holder.list
         val mLayoutManager = LinearLayoutManager(context)
         recycleView.layoutManager = mLayoutManager
-        recycleView.adapter = EventAdapter(activity, filteredList, places, categories, isEmpty, currentDay)
+        recycleView.adapter = EventAdapter(activity, filteredList, places, categories, isEmpty)
         recycleView.visibility = if (isExpanded) View.VISIBLE else View.GONE
     }
 
@@ -86,11 +76,6 @@ class DayAdapter (
         val dayTitleView = view.findViewById<TextView>(R.id.text_list_header_title)
         val arrowView = view.findViewById<ImageView>(R.id.arrow_list_header_title)
         val list = view.findViewById<RecyclerView>(R.id.container_list)
-    }
-
-    fun getCurrentTime(): Date {
-        val current = System.currentTimeMillis()
-        return Date(current)
     }
 
     interface WhichDayClickedInterface {
