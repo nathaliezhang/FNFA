@@ -1,84 +1,28 @@
 {
-  "places" : [
-    {
-      "id": 0,
-      "name": "Hôtel de ville",
-      "seats": -1
-    },
+  "places": [
     {
       "id": 1,
-      "name": "Ciné TNB Jouvet",
-      "seats": 400
+      "name": "TNB"
     },
     {
       "id": 2,
-      "name": "Ciné TNB Piccoli",
-      "seats": 96
+      "name": "Arvor"
     },
     {
       "id": 3,
-      "name": "Espace rencontre TNB",
-      "seats": 80
+      "name": "ESRA"
     },
     {
       "id": 4,
-      "name": "Bar TNB",
-      "seats": -1
+      "name": "Grand Logis"
     },
     {
       "id": 5,
-      "name": "Hall bas TNB",
-      "seats": -1
+      "name": "Esplanade Charles de Gaulle"
     },
     {
       "id": 6,
-      "name": "Cube - RDC TNB",
-      "seats": -1
-    },
-    {
-      "id": 7,
-      "name": "Arvor - Salle 2",
-      "seats": 158
-    },
-    {
-      "id": 8,
-      "name": "BRUZ Le Grand Logis (GS)",
-      "seats": 350
-    },
-    {
-      "id": 9,
-      "name": "Hall haut",
-      "seats": -1
-    },
-    {
-      "id": 10,
-      "name": "Cube",
-      "seats": -1
-    },
-    {
-      "id": 11,
-      "name": "Arvor espace rencontre",
-      "seats": -1
-    },
-    {
-      "id": 12,
-      "name": "ESRA",
-      "seats": -1
-    },
-    {
-      "id": 13,
-      "name": "Esplanade Charles de Gaulle",
-      "seats": -1
-    },
-    {
-      "id": 14,
-      "name": "Arvor - Salle 1",
-      "seats": 215
-    },
-    {
-      "id": 15,
-      "name": "Les champs Libres - Musée de Bretagne",
-      "seats": -1
+      "name": "France 3 Bretagne"
     }
   ]
 }

@@ -1,32 +1,36 @@
 {
-  "categories" : [
-    {
-      "id": 0,
-      "name": "Séance scolaire ouverte au public"
-    },
+  "categories": [
     {
       "id": 1,
-      "name": "Séance spéciale"
+      "name": "Compétition et panorama"
     },
     {
       "id": 2,
-      "name": "Volet professionnel"
+      "name": "Séance spéciale"
     },
     {
       "id": 3,
-      "name": "Compétition et sélections"
+      "name": "Long métrage"
     },
     {
       "id": 4,
-      "name": "Long métrage et rencontres"
+      "name": "Volet professionnel"
     },
     {
       "id": 5,
-      "name": "Ateliers secret Fab"
+      "name": "Autour des films"
     },
     {
       "id": 6,
       "name": "Salon des nouvelles écritures"
+    },
+    {
+      "id": 7,
+      "name": "Cube animé"
+    },
+    {
+      "id": 8,
+      "name": "Focus"
     }
   ]
 }
