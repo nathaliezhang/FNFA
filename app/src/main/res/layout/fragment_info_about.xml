@@ -111,28 +111,133 @@
             app:layout_constraintTop_toBottomOf="@+id/info_about_link_FNFA" />
 
         <TextView
-            android:id="@+id/info_about_subtitle2"
+            android:id="@+id/info_about_places"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="292dp" />
+
+        <TextView
+            android:id="@+id/info_acces_subtitle1"
+            style="@style/InfoSubTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/info_acces_item_subtitle1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/info_about_link_AFCA" />
+
+        <TextView
+            android:id="@+id/info_acces_subtitle1_item1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="4dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="@string/info_acces_item_subtitle1_item1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/info_acces_subtitle1" />
+
+        <TextView
+            android:id="@+id/info_acces_subtitle1_item1_info"
+            android:layout_width="wrap_content"
+            android:layout_height="71dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:textColor="@color/black"
+            android:text="@string/info_acces_item_subtitle1_item1_info"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/info_acces_subtitle1_item1" />
+
+        <TextView
+            android:id="@+id/info_acces_subtitle1_item2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="@string/info_acces_item_subtitle1_item2"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/info_acces_subtitle1_item1_info"/>
+
+        <TextView
+            android:id="@+id/info_acces_subtitle1_item2_info"
+            android:layout_width="wrap_content"
+            android:layout_height="71dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:textColor="@color/black"
+            android:text="@string/info_acces_item_subtitle1_item2_info"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/info_acces_subtitle1_item2" />
+
+        <TextView
+            android:id="@+id/info_acces_subtitle1_item3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="@string/info_acces_item_subtitle1_item3"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/info_acces_subtitle1_item2_info" />
+
+        <TextView
+            android:id="@+id/info_acces_subtitle1_item3_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="@string/info_acces_item_subtitle1_item3_info"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/info_acces_subtitle1_item3" />
+
+        <TextView
+            android:id="@+id/info_acces_subtitle2"
             style="@style/InfoSubTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
-            android:text="@string/info_about_item_subtitle2"
-            android:textColor="@color/black"
+            android:text="@string/info_acces_item_subtitle2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/info_about_link_AFCA" />
+            app:layout_constraintTop_toBottomOf="@+id/info_acces_subtitle1_item3_info" />
 
         <TextView
-            android:id="@+id/info_about_places"
+            android:id="@+id/info_acces_subtitle2_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
+            android:textStyle="bold"
             android:textColor="@color/black"
+            android:text="@string/info_acces_item_subtitle2_item"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/info_about_subtitle2" />
+            app:layout_constraintTop_toBottomOf="@+id/info_acces_subtitle2" />
+
+        <TextView
+            android:id="@+id/info_acces_subtitle2_item_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/black"
+            android:text="@string/info_acces_item_subtitle2_item_info"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/info_acces_subtitle2_item" />
 
     </android.support.constraint.ConstraintLayout>
 

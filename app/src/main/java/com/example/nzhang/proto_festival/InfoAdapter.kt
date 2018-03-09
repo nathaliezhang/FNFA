@@ -23,7 +23,6 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
     private val TYPE_PARTNER: Int = 2
     private var mExpandedPosition: Int = -1
     private var previousExpandedPosition: Int = -1
-    private val placesText = DataController(activity).placesText
     val animation = RotateAnimation(0f, 90.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
 
 
@@ -86,8 +85,6 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
             } else {
                 holder.icon.setImageResource(R.drawable.picto_festival)
             }
-
-            holder.places.text = placesText
 
             holder.linkFNFA.setOnClickListener {
                 browserAboutPage("FNFA")
