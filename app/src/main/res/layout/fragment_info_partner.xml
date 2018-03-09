@@ -177,8 +177,7 @@
                 android:id="@+id/info_partners_bretagne"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/logo_6"
                 app:layout_constraintStart_toStartOf="parent"
@@ -198,10 +197,11 @@
                 android:id="@+id/info_partners_ille"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/logo_8"
+                app:layout_constraintEnd_toStartOf="@+id/info_partners_rennes"
                 app:layout_constraintStart_toEndOf="@+id/info_partners_bretagne"
                 app:layout_constraintTop_toBottomOf="@+id/info_partners_cp" />
 
@@ -220,24 +220,11 @@
                 android:id="@+id/info_partners_rennes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="24dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/logo_10"
-                app:layout_constraintStart_toEndOf="@+id/info_partners_ille"
-                app:layout_constraintTop_toBottomOf="@+id/info_partners_sacem" />
-
-            <ImageView
-                android:id="@+id/info_partners_gebelins"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/logo_11"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/info_partners_rennes"
-                app:layout_constraintTop_toBottomOf="@+id/info_partners_procirep" />
+                app:layout_constraintTop_toBottomOf="@+id/info_partners_sacem" />
 
             <TextView
                 android:layout_width="wrap_content"
