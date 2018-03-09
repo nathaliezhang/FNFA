@@ -57,8 +57,10 @@
     <string name="bottom_sheet_filter_public">Le filtre pour les évènements de type public est en train d’être appliqué</string>
     <string name="bottom_sheet_no_filter">Tous les filtres sont en train d’être retirés</string>
 
-    <string name="info_partner_subtitle1">Organisé par</string>
-    <string name="info_partner_subtitle2">En partenariat avec</string>
-    <string name="info_partner_subtitle3">Avec le soutient de</string>
-    <string name="info_partner_subtitle4">L’AFCA est soutenue par le centre national du cinéma et de l’image animée</string>
+    <string name="info_partner_subtitle1_item1">Organisé par</string>
+    <string name="info_partner_subtitle1_item2">En partenariat avec</string>
+    <string name="info_partner_subtitle1_item3">Avec le soutient de</string>
+    <string name="info_partner_subtitle1_item4">L’AFCA est soutenue par le centre national du cinéma et de l’image animée</string>
+    <string name="info_partner_subtitle2_item1">Crédits</string>
+    <string name="info_partner_subtitle2_item2">Réalisé par l’école des Gobelins en partenariat avec l’AFCA par Mathilde Hérard, Mélanie Ngo, Matthieu Pajot et Nathalie Zhang</string>
 </resources>
