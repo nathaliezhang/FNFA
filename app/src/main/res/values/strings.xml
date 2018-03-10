@@ -7,7 +7,7 @@
     <string name="saturday">Samedi</string>
     <string name="sunday">Dimanche</string>
 
-    <string name="info_price_item_title">Tarifs</string>
+    <string name="info_price_item_title">Tarifs et accès</string>
     <string name="info_price_item_subtitle1">Tout public</string>
     <string name="info_price_item_subtitle1_item1">Tarif unique</string>
     <string name="info_price_item_subtitle1_item1_price">6 €</string>
@@ -22,13 +22,24 @@
     <string name="info_price_item_subtitle2_item1_price">3 €</string>
     <string name="info_price_item_subtitle2_item2">Atelier</string>
     <string name="info_price_item_subtitle2_item2_price">4 €</string>
-    <string name="info_price_item_subtitle3">En accès libre</string>
+    <string name="info_price_item_subtitle3">Billetterie</string>
     <string name="info_price_item_subtitle3_item">
-        Le Salon des nouvelles écritures, Le Cube animé, L’atelier jeux optiques, Dans les coulisses des As de la jungle, A la rencontre des réalisateurs, La Caravane ensorcelée, Dock en stock, Cérémonie de remise des prix.
+        Ouverture de la billetterie 30 minutes avant le début de chaque séance pour toutes les salles.\nPour les séances du TNB uniquement, réservation à partir du 4 avril sur toute la durée du Festival.\nCarte abonnée des salles partenaires (TNB, Arvor et Le Grand Logis) acceptée.
     </string>
 
+    <string name="info_acces_item_subtitle1">À Rennes</string>
+    <string name="info_acces_item_subtitle1_item1">TNB</string>
+    <string name="info_acces_item_subtitle1_item1_info">1 rue Saint-Hélier\n02 99 31 55 33\nOuverture au grand public à partir de 13h\nBus C1 - C2 -11 - Arrêt : Liberté TNB / Métro Charles de Gaulle</string>
+    <string name="info_acces_item_subtitle1_item2">Cinéma Arvor</string>
+    <string name="info_acces_item_subtitle1_item2_info">29 rue d’Antrain\n02 99 38 78 04\nBus C1 - C5 - 9 - 12 - Arrêt : Sainte-Anne ou Hôtel Dieu / Métro Sainte-Anne</string>
+    <string name="info_acces_item_subtitle1_item3">ESRA</string>
+    <string name="info_acces_item_subtitle1_item3_info">1 rue Xavier Grall\n02 99 36 64 64\nBus 41ex - 50 - 70 - Arrêt : Pâtis Tatelin</string>
+    <string name="info_acces_item_subtitle2">À Bruz</string>
+    <string name="info_acces_item_subtitle2_item">Le Grand Logis et la Médiathèque</string>
+    <string name="info_acces_item_subtitle2_item_info">10 avenue du Général de Gaulle\n02 99 05 30 62 / 02 99 05 30 60\nBus 57 (30 minutes depuis Rennes) et 59 direction Bruz - Arrêt : Bruz Centre\nToutes les salles sont accessibles aux personnes à mobilité réduite.</string>
 
-    <string name="info_about_item_title">Le festival</string>
+
+    <string name="info_about_item_title">Le Festival</string>
     <string name="info_about_item_subtitle1">A propos</string>
     <string name="info_about_item_block">
        Vitrine de l’animation française, le Festival national du film d’animation a été créé en
@@ -41,9 +52,15 @@
     <string name="info_about_item_subtitle2">Lieux</string>
 
     <string name="info_partners_item_title">Partenaires</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="bottom_sheet_filter_pro">Le filtre pour les évènements de type professionnel est en train d’être appliqué</string>
     <string name="bottom_sheet_filter_public">Le filtre pour les évènements de type public est en train d’être appliqué</string>
     <string name="bottom_sheet_no_filter">Tous les filtres sont en train d’être retirés</string>
+
+    <string name="info_partner_subtitle1_item1">Organisé par</string>
+    <string name="info_partner_subtitle1_item2">En partenariat avec</string>
+    <string name="info_partner_subtitle1_item3">Avec le soutien de</string>
+    <string name="info_partner_subtitle1_item4">L’AFCA est soutenue par le centre national du cinéma et de l’image animée</string>
+    <string name="info_partner_subtitle2_item1">Crédits</string>
+    <string name="info_partner_subtitle2_item2">Réalisé par l’école des Gobelins en partenariat avec l’AFCA par Mathilde Hérard, Mélanie Ngo, Matthieu Pajot et Nathalie Zhang</string>
 </resources>
