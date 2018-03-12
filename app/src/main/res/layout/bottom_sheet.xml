@@ -32,6 +32,7 @@
         android:maxWidth="250dp"
         android:padding="8dp"
         android:text=""
+        android:fontFamily="@font/raleway_regular"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/bottom_sheet_gif"
