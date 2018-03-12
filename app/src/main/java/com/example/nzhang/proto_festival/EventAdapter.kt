@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Typeface
 import android.net.Uri
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
@@ -59,6 +60,9 @@ class EventAdapter (
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val extraLightFont: Typeface = Typeface.createFromAsset(context.assets, "fonts/Raleway-ExtraLight.ttf")
+        val semiBoldFont: Typeface = Typeface.createFromAsset(context.assets, "fonts/Raleway-SemiBold.ttf")
+        val regularFont: Typeface = Typeface.createFromAsset(context.assets, "fonts/Raleway-Regular.ttf")
 
         if (holder is EventViewHolder) {
             val event = events[position]
@@ -70,6 +74,7 @@ class EventAdapter (
 
             if (event.getStartingDate() < getCurrentTime() && event.getEndingDate() > getCurrentTime()) {
                 holder.currentArrowView.visibility = View.VISIBLE
+                holder.timeView.typeface = semiBoldFont
             }
 
 
@@ -94,6 +99,14 @@ class EventAdapter (
                 else -> holder.imageTime.tag = R.drawable.picto_temps_4
             }
 
+            holder.categoryView.typeface = extraLightFont
+            holder.titleView.typeface = semiBoldFont
+            holder.timeView.typeface = extraLightFont
+            holder.durationView.typeface = extraLightFont
+            holder.placeView.typeface = regularFont
+            holder.linkView.typeface = regularFont
+            holder.descriptionView.typeface = regularFont
+
             holder.bgView.setBackgroundResource(R.color.white)
             holder.bgDetailView.setBackgroundResource(R.color.white)
             holder.titleView.text = event.name
@@ -116,6 +129,7 @@ class EventAdapter (
                 }
                 holder.bgView.setBackgroundResource(R.color.green)
                 holder.bgDetailView.setBackgroundResource(R.color.green)
+                holder.timeView.typeface = semiBoldFont
             }
 
             holder.itemView.setOnClickListener {
@@ -168,9 +182,15 @@ class EventAdapter (
             })
         }
 
+        if (holder is EmptyViewHolder) {
+            holder.emptyView.typeface = regularFont
+        }
+
     }
 
-    class EmptyViewHolder(view: View) : RecyclerView.ViewHolder(view)
+    class EmptyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val emptyView = view.findViewById<TextView>(R.id.text_item_empty)
+    }
 
     class EventViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val bgView = view.findViewById<ImageView>(R.id.bg_list_item)

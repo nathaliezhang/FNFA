@@ -2,6 +2,7 @@ package com.example.nzhang.proto_festival
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.Typeface
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -30,10 +31,12 @@ class DayAdapter (
     private var mExpandedPosition: Int = -1
     val animation_show = RotateAnimation(0f, 90.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
 
+
     override fun getItemCount(): Int = days.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeaderViewHolder {
         context = parent.context
+
         val layoutInflater = LayoutInflater.from(context)
         val view = layoutInflater.inflate(R.layout.item_event_header, parent, false)
         return DayAdapter.HeaderViewHolder(view)
@@ -42,7 +45,10 @@ class DayAdapter (
     override fun onBindViewHolder(holder: HeaderViewHolder, position: Int) {
         val dayValue = days[position][0].getFullStartingDate()
 
+        val lightFont: Typeface = Typeface.createFromAsset(context.assets, "fonts/Raleway-Light.ttf")
+        holder.dayTitleView.typeface = lightFont
         holder.dayTitleView.text = dayValue  //"mercredi 4 avril"
+
         val filteredList = when (filter) {
             "pro" -> days[position].filter { it.pro == 1 }
             "public" -> days[position].filter { it.pro == 0 }

@@ -1,7 +1,11 @@
 package com.example.nzhang.proto_festival
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Typeface
+import android.net.Uri
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -15,6 +19,7 @@ import com.example.nzhang.proto_festival.model.Places
 import java.sql.Date
 
 class FavoriteAdapter (
+        private val activity: Activity,
         events: List<Events.Event>,
         private val places: List<Places.Place>,
         private val categories: List<Categories.Category>,
@@ -63,6 +68,9 @@ class FavoriteAdapter (
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val extraLightFont: Typeface = Typeface.createFromAsset(context.assets, "fonts/Raleway-ExtraLight.ttf")
+        val semiBoldFont: Typeface = Typeface.createFromAsset(context.assets, "fonts/Raleway-SemiBold.ttf")
+        val regularFont: Typeface = Typeface.createFromAsset(context.assets, "fonts/Raleway-Regular.ttf")
 
         if (holder is EventViewHolder) {
             val event = tempEvents[position]
@@ -73,6 +81,15 @@ class FavoriteAdapter (
 
             val placeSb = StringBuilder()
             val categorySb = StringBuilder()
+
+            holder.categoryView.typeface = extraLightFont
+            holder.titleView.typeface = semiBoldFont
+            holder.dateView.typeface = semiBoldFont
+            holder.timeView.typeface = semiBoldFont
+            holder.durationView.typeface = extraLightFont
+            holder.placeView.typeface = regularFont
+            holder.linkView.typeface = regularFont
+            holder.descriptionView.typeface = regularFont
 
             holder.titleView.text = event.name
             holder.timeView.text = event.getStartingHour()
@@ -105,6 +122,10 @@ class FavoriteAdapter (
             })
             holder.placeView.text = placeSb.toString()
 
+            holder.linkView.setOnClickListener {
+                browserFNFAPage()
+            }
+
             event.categoryIds.forEach({
                 id -> val name = categories[categories.indexOfFirst({it.id == id.toString()})].name
                 if (event.categoryIds.indexOf(id) == event.categoryIds.size - 1 ){
@@ -128,9 +149,15 @@ class FavoriteAdapter (
             })
         }
 
+        if (holder is EmptyViewHolder) {
+            holder.emptyView.typeface = regularFont
+        }
+
     }
 
-    class EmptyViewHolder(view: View) : RecyclerView.ViewHolder(view)
+    class EmptyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val emptyView = view.findViewById<TextView>(R.id.text_item_empty)
+    }
 
     class EventViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val categoryView = view.findViewById<TextView>(R.id.text_fav_item_category)
@@ -139,6 +166,7 @@ class FavoriteAdapter (
         val timeView = view.findViewById<TextView>(R.id.text_fav_item_time)
         val durationView = view.findViewById<TextView>(R.id.text_fav_item_duration)
         val placeView = view.findViewById<TextView>(R.id.text_fav_item_place)
+        val linkView = view.findViewById<TextView>(R.id.text_fav_item_web)
         val imageButton = view.findViewById<ImageButton>(R.id.image_fav_item)
         val details = view.findViewById<ConstraintLayout>(R.id.fav_item_details)
         val group = view.findViewById<ConstraintLayout>(R.id.fav_item_group)
@@ -152,6 +180,11 @@ class FavoriteAdapter (
     fun getCurrentTime(): Date {
         val current = System.currentTimeMillis()
         return Date(current)
+    }
+
+    private fun browserFNFAPage() {
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://festival-film-animation.fr"))
+        activity.startActivity(browserIntent)
     }
 
 }

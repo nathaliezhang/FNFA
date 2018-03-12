@@ -1,5 +1,6 @@
 package com.example.nzhang.proto_festival.fragment
 
+import android.app.Activity
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -43,7 +44,7 @@ class FavoriteFragment : Fragment(), FavoriteAdapter.EmptyFavoriteInterface {
 
         updateFavorite()
 
-        recycleView.adapter = FavoriteAdapter(finalItemsList, places, categories, this)
+        recycleView.adapter = FavoriteAdapter(mainActivity, finalItemsList, places, categories, this)
         return view
     }
 
@@ -55,6 +56,6 @@ class FavoriteFragment : Fragment(), FavoriteAdapter.EmptyFavoriteInterface {
 
     override fun onEmptyFavorite() {
         updateFavorite()
-        recycleView.adapter = FavoriteAdapter(finalItemsList, places, categories, this)
+        recycleView.adapter = FavoriteAdapter(mainActivity, finalItemsList, places, categories, this)
     }
 }
