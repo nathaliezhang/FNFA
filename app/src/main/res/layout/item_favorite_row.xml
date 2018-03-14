@@ -14,11 +14,11 @@
 
         <TextView
             android:id="@+id/text_fav_item_category"
-            android:layout_width="250dip"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
-            android:layout_marginLeft="64dp"
+            android:layout_width="251dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="48dp"
             android:layout_marginTop="24dp"
+            android:fontFamily="@font/raleway_extralight"
             android:singleLine="false"
             android:text="Catégorie"
             android:textAllCaps="true"
@@ -31,13 +31,14 @@
             android:id="@+id/text_fav_item_title"
             android:layout_width="250dip"
             android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
-            android:layout_marginLeft="64dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginLeft="48dp"
+            android:fontFamily="@font/raleway_semibold"
             android:singleLine="false"
             android:text="Titre de l'événement"
             android:textAllCaps="true"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_fav_item_category" />
@@ -47,8 +48,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:layout_marginStart="64dp"
-            android:layout_marginLeft="64dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginLeft="48dp"
+            android:fontFamily="@font/raleway_semibold"
             android:text="Date"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -61,6 +63,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:text="Heure de début"
+            android:fontFamily="@font/raleway_semibold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/text_fav_item_date"
             app:layout_constraintTop_toBottomOf="@+id/text_fav_item_title" />
@@ -107,8 +110,7 @@
             android:id="@+id/image_fav_item_place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
-            android:layout_marginLeft="64dp"
+            android:layout_marginStart="48dp"
             android:src="@drawable/place"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -119,6 +121,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:text="Lieu de l'événement"
+            android:fontFamily="@font/raleway_regular"
             android:textColor="@color/black"
             app:layout_constraintStart_toEndOf="@+id/image_fav_item_place" />
 
@@ -126,8 +129,7 @@
             android:id="@+id/image_fav_item_web"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
-            android:layout_marginLeft="64dp"
+            android:layout_marginStart="48dp"
             android:layout_marginTop="4dp"
             android:src="@drawable/web"
             app:layout_constraintStart_toStartOf="parent"
@@ -141,6 +143,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="4dp"
             android:text="Site internet"
+            android:fontFamily="@font/raleway_regular"
             android:textColor="@color/black"
             app:layout_constraintStart_toEndOf="@+id/image_fav_item_web"
             app:layout_constraintTop_toBottomOf="@+id/text_fav_item_place" />
@@ -150,13 +153,16 @@
             android:layout_width="250dip"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:layout_marginStart="64dp"
-            android:layout_marginLeft="64dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
+            android:fontFamily="@font/raleway_regular"
             android:singleLine="false"
             android:text="Description"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_fav_item_web" />
 

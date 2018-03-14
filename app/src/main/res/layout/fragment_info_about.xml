@@ -29,6 +29,7 @@
         <TextView
             android:id="@+id/info_about_button"
             style="@style/InfoTitle"
+            android:fontFamily="@font/raleway_light"
             android:layout_width="wrap_content"
             android:layout_height="34dp"
             android:layout_marginStart="24dp"
@@ -66,19 +67,24 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/info_about_item_subtitle1"
+            android:fontFamily="@font/raleway_extralight"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/info_about_text"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            android:width="0dp"
+            android:fontFamily="@font/raleway_semibold"
             android:text="@string/info_about_item_block"
             android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/info_price_subtitle1" />
 
@@ -91,7 +97,8 @@
             android:layout_marginLeft="24dp"
             android:layout_marginTop="8dp"
             android:text="@string/info_about_item_link_FNFA"
-            android:textColor="@color/black"
+            android:fontFamily="@font/raleway_semibold"
+            android:textColor="@color/grey"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/info_about_text" />
@@ -105,7 +112,8 @@
             android:layout_marginLeft="24dp"
             android:layout_marginTop="4dp"
             android:text="@string/info_about_item_link_AFCA"
-            android:textColor="@color/black"
+            android:fontFamily="@font/raleway_semibold"
+            android:textColor="@color/grey"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/info_about_link_FNFA" />
@@ -129,6 +137,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="24dp"
             android:text="@string/info_acces_item_subtitle1"
+            android:fontFamily="@font/raleway_extralight"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/info_about_link_AFCA" />
 
@@ -142,17 +151,19 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             android:text="@string/info_acces_item_subtitle1_item1"
+            android:fontFamily="@font/raleway_semibold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/info_acces_subtitle1" />
 
         <TextView
             android:id="@+id/info_acces_subtitle1_item1_info"
             android:layout_width="wrap_content"
-            android:layout_height="71dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:textColor="@color/black"
             android:text="@string/info_acces_item_subtitle1_item1_info"
+            android:fontFamily="@font/raleway_regular"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/info_acces_subtitle1_item1" />
 
@@ -162,7 +173,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
+            android:layout_marginTop="4dp"
             android:text="@string/info_acces_item_subtitle1_item2"
+            android:fontFamily="@font/raleway_semibold"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -176,6 +189,7 @@
             android:layout_marginLeft="8dp"
             android:textColor="@color/black"
             android:text="@string/info_acces_item_subtitle1_item2_info"
+            android:fontFamily="@font/raleway_regular"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/info_acces_subtitle1_item2" />
 
@@ -185,7 +199,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
+            android:layout_marginTop="4dp"
             android:text="@string/info_acces_item_subtitle1_item3"
+            android:fontFamily="@font/raleway_semibold"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -198,6 +214,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:text="@string/info_acces_item_subtitle1_item3_info"
+            android:fontFamily="@font/raleway_regular"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/info_acces_subtitle1_item3" />
@@ -211,6 +228,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
             android:text="@string/info_acces_item_subtitle2"
+            android:fontFamily="@font/raleway_extralight"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/info_acces_subtitle1_item3_info" />
 
@@ -224,6 +242,7 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             android:text="@string/info_acces_item_subtitle2_item"
+            android:fontFamily="@font/raleway_semibold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/info_acces_subtitle2" />
 
@@ -236,6 +255,7 @@
             android:layout_marginBottom="8dp"
             android:textColor="@color/black"
             android:text="@string/info_acces_item_subtitle2_item_info"
+            android:fontFamily="@font/raleway_regular"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/info_acces_subtitle2_item" />
 

@@ -1,7 +1,9 @@
 package com.example.nzhang.proto_festival
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
@@ -17,7 +19,6 @@ import android.view.animation.DecelerateInterpolator
 
 
 class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
     private val TYPE_PRICE: Int = 0
     private val TYPE_ABOUT: Int = 1
     private val TYPE_PARTNER: Int = 2
@@ -47,10 +48,14 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
         val isExpanded = position == mExpandedPosition
+        val context = holder?.itemView?.context
+        val lightFont: Typeface = Typeface.createFromAsset(context?.assets, "fonts/Raleway-Light.ttf")
+        val semiBoldFont: Typeface = Typeface.createFromAsset(context?.assets, "fonts/Raleway-SemiBold.ttf")
 
         if (holder is PriceViewHolder){
             holder.details.visibility = (if (isExpanded) View.VISIBLE else View.GONE)
             holder.itemView.isActivated = isExpanded
+            holder.title.typeface = lightFont
 
             if (isExpanded) {
                 holder.icon.setImageResource(R.drawable.picto_tarifs_cliquey)
@@ -73,6 +78,9 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
         if (holder is AboutViewHolder){
             holder.details.visibility = (if (isExpanded) View.VISIBLE else View.GONE)
             holder.itemView.isActivated = isExpanded
+            holder.title.typeface = lightFont
+            holder.linkAFCA.typeface = semiBoldFont
+            holder.linkFNFA.typeface = semiBoldFont
 
             if (isExpanded) {
                 holder.icon.setImageResource(R.drawable.picto_festival_cliquey)
@@ -103,6 +111,7 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
         if (holder is PartnerViewHolder){
             holder.details.visibility = (if (isExpanded) View.VISIBLE else View.GONE)
             holder.itemView.isActivated = isExpanded
+            holder.title.typeface = lightFont
 
             if (isExpanded) {
                 holder.icon.setImageResource(R.drawable.picto_partenaires_cliquey)
@@ -136,6 +145,7 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
     class PriceViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val group = view.findViewById<ConstraintLayout>(R.id.item_group_price)
         val details = view.findViewById<ConstraintLayout>(R.id.item_details_price)
+        val title = view.findViewById<TextView>(R.id.info_price_button)
         val icon = view.findViewById<ImageView>(R.id.info_price_image)
         val arrow = view.findViewById<ImageView>(R.id.info_price_button_arrow)
     }
@@ -143,6 +153,7 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
     class AboutViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val group = view.findViewById<ConstraintLayout>(R.id.item_group_about)
         val details = view.findViewById<ConstraintLayout>(R.id.item_details_about)
+        var title = view.findViewById<TextView>(R.id.info_about_button)
         val linkFNFA = view.findViewById<TextView>(R.id.info_about_link_FNFA)
         val linkAFCA = view.findViewById<TextView>(R.id.info_about_link_AFCA)
         val icon = view.findViewById<ImageView>(R.id.info_about_image)
@@ -153,6 +164,7 @@ class InfoAdapter(private val activity: Activity): RecyclerView.Adapter<Recycler
     class PartnerViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val group = view.findViewById<ConstraintLayout>(R.id.item_group_partner)
         val details = view.findViewById<ConstraintLayout>(R.id.item_details_partner)
+        val title = view.findViewById<TextView>(R.id.info_partners_button)
         val icon = view.findViewById<ImageView>(R.id.info_partners_image)
         val arrow = view.findViewById<ImageView>(R.id.info_partners_button_arrow)
     }
