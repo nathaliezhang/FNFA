@@ -243,7 +243,6 @@
                 android:text="@string/info_partner_subtitle1_item4"
                 android:fontFamily="@font/raleway_semibold"
                 android:textAlignment="center"
-                android:textAllCaps="true"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

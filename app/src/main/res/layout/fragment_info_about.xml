@@ -74,14 +74,17 @@
 
         <TextView
             android:id="@+id/info_about_text"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/info_about_item_block"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            android:width="0dp"
             android:fontFamily="@font/raleway_semibold"
+            android:text="@string/info_about_item_block"
             android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/info_price_subtitle1" />
 
@@ -95,7 +98,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/info_about_item_link_FNFA"
             android:fontFamily="@font/raleway_semibold"
-            android:textColor="@color/black"
+            android:textColor="@color/grey"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/info_about_text" />
@@ -110,7 +113,7 @@
             android:layout_marginTop="4dp"
             android:text="@string/info_about_item_link_AFCA"
             android:fontFamily="@font/raleway_semibold"
-            android:textColor="@color/black"
+            android:textColor="@color/grey"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/info_about_link_FNFA" />
